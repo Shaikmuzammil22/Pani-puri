@@ -1,0 +1,25 @@
+
+{
+  "shopName": "Pani Puri Wala",
+  "notice": "Welcome! Fresh pani puri available today.",
+  "offerTitle": "Special Offer",
+  "offerText": "Ask us about today's offer!",
+  "menu": [
+    {
+      "id": "pani-puri",
+      "name": "Pani Puri",
+      "description": "Fresh and spicy",
+      "price": 30,
+      "imageUrl": "https://example.com/pani-puri.jpg",
+      "available": true
+    },
+    {
+      "id": "samosa",
+      "name": "Samosa",
+      "description": "Crispy and fresh",
+      "price": 15,
+      "imageUrl": "https://example.com/samosa.jpg",
+      "available": true
+    }
+  ]
+}
