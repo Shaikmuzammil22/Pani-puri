@@ -1,249 +1,332 @@
-package com.pani_puri_ismail
-
-import android.Manifest
-import android.annotation.SuppressLint
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
-import android.os.Bundle
-import android.webkit.JavascriptInterface
-import android.webkit.WebChromeClient
-import android.webkit.WebResourceRequest
-import android.webkit.WebView
-import android.webkit.WebViewClient
-import android.widget.Toast
-import androidx.activity.ComponentActivity
-import androidx.activity.OnBackPressedCallback
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.Priority
-import com.google.android.gms.tasks.CancellationTokenSource
-import org.json.JSONObject
-
-class MainActivity : ComponentActivity() {
-
-    private lateinit var webView: WebView
-    private val websiteUrl = "https://shaikmuzammil22.github.io/Pani-puri/"
-    private val websiteHost = "shaikmuzammil22.github.io"
-
-    private var pendingLocationRequest = false
-
-    private val locationPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-            val granted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true ||
-                          permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true
-            if (granted) {
-                fetchLocation()
-            } else {
-                pendingLocationRequest = false
-                sendLocationResult(JSONObject().put("error", "Location permission required to auto-detect."))
-            }
-        }
-
-    @SuppressLint("SetJavaScriptEnabled")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        webView = WebView(this)
-        setContentView(webView)
-
-        webView.settings.javaScriptEnabled = true
-        webView.settings.domStorageEnabled = true
-        webView.settings.allowFileAccess = false
-        webView.settings.allowContentAccess = false
-
-        // JS Bridge attach (Bohot zaroori hai)
-        webView.addJavascriptInterface(WebAppInterface(), "AndroidLocation")
-
-        webView.webChromeClient = WebChromeClient()
-        webView.webViewClient = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
-                return handleUrl(request.url)
-            }
-            @Suppress("DEPRECATION")
-            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-                return handleUrl(Uri.parse(url))
-            }
-        }
-
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (::webView.isInitialized && webView.canGoBack()) {
-                    webView.goBack()
-                } else {
-                    isEnabled = false
-                    onBackPressedDispatcher.onBackPressed()
-                }
-            }
-        })
-
-        if (savedInstanceState != null) {
-            webView.restoreState(savedInstanceState)
-        } else {
-            webView.loadUrl(websiteUrl)
-        }
-    }
-
-    private fun handleUrl(uri: Uri): Boolean {
-        val scheme = uri.scheme.orEmpty().lowercase()
-        val host = uri.host.orEmpty().lowercase()
-
-        if (scheme == "https" && host == websiteHost) return false
-
-        if (scheme == "http" || scheme == "https" || scheme == "upi" || scheme == "whatsapp" || scheme == "geo" || scheme == "tel") {
-            return try {
-                startActivity(Intent(Intent.ACTION_VIEW, uri))
-                true
-            } catch (_: Exception) {
-                Toast.makeText(this, "App not installed for this link.", Toast.LENGTH_SHORT).show()
-                true
-            }
-        }
-        return true
-    }
-
-    private inner class WebAppInterface {
-
-        @JavascriptInterface
-        fun requestLocationFromWeb() {
-            runOnUiThread { requestCustomerLocation() }
-        }
-
-        @JavascriptInterface
-        fun openUpiApp(appPackage: String, upiId: String, shopName: String, amount: String) {
-            runOnUiThread {
-                try {
-                    val upiUri = Uri.parse("upi://pay?pa=$upiId&pn=$shopName&am=$amount&cu=INR")
-                    val intent = Intent(Intent.ACTION_VIEW, upiUri)
-                    intent.setPackage(appPackage)
-                    
-                    if (intent.resolveActivity(packageManager) != null) {
-                        startActivity(intent)
-                    } else {
-                        Toast.makeText(this@MainActivity, "App is not installed on your phone.", Toast.LENGTH_SHORT).show()
-                    }
-                } catch (e: Exception) {
-                    Toast.makeText(this@MainActivity, "Error opening UPI app.", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-
-    private fun requestCustomerLocation() {
-        if (pendingLocationRequest) return
-        pendingLocationRequest = true
-
-        val fineGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-        val coarseGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
-
-        if (fineGranted || coarseGranted) {
-            fetchLocation()
-        } else {
-            locationPermissionLauncher.launch(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION))
-        }
-    }
-
-    @SuppressLint("MissingPermission")
-    private fun fetchLocation() {
-        val fineGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-        val coarseGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
-
-        if (!fineGranted && !coarseGranted) {
-            pendingLocationRequest = false
-            sendLocationResult(JSONObject().put("error", "Location permission denied."))
-            return
-        }
-
-        val client = LocationServices.getFusedLocationProviderClient(this)
-        val cancellation = CancellationTokenSource()
-
-        client.getCurrentLocation(
-            if (fineGranted) Priority.PRIORITY_HIGH_ACCURACY else Priority.PRIORITY_BALANCED_POWER_ACCURACY,
-            cancellation.token
-        ).addOnSuccessListener { location ->
-            pendingLocationRequest = false
-            if (location == null) {
-                sendLocationResult(JSONObject().put("error", "Location not found. Turn on GPS."))
-                return@addOnSuccessListener
-            }
-            
-            val lat = location.latitude
-            val lng = location.longitude
-            sendLocationResult(JSONObject().put("latitude", lat).put("longitude", lng).put("mapsUrl", "https://www.google.com/maps?q=$lat,$lng"))
-            
-        }.addOnFailureListener {
-            pendingLocationRequest = false
-            sendLocationResult(JSONObject().put("error", "Failed to get location."))
-        }
-    }
-
-    private fun sendLocationResult(result: JSONObject) {
-        val jsonString = JSONObject.quote(result.toString())
-        runOnUiThread {
-            if (::webView.isInitialized) {
-                webView.evaluateJavascript("if (window.onNativeLocation) { window.onNativeLocation($jsonString); }", null)
-            }
-        }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        webView.saveState(outState)
-        super.onSaveInstanceState(outState)
-    }
-
-    override fun onDestroy() {
-        if (::webView.isInitialized) {
-            webView.removeJavascriptInterface("AndroidLocation")
-            webView.destroy()
-        }
-        super.onDestroy()
-    }
-}<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#572511">
-<meta name="description" content="Order fresh, crispy pani puri. Choose pickup or home delivery and place your order on WhatsApp.">
 <title>Pani Puri Wala | Fresh & Crispy</title>
-
 <style>
-:root {
-  --brown: #572511;
-  --brown2: #793719;
-  --orange: #ed812d;
-  --cream: #fff8ed;
-  --green: #218548;
-  --text: #2e2119;
-  --muted: #75695f;
-  --white: #fff;
-  --shadow: 0 12px 35px rgba(75, 40, 17, .10);
-}
-
+:root { --brown: #572511; --orange: #ed812d; --cream: #fff8ed; --green: #218548; --text: #2e2119; --muted: #75695f; }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--text); background: var(--cream); }
-button, input, textarea, select { font: inherit; }
-button { cursor: pointer; }
+body { margin: 0; font-family: system-ui, sans-serif; color: var(--text); background: var(--cream); }
+button, input, textarea { font: inherit; }
 a { color: inherit; text-decoration: none; }
-
-.topbar { background: var(--brown); color: white; text-align: center; padding: 9px 12px; font-size: 13px; }
-header { position: sticky; top: 0; z-index: 20; background: rgba(255, 248, 237, .96); backdrop-filter: blur(12px); border-bottom: 1px solid #eadaca; }
-.nav { max-width: 1180px; margin: auto; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+.topbar { background: var(--brown); color: white; text-align: center; padding: 9px; font-size: 13px; }
+header { position: sticky; top: 0; z-index: 20; background: rgba(255, 248, 237, .96); border-bottom: 1px solid #eadaca; }
+.nav { max-width: 1180px; margin: auto; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; }
 .logo { font-size: 21px; font-weight: 900; color: var(--brown); }
 .logo span { color: var(--orange); }
-.navlinks { display: flex; align-items: center; gap: 22px; font-size: 14px; font-weight: 650; }
-
-.btn { border: 0; border-radius: 12px; padding: 13px 18px; font-weight: 750; transition: transform .2s, box-shadow .2s, opacity .2s; }
-.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px #00000016; }
+.navlinks { display: flex; gap: 22px; font-size: 14px; font-weight: 650; }
+.btn { border: 0; border-radius: 12px; padding: 13px 18px; font-weight: 750; cursor: pointer; }
 .btn-primary { background: var(--orange); color: white; }
 .btn-dark { background: var(--brown); color: white; }
 .btn-green { background: var(--green); color: white; }
 .btn-light { background: #f4e5d2; color: var(--brown); }
-.btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
 
-.hero { max-width: 1180px; margin: auto; padding: 65px 20px 55px; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 45px; }
+.hero { max-width: 1180px; margin: auto; padding: 65px 20px; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 45px; }
+.hero h1 { font-size: clamp(42px, 6vw, 72px); color: var(--brown); margin: 19px 0; }
+.hero h1 span { color: var(--orange); }
+.hero p { color: var(--muted); font-size: 17px; line-height: 1.8; }
+.hero-actions { display: flex; gap: 12px; margin-top: 25px; }
+.hero-photo { position: relative; min-height: 380px; border-radius: 35px; overflow: hidden; }
+.hero-photo img { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: cover; }
+
+.slider-section { max-width: 1180px; margin: auto; padding: 20px; }
+.slider-container { width: 100%; height: 350px; border-radius: 25px; overflow: hidden; }
+.slider-wrapper { display: flex; width: 100%; height: 100%; transition: transform 0.5s ease-in-out; }
+.slider-wrapper img { min-width: 100%; height: 100%; object-fit: cover; }
+
+.section { max-width: 1180px; margin: auto; padding: 48px 20px; }
+.section-heading h2 { color: var(--brown); font-size: clamp(28px, 4vw, 40px); margin: 0 0 8px; }
+.menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.food-card { background: white; border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; }
+.food-image { height: 205px; }
+.food-image img { width: 100%; height: 100%; object-fit: cover; }
+.food-info { padding: 18px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+.price { font-size: 21px; font-weight: 900; color: var(--green); }
+.quantity { display: flex; align-items: center; gap: 11px; }
+.quantity button { width: 36px; height: 36px; background: #f7e7d4; color: var(--brown); font-size: 22px; font-weight: bold; border-radius: 10px; border: none; }
+.unavailable { color: red; font-weight: bold; }
+
+.checkout-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.panel { background: white; border-radius: 22px; padding: 23px; }
+.field { margin-bottom: 16px; }
+.field label { display: block; font-weight: bold; margin-bottom: 7px; font-size: 13px; }
+.field input, .field textarea { width: 100%; padding: 13px; border: 1px solid #dfd0c1; border-radius: 11px; }
+.choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.choice { border: 1px solid #e7d8c8; border-radius: 12px; padding: 13px; cursor: pointer; }
+.choice:has(input:checked) { border-color: var(--orange); background: #fff4e8; }
+.cart-line { display: flex; justify-content: space-between; padding: 13px 0; border-bottom: 1px solid #eee; }
+.total-row { display: flex; justify-content: space-between; font-weight: 900; font-size: 20px; padding-top: 17px; }
+.payment-box { margin-top: 16px; padding: 17px; border-radius: 15px; background: #fff6e9; }
+.qr-wrap { display: none; text-align: center; margin-top: 13px; padding: 15px; background: white; }
+.qr-wrap img { width: 220px; height: 220px; }
+.upi-apps { display: flex; gap: 10px; justify-content: center; margin-top: 15px; flex-wrap: wrap; }
+.upi-apps button { display: flex; align-items: center; gap: 6px; padding: 10px 16px; border-radius: 10px; border: 1px solid #ddd; background: #fff; cursor: pointer; }
+.upi-apps img { width: 22px; height: 22px; }
+.toast { position: fixed; left: 50%; bottom: 85px; transform: translateX(-50%); background: #222; color: white; padding: 12px 18px; border-radius: 12px; opacity: 0; transition: 0.3s; pointer-events: none; }
+.toast.show { opacity: 1; }
+.floating-cart { position: fixed; right: 18px; bottom: 18px; background: var(--green); color: white; padding: 15px 20px; border-radius: 50px; font-weight: bold; border: none; }
+@media (max-width: 800px) {
+  .hero, .checkout-layout { grid-template-columns: 1fr; }
+  .menu-grid { grid-template-columns: repeat(2, 1fr); }
+  .slider-container { height: 250px; }
+  .hero-photo { min-height: 280px; }
+}
+</style>
+</head>
+<body>
+<div class="topbar">🥣 Fresh Pani Puri • Home Delivery</div>
+<header>
+  <nav class="nav">
+    <a href="#" class="logo">Pani Puri <span>Wala</span></a>
+    <div class="navlinks">
+      <a href="#menu">Menu</a>
+      <a href="#checkout">Order</a>
+      <a class="btn btn-primary" href="#checkout">Order Now</a>
+    </div>
+  </nav>
+</header>
+<main>
+  <section class="hero">
+    <div>
+      <h1>Crunchy puri.<br>Chatpata <span>paani.</span></h1>
+      <p>Your favourite pani puri, full of flavour and freshness.</p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn btn-primary">Explore Menu ↓</a>
+        <a href="#checkout" class="btn btn-dark">Order Now</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="https://images.pexels.com/photos/14837647/pexels-photo-14837647.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Pani Puri">
+    </div>
+  </section>
+
+  <div class="slider-section">
+    <div class="slider-container">
+      <div class="slider-wrapper" id="sliderWrapper">
+        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=1000" alt="Pani Puri">
+        <img src="https://images.pexels.com/photos/14837647/pexels-photo-14837647.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Pani Puri">
+        <img src="https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?w=1000" alt="Pani Puri">
+      </div>
+    </div>
+  </div>
+
+  <section id="menu" class="section">
+    <div class="section-heading"><h2>Our Menu</h2></div>
+    <div id="notice" class="notice">Welcome! Fresh pani puri available today.</div>
+    <div id="menuStatus">Loading menu...</div>
+    <div id="menuGrid" class="menu-grid"></div>
+  </section>
+
+  <section id="checkout" class="section">
+    <div class="section-heading"><h2>Checkout</h2></div>
+    <div class="checkout-layout">
+      <div class="panel">
+        <form id="orderForm">
+          <div class="field"><label>Name *</label><input id="customerName" required placeholder="Full name"></div>
+          <div class="field"><label>Mobile *</label><input id="customerPhone" type="tel" required placeholder="Phone"></div>
+          <div class="field">
+            <label>Delivery Location *</label>
+            <textarea id="address" rows="2" required readonly style="cursor: pointer; background: #fff4e8; font-weight: bold; color: var(--brown);" placeholder="📍 Click here to auto-detect location"></textarea>
+          </div>
+          <div class="field"><label>Instructions</label><textarea id="instructions" placeholder="Spice preference..."></textarea></div>
+
+          <div class="field">
+            <label>Payment *</label>
+            <div class="choice-grid">
+              <label class="choice"><input type="radio" name="payment" value="COD" checked> Cash</label>
+              <label class="choice"><input type="radio" name="payment" value="UPI"> UPI</label>
+            </div>
+          </div>
+
+          <div id="paymentBox" class="payment-box" hidden>
+            <p>UPI ID: <strong>trustedcracking@axl</strong></p>
+            <button type="button" id="showQr" class="btn btn-light">Show QR</button>
+            <div id="qrWrap" class="qr-wrap">
+              <img id="qrImage" alt="QR">
+              <div class="upi-apps">
+                <button type="button" id="paytmBtn"><img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg"> Paytm</button>
+                <button type="button" id="gpayBtn"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg"> GPay</button>
+                <button type="button" id="phonepeBtn"><img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg"> PhonePe</button>
+              </div>
+            </div>
+            <div class="field" style="margin-top:14px"><label>UTR *</label><input id="utr" placeholder="Transaction ID"></div>
+          </div>
+
+          <button class="btn btn-green" type="submit" style="width:100%;">Send WhatsApp Order →</button>
+        </form>
+      </div>
+      <div class="panel">
+        <h3>Your Cart</h3>
+        <div id="cartItems"><div class="empty">Cart is empty.</div></div>
+        <div class="total-row"><span>Total</span><span id="cartTotal">₹0.00</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+<button id="floatingCart" class="floating-cart">🛒 Cart · 0 · ₹0</button>
+<div id="toast" class="toast"></div>
+
+<script>
+const DATA_URLS = ["https://cdn.jsdelivr.net/gh/Shaikmuzammil22/Pani-puri@main/data.json", "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/main/data.json"];
+const WHATSAPP_NUMBER = "919353481235";
+const UPI_ID = "trustedcracking@axl";
+const SHOP_NAME = "Pani Puri Wala";
+const CUSTOM_IMAGES = { "pani-puri": "https://images.pexels.com/photos/14837647/pexels-photo-14837647.jpeg?auto=compress&cs=tinysrgb&w=600", "samosa": "https://images.pexels.com/photos/14837647/pexels-photo-14837647.jpeg?auto=compress&cs=tinysrgb&w=600" };
+
+const state = { menu: [], cart: {} };
+const $ = (id) => document.getElementById(id);
+
+function money(val) { return new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR" }).format(val); }
+function notify(msg) { const t = $("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 2500); }
+
+function cartEntries() { return state.menu.filter(item => (state.cart[item.id] || 0) > 0); }
+function cartCount() { return cartEntries().reduce((sum, item) => sum + state.cart[item.id], 0); }
+function cartTotal() { return cartEntries().reduce((sum, item) => sum + item.price * state.cart[item.id], 0); }
+
+function setQuantity(id, delta) {
+  const item = state.menu.find(e => e.id === id);
+  if (!item || !item.available) return;
+  const next = Math.max(0, Math.min(99, (state.cart[id] || 0) + delta));
+  if (next === 0) delete state.cart[id]; else state.cart[id] = next;
+  renderMenu(); renderCart();
+}
+
+function renderMenu() {
+  const grid = $("menuGrid");
+  if (!state.menu.length) return;
+  grid.innerHTML = state.menu.map(item => {
+    const qty = state.cart[item.id] || 0;
+    const img = CUSTOM_IMAGES[item.id] || item.imageUrl || "https://via.placeholder.com/300";
+    return `
+      <article class="food-card">
+        <div class="food-image"><img src="${img}"></div>
+        <div class="food-info">
+          <h3>${item.name}</h3>
+          <p>${item.description}</p>
+          <div class="food-bottom">
+            <span class="price">${money(item.price)}</span>
+            <div class="quantity">
+              <button data-action="minus" data-id="${item.id}">−</button>
+              <span>${qty}</span>
+              <button data-action="plus" data-id="${item.id}">+</button>
+            </div>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+function renderCart() {
+  const items = cartEntries();
+  $("cartItems").innerHTML = items.length ? items.map(item => `
+    <div class="cart-line">
+      <div><strong>${item.name}</strong><br><small>${money(item.price)} × ${state.cart[item.id]}</small><br>
+      <button class="remove" data-remove="${item.id}" style="color:red;border:none;background:none;cursor:pointer;">Remove</button></div>
+      <strong>${money(item.price * state.cart[item.id])}</strong>
+    </div>
+  `).join("") : "<div>Cart is empty.</div>";
+  $("cartTotal").textContent = money(cartTotal());
+  $("floatingCart").textContent = `🛒 Cart · ${cartCount()} · ${money(cartTotal())}`;
+}
+
+async function loadMenu() {
+  let data = null;
+  for (const url of DATA_URLS) {
+    try { const res = await fetch(url); if (res.ok) { data = await res.json(); break; } } catch (e) {}
+  }
+  if (data) {
+    state.menu = data.menu.map(item => ({
+      id: String(item.id), name: item.name, description: item.description, price: Number(item.price), available: item.available !== false, imageUrl: item.imageUrl
+    }));
+    $("menuStatus").style.display = "none";
+    renderMenu();
+  }
+}
+
+// UI Events
+$("menuGrid").addEventListener("click", e => {
+  const btn = e.target.closest("button[data-action]");
+  if (btn) setQuantity(btn.dataset.id, btn.dataset.action === "plus" ? 1 : -1);
+});
+$("cartItems").addEventListener("click", e => {
+  const btn = e.target.closest("button[data-remove]");
+  if (btn) { delete state.cart[btn.dataset.remove]; renderMenu(); renderCart(); }
+});
+$("floatingCart").addEventListener("click", () => $("checkout").scrollIntoView());
+
+document.querySelectorAll('input[name="payment"]').forEach(inp => {
+  inp.addEventListener("change", () => { $("paymentBox").hidden = inp.value !== "UPI" || !inp.checked; });
+});
+
+$("showQr").addEventListener("click", () => {
+  if (!cartEntries().length) return notify("Add items first");
+  const params = new URLSearchParams({ pa: UPI_ID, pn: SHOP_NAME, am: cartTotal().toFixed(2), cu: "INR" });
+  $("qrImage").src = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" + encodeURIComponent("upi://pay?" + params);
+  $("qrWrap").style.display = "block";
+});
+
+function openUpiApp(pkg, scheme) {
+  const amt = cartTotal().toFixed(2);
+  if (typeof window.AndroidLocation !== "undefined") {
+    window.AndroidLocation.openUpiApp(pkg, UPI_ID, SHOP_NAME, amt);
+  } else {
+    let link = scheme === "paytm" ? `paytmmp://pay?pa=${UPI_ID}&pn=${SHOP_NAME}&am=${amt}&cu=INR` : (scheme === "gpay" ? `tez://upi/pay?pa=${UPI_ID}&pn=${SHOP_NAME}&am=${amt}&cu=INR` : `phonepe://pay?pa=${UPI_ID}&pn=${SHOP_NAME}&am=${amt}&cu=INR`);
+    window.location.href = link;
+  }
+}
+$("paytmBtn").addEventListener("click", () => openUpiApp("net.one97.paytm", "paytm"));
+$("gpayBtn").addEventListener("click", () => openUpiApp("com.google.android.apps.nbu.paisa.user", "gpay"));
+$("phonepeBtn").addEventListener("click", () => openUpiApp("com.phonepe.app", "phonepe"));
+
+// Location Auto Detect
+$("address").addEventListener("click", () => {
+  if (typeof window.AndroidLocation !== "undefined") {
+    $("address").value = "Fetching location...";
+    window.AndroidLocation.requestLocationFromWeb();
+  } else {
+    alert("Please open this in the App to auto-detect location.");
+  }
+});
+
+window.onNativeLocation = function(res) {
+  const data = typeof res === "string" ? JSON.parse(res) : res;
+  if (data.error) { notify(data.error); $("address").value = ""; return; }
+  if (data.mapsUrl) {
+    $("address").value = `📍 Location Auto-Detected`;
+    $("address").dataset.link = data.mapsUrl;
+    notify("Location detected!");
+  }
+};
+
+// Form Submit
+$("orderForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (!cartEntries().length) return notify("Cart is empty");
+  if (!$("address").value) return notify("Please detect location first");
+  
+  let msg = `🛒 *New Order*\nName: ${$("customerName").value}\nPhone: ${$("customerPhone").value}\nAddress: ${$("address").dataset.link || $("address").value}\n\n*Items:*\n`;
+  cartEntries().forEach(i => msg += `• ${i.name} x${state.cart[i.id]} = ${money(i.price * state.cart[i.id])}\n`);
+  msg += `\n*Total: ${money(cartTotal())}*`;
+  
+  window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg), "_blank");
+});
+
+// Slider
+let slideIndex = 0;
+setInterval(() => {
+  const slides = document.querySelectorAll("#sliderWrapper img");
+  if (!slides.length) return;
+  slideIndex = (slideIndex + 1) % slides.length;
+  $("sliderWrapper").style.transform = `translateX(-${slideIndex * 100}%)`;
+}, 3000);
+
+loadMenu(); renderCart();
+</script>
+</body>
+</html>180px; margin: auto; padding: 65px 20px 55px; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 45px; }
 .eyebrow { display: inline-block; background: #ffead5; color: #a34d16; border-radius: 30px; padding: 8px 13px; font-size: 12px; font-weight: 850; letter-spacing: 1px; text-transform: uppercase; }
 .hero h1 { font-size: clamp(42px, 6vw, 72px); line-height: 1.04; letter-spacing: -2px; color: var(--brown); margin: 19px 0; }
 .hero h1 span { color: var(--orange); }
