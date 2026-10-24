@@ -43,7 +43,7 @@ header { position: sticky; top: 0; z-index: 100; background: rgba(255, 252, 245,
 .logo { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; color: var(--brown); letter-spacing: 1px; transition: transform 0.3s; }
 .logo:hover { transform: scale(1.05); }
 .logo span { color: var(--gold); text-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
-.navlinks { display: flex; gap: 30px; font-size: 15px; font-weight: 600; color: var(--brown-light); }
+.navlinks { display: flex; gap: 30px; font-size: 15px; font-weight: 600; color: var(--brown-light); align-items: center; }
 .navlinks a { position: relative; transition: color 0.3s; }
 .navlinks a::after { content: ''; position: absolute; width: 0%; height: 2px; bottom: -5px; left: 0; background: var(--gold); transition: width 0.3s; }
 .navlinks a:hover { color: var(--gold); }
@@ -59,23 +59,9 @@ header { position: sticky; top: 0; z-index: 100; background: rgba(255, 252, 245,
 .btn-green { background: linear-gradient(135deg, var(--green), var(--green-light)); color: white; width: 100%; font-size: 16px; padding: 18px; border-radius: 15px; box-shadow: 0 8px 20px rgba(33, 133, 72, 0.3); }
 .btn-light { background: #f4ece0; color: var(--brown); border: 1px solid #e0d0b8; }
 
-/* HERO SECTION (Fixed Background) */
+/* HERO SECTION */
 .hero { max-width: 1180px; margin: 40px auto; padding: 0 20px; perspective: 1000px; }
-.hero-photo { 
-  position: relative; 
-  border-radius: 40px; 
-  overflow: hidden; 
-  height: 520px; 
-  box-shadow: 0 30px 60px rgba(58, 21, 6, 0.25); 
-  animation: zoomIn 1.2s cubic-bezier(0.16, 1, 0.3, 1); 
-  transform-style: preserve-3d;
-  
-  /* YAHAN PHOTO KA LINK LAGA HAI (Background Image) */
-  background-image: url('https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=1200&q=80');
-  background-size: cover;
-  background-position: center;
-  transition: background-size 15s ease;
-}
+.hero-photo { position: relative; border-radius: 40px; overflow: hidden; height: 520px; box-shadow: 0 30px 60px rgba(58, 21, 6, 0.25); animation: zoomIn 1.2s cubic-bezier(0.16, 1, 0.3, 1); transform-style: preserve-3d; background-image: url('https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center; transition: background-size 15s ease; }
 .hero-photo:hover { background-size: 110%; }
 .hero-overlay { position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.85) 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; text-align: center; }
 .hero-overlay h1 { font-family: 'Playfair Display', serif; font-size: 75px; font-weight: 900; color: var(--gold-light); text-shadow: 0 0 20px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.4); margin-bottom: 15px; letter-spacing: 3px; animation: glowPulse 3s infinite alternate, fadeUp 1s ease 0.5s both; line-height: 1.1; }
@@ -123,23 +109,12 @@ header { position: sticky; top: 0; z-index: 100; background: rgba(255, 252, 245,
 .field input:focus, .field textarea:focus { border-color: var(--gold); background: white; outline: none; box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); transform: scale(1.01); }
 
 /* RADIO BUTTONS */
-.choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.choice { border: 2px solid #eee; border-radius: 15px; padding: 20px; text-align: center; cursor: pointer; font-weight: 700; transition: all 0.4s; background: white; position: relative; overflow: hidden; }
-.choice:has(input:checked) { border-color: var(--gold); background: linear-gradient(135deg, #fffdf5, #fff8ed); color: var(--brown); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.15); transform: translateY(-3px); }
-.choice input { display: none; }
+.choice-grid { display: grid; grid-template-columns: 1fr; gap: 20px; } /* Sirf 1 option hai isliye 1 column */
+.choice { border: 2px solid var(--gold); border-radius: 15px; padding: 20px; text-align: center; font-weight: 700; background: linear-gradient(135deg, #fffdf5, #fff8ed); color: var(--brown); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.15); }
 
 /* CART */
 .cart-line { display: flex; justify-content: space-between; padding: 18px 0; border-bottom: 1px solid #eee; animation: slideRight 0.4s ease; }
 .total-row { display: flex; justify-content: space-between; font-weight: 900; font-size: 28px; margin-top: 30px; color: var(--brown); font-family: 'Playfair Display', serif; }
-
-/* PAYMENT BOX */
-.payment-box { margin-top: 30px; padding: 25px; background: linear-gradient(135deg, #fdfbf7, #fff4e8); border-radius: 20px; border: 2px dashed var(--gold); animation: fadeIn 0.5s ease; }
-.qr-wrap { display: none; text-align: center; margin-top: 25px; }
-.qr-wrap img { width: 250px; height: 250px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); animation: zoomIn 0.5s ease; border: 5px solid white; }
-.upi-apps { display: flex; gap: 15px; justify-content: center; margin-top: 25px; flex-wrap: wrap; }
-.upi-apps button { display: flex; align-items: center; gap: 10px; padding: 12px 25px; border: 2px solid #eee; border-radius: 15px; background: white; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-.upi-apps button:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2); }
-.upi-apps img { width: 26px; height: 26px; }
 
 /* TOAST & FLOATING CART */
 .toast { position: fixed; bottom: 110px; left: 50%; transform: translateX(-50%) translateY(30px); background: rgba(58, 21, 6, 0.95); backdrop-filter: blur(10px); color: white; padding: 18px 35px; border-radius: 50px; opacity: 0; transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); pointer-events: none; z-index: 999; box-shadow: 0 15px 40px rgba(0,0,0,0.3); font-weight: 600; border: 1px solid var(--gold); letter-spacing: 1px; }
@@ -166,7 +141,8 @@ footer h2 { font-family: 'Playfair Display', serif; font-size: 36px; letter-spac
   .hero-overlay p { font-size: 16px; letter-spacing: 3px; }
   .hero-photo { height: 380px; border-radius: 25px; }
   .checkout-layout { grid-template-columns: 1fr; }
-  .navlinks { display: none; }
+  .navlinks { display: flex; gap: 15px; }
+  .navlinks a:not(.btn) { display: none; } /* Mobile pe menu text hide */
   .panel { padding: 25px; }
   .section-heading h2 { font-size: 32px; }
 }
@@ -180,20 +156,25 @@ footer h2 { font-family: 'Playfair Display', serif; font-size: 36px; letter-spac
 <!-- RUNNING TOP BANNER -->
 <div class="topbar-marquee">
   <div class="marquee-content">
-    <span>✨ Welcome to Ismail Pani Puri Wala ✨ Fresh & Premium Taste ✨ Home Delivery Available ✨ Order Now ✨ Welcome to Ismail Pani Puri Wala ✨ Fresh & Premium Taste ✨ Home Delivery Available ✨ Order Now</span>
+    <span>✨ Welcome to Ismail Pani Puri Wala ✨ Fresh & Premium Taste ✨ Home Delivery Available ✨ Order Now ✨</span>
   </div>
 </div>
 
 <header>
   <nav class="nav">
     <a href="#" class="logo">Ismail <span>Pani Puri</span></a>
-    <div class="navlinks"><a href="#menu">Menu</a><a href="#checkout">Order</a></div>
+    <div class="navlinks">
+      <a href="#menu">Menu</a>
+      <a href="#checkout">Order</a>
+      <!-- NAYA SHARE BUTTON -->
+      <button onclick="shareApp()" class="btn btn-dark" style="padding: 10px 20px; font-size: 12px;">Share App ↗</button>
+    </div>
     <a href="#checkout" class="btn btn-primary" style="padding: 10px 20px; font-size: 12px;">Order Now</a>
   </nav>
 </header>
 
 <main>
-  <!-- HERO SECTION (FIXED BACKGROUND) -->
+  <!-- HERO SECTION -->
   <section class="hero">
     <div class="hero-photo">
       <div class="hero-overlay">
@@ -229,27 +210,17 @@ footer h2 { font-family: 'Playfair Display', serif; font-size: 36px; letter-spac
             <label>Delivery Location *</label>
             <textarea id="address" rows="2" required readonly style="cursor: pointer; background: #fff4e8; font-weight: bold; color: var(--brown); border-color: var(--gold);" placeholder="📍 Click here to auto-detect location"></textarea>
           </div>
-          <!-- INSTRUCTIONS SECTION REMOVED -->
+          
+          <!-- SIRF CASH ON DELIVERY -->
           <div class="field">
             <label>Payment Method *</label>
             <div class="choice-grid">
-              <label class="choice"><input type="radio" name="payment" value="COD" checked> 💵 Cash</label>
-              <label class="choice"><input type="radio" name="payment" value="UPI"> 📱 UPI</label>
-            </div>
-          </div>
-          <div id="paymentBox" class="payment-box" style="display: none;">
-            <p style="margin-bottom: 15px; font-weight: 600;">UPI ID: <strong style="color: var(--brown);">trustedcracking@axl</strong></p>
-            <button type="button" id="showQr" class="btn btn-light" style="width: 100%; border-radius: 10px;">Show QR Code</button>
-            <div id="qrWrap" class="qr-wrap">
-              <img id="qrImage" alt="QR">
-              <div class="upi-apps">
-                <button type="button" id="paytmBtn"><img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg"> Paytm</button>
-                <button type="button" id="gpayBtn"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg"> GPay</button>
-                <button type="button" id="phonepeBtn"><img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg"> PhonePe</button>
+              <div class="choice">
+                💵 Cash on Delivery
               </div>
             </div>
-            <div class="field" style="margin-top: 20px;"><label>UTR Number *</label><input id="utr" placeholder="Transaction ID"></div>
           </div>
+
           <button class="btn btn-green" type="submit">Send WhatsApp Order →</button>
         </form>
       </div>
@@ -291,7 +262,6 @@ const BRANCH = "main";
 const DATA_URL = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/${BRANCH}/data.json`;
 
 const WHATSAPP_NUMBER = "919353481235";
-const UPI_ID = "trustedcracking@axl";
 const SHOP_NAME = "Ismail Pani Puri";
 
 const state = { menu: [], cart: {}, shopOpen: true };
@@ -393,29 +363,6 @@ $("cartItems").addEventListener("click", e => {
   if (btn) { delete state.cart[btn.dataset.remove]; renderMenu(); renderCart(); }
 });
 $("floatingCart").addEventListener("click", () => $("checkout").scrollIntoView({ behavior: 'smooth' }));
-document.querySelectorAll('input[name="payment"]').forEach(inp => {
-  inp.addEventListener("change", () => { $("paymentBox").style.display = inp.value === "UPI" && inp.checked ? "block" : "none"; });
-});
-
-$("showQr").addEventListener("click", () => {
-  if (!cartEntries().length) return notify("Add items first");
-  const params = new URLSearchParams({ pa: UPI_ID, pn: SHOP_NAME, am: cartTotal().toFixed(2), cu: "INR" });
-  $("qrImage").src = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" + encodeURIComponent("upi://pay?" + params);
-  $("qrWrap").style.display = "block";
-});
-
-function openUpiApp(pkg, scheme) {
-  const amt = cartTotal().toFixed(2);
-  if (typeof window.AndroidLocation !== "undefined") {
-    window.AndroidLocation.openUpiApp(pkg, UPI_ID, SHOP_NAME, amt);
-  } else {
-    let link = scheme === "paytm" ? `paytmmp://pay?pa=${UPI_ID}&pn=${SHOP_NAME}&am=${amt}&cu=INR` : (scheme === "gpay" ? `tez://upi/pay?pa=${UPI_ID}&pn=${SHOP_NAME}&am=${amt}&cu=INR` : `phonepe://pay?pa=${UPI_ID}&pn=${SHOP_NAME}&am=${amt}&cu=INR`);
-    window.location.href = link;
-  }
-}
-$("paytmBtn").addEventListener("click", () => openUpiApp("net.one97.paytm", "paytm"));
-$("gpayBtn").addEventListener("click", () => openUpiApp("com.google.android.apps.nbu.paisa.user", "gpay"));
-$("phonepeBtn").addEventListener("click", () => openUpiApp("com.phonepe.app", "phonepe"));
 
 $("address").addEventListener("click", () => {
   if (typeof window.AndroidLocation !== "undefined") {
@@ -440,12 +387,26 @@ $("orderForm").addEventListener("submit", (e) => {
   if (!cartEntries().length) return notify("Cart is empty");
   if (!$("address").value) return notify("Please detect location first");
   
-  let msg = `🛒 *New Order*\nName: ${$("customerName").value}\nPhone: ${$("customerPhone").value}\nAddress: ${$("address").dataset.link || $("address").value}\n\n*Items:*\n`;
+  let msg = `🛒 *New Order (Cash on Delivery)*\nName: ${$("customerName").value}\nPhone: ${$("customerPhone").value}\nAddress: ${$("address").dataset.link || $("address").value}\n\n*Items:*\n`;
   cartEntries().forEach(i => msg += `• ${i.name} x${state.cart[i.id]} = ${money(i.price * state.cart[i.id])}\n`);
   msg += `\n*Total: ${money(cartTotal())}*`;
   
   window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg), "_blank");
 });
+
+// SHARE APP FUNCTION
+function shareApp() {
+  if (navigator.share) {
+    navigator.share({
+      title: 'Ismail Pani Puri Wala',
+      text: 'Order fresh and premium Pani Puri from our app!',
+      url: window.location.href // Browser me link share hoga, App me APK
+    }).catch((error) => console.log('Error sharing', error));
+  } else {
+    // Fallback
+    alert("Aapka browser share feature support nahi karta. Aap link copy karke bhej sakte hain.");
+  }
+}
 
 loadMenu();
 </script>
