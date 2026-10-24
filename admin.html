@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel - Pani Puri Wala</title>
+<style>
+  body { font-family: system-ui, sans-serif; background: #f4f4f4; padding: 20px; margin: 0; }
+  .container { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+  h1 { text-align: center; color: #572511; margin-bottom: 20px; }
+  .field { margin-bottom: 15px; }
+  label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
+  input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+  button { width: 100%; padding: 15px; background: #218548; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+  button:hover { background: #1a6b39; }
+  .status { margin-top: 15px; padding: 10px; text-align: center; border-radius: 8px; font-weight: bold; display: none; }
+  .success { background: #d4edda; color: #155724; display: block; }
+  .error { background: #f8d7da; color: #721c24; display: block; }
+  .card { border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px; background: #fafafa; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Admin Panel</h1>
+  
+  <div class="field">
+    <label>GitHub Token (Private)</label>
+    <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxxxxx">
+  </div>
+
+  <hr style="margin: 20px 0; border: 1px solid #eee;">
+
+  <div class="field">
+    <label>Shop Status</label>
+    <select id="shopStatus">
+      <option value="true">🟢 Shop Open (Aaj khula hai)</option>
+      <option value="false">🔴 Shop Closed (Today is holiday)</option>
+    </select>
+  </div>
+
+  <div class="card">
+    <h3>Item 1 (Pani Puri)</h3>
+    <div class="field"><label>Price (₹)</label><input type="number" id="price1"></div>
+    <div class="field"><label>Photo URL</label><input type="text" id="img1"></div>
+  </div>
+
+  <div class="card">
+    <h3>Item 2 (Samosa)</h3>
+    <div class="field"><label>Price (₹)</label><input type="number" id="price2"></div>
+    <div class="field"><label>Photo URL</label><input type="text" id="img2"></div>
+  </div>
+
+  <button onclick="saveData()">Update Live App</button>
+  <div id="statusMsg" class="status"></div>
+</div>
+
+<script>
+  // AAPKI GITHUB DETAILS YAHAN DAALEIN
+  const GITHUB_USERNAME = "Shaikmuzammil22";
+  const REPO_NAME = "Pani-puri";
+  const FILE_PATH = "data.json";
+  const BRANCH = "main";
+
+  const API_URL = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${FILE_PATH}`;
+
+  // Load current data on page load
+  window.onload = async () => {
+    try {
+      const res = await fetch("https://raw.githubusercontent.com/" + GITHUB_USERNAME + "/" + REPO_NAME + "/" + BRANCH + "/data.json?t=" + Date.now());
+      const data = await res.json();
+      
+      document.getElementById("shopStatus").value = data.shopOpen ? "true" : "false";
+      
+      if(data.menu && data.menu[0]) {
+        document.getElementById("price1").value = data.menu[0].price;
+        document.getElementById("img1").value = data.menu[0].imageUrl;
+      }
+      if(data.menu && data.menu[1]) {
+        document.getElementById("price2").value = data.menu[1].price;
+        document.getElementById("img2").value = data.menu[1].imageUrl;
+      }
+    } catch(e) {
+      console.log("Data load failed", e);
+    }
+  };
+
+  async function saveData() {
+    const token = document.getElementById("githubToken").value.trim();
+    if(!token) return showMsg("GitHub Token daalna zaroori hai!", "error");
+
+    const isShopOpen = document.getElementById("shopStatus").value === "true";
+    
+    const updatedData = {
+      "shopOpen": isShopOpen,
+      "shopClosedMessage": "🚫 Aaj shop band hai! (Today is holiday)",
+      "menu": [
+        {
+          "id": "pani-puri",
+          "name": "Pani Puri",
+          "description": "Fresh and spicy",
+          "price": Number(document.getElementById("price1").value),
+          "imageUrl": document.getElementById("img1").value
+        },
+        {
+          "id": "samosa",
+          "name": "Samosa",
+          "description": "Crispy and fresh",
+          "price": Number(document.getElementById("price2").value),
+          "imageUrl": document.getElementById("img2").value
+        }
+      ]
+    };
+
+    try {
+      // 1. Get file SHA (Needed by GitHub to update)
+      const getRes = await fetch(API_URL, {
+        headers: { "Authorization": `token ${token}` }
+      });
+      const fileInfo = await getRes.json();
+      
+      if(fileInfo.message === "Not Found") return showMsg("Token galat hai ya file nahi mili.", "error");
+      const sha = fileInfo.sha;
+
+      // 2. Encode JSON data to Base64
+      const contentEncoded = btoa(unescape(encodeURIComponent(JSON.stringify(updatedData, null, 2))));
+
+      // 3. Update file on GitHub
+      const putRes = await fetch(API_URL, {
+        method: "PUT",
+        headers: {
+          "Authorization": `token ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          message: "Admin: Shop settings updated",
+          content: contentEncoded,
+          sha: sha,
+          branch: BRANCH
+        })
+      });
+
+      if(putRes.ok) {
+        showMsg("✅ Success! App live update ho gaya hai.", "success");
+      } else {
+        showMsg("❌ Error: Update fail ho gaya. Token check karein.", "error");
+      }
+    } catch(e) {
+      showMsg("❌ Network Error.", "error");
+    }
+  }
+
+  function showMsg(msg, type) {
+    const el = document.getElementById("statusMsg");
+    el.textContent = msg;
+    el.className = "status " + type;
+    setTimeout(() => el.className = "status", 4000);
+  }
+</script>
+</body>
+</html>
