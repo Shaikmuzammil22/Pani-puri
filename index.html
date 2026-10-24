@@ -6,34 +6,23 @@
 <meta name="theme-color" content="#572511">
 <title>Pani Puri Wala | Fresh & Crispy</title>
 <style>
-:root {
-  --brown: #572511;
-  --orange: #ed812d;
-  --cream: #fff8ed;
-  --green: #218548;
-  --text: #2e2119;
-  --muted: #75695f;
-}
+:root { --brown: #572511; --orange: #ed812d; --cream: #fff8ed; --green: #218548; --text: #2e2119; --muted: #75695f; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: system-ui, -apple-system, sans-serif; color: var(--text); background: var(--cream); }
 button, input, textarea { font: inherit; }
 a { color: inherit; text-decoration: none; }
-
 .topbar { background: var(--brown); color: white; text-align: center; padding: 10px; font-size: 13px; }
 header { position: sticky; top: 0; z-index: 100; background: rgba(255, 248, 237, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid #eadaca; }
 .nav { max-width: 1180px; margin: auto; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; }
 .logo { font-size: 22px; font-weight: 900; color: var(--brown); }
 .logo span { color: var(--orange); }
 .navlinks { display: flex; gap: 20px; font-size: 14px; font-weight: 600; }
-.navlinks a:hover { color: var(--orange); }
-
 .btn { border: 0; border-radius: 12px; padding: 12px 18px; font-weight: 700; cursor: pointer; transition: 0.2s; }
 .btn:hover { opacity: 0.9; transform: translateY(-2px); }
 .btn-primary { background: var(--orange); color: white; }
 .btn-dark { background: var(--brown); color: white; }
 .btn-green { background: var(--green); color: white; width: 100%; font-size: 16px; padding: 15px; }
 .btn-light { background: #f4e5d2; color: var(--brown); }
-
 .hero { max-width: 1180px; margin: auto; padding: 60px 20px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 40px; }
 .hero h1 { font-size: 50px; line-height: 1.1; color: var(--brown); margin-bottom: 20px; }
 .hero h1 span { color: var(--orange); }
@@ -41,16 +30,9 @@ header { position: sticky; top: 0; z-index: 100; background: rgba(255, 248, 237,
 .hero-actions { display: flex; gap: 15px; }
 .hero-photo { border-radius: 30px; overflow: hidden; height: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
 .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
-
-.slider-section { max-width: 1180px; margin: auto; padding: 20px; }
-.slider-container { width: 100%; height: 350px; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-.slider-wrapper { display: flex; width: 100%; height: 100%; transition: transform 0.5s ease-in-out; }
-.slider-wrapper img { min-width: 100%; height: 100%; object-fit: cover; }
-
 .section { max-width: 1180px; margin: auto; padding: 50px 20px; }
 .section-heading h2 { color: var(--brown); font-size: 32px; margin-bottom: 20px; }
-.notice { background: #fff0db; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #f3d5b4; }
-
+.notice { background: #fff0db; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #f3d5b4; font-weight: bold; }
 .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
 .food-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
 .food-image { height: 200px; width: 100%; }
@@ -63,41 +45,32 @@ header { position: sticky; top: 0; z-index: 100; background: rgba(255, 248, 237,
 .quantity { display: flex; align-items: center; gap: 12px; background: #f4e5d2; padding: 5px 10px; border-radius: 10px; }
 .quantity button { background: none; border: none; font-size: 20px; font-weight: bold; color: var(--brown); cursor: pointer; }
 .quantity span { font-weight: bold; min-width: 20px; text-align: center; }
-
 .checkout-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
 .panel { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
 .panel h3 { color: var(--brown); margin-bottom: 20px; font-size: 22px; }
 .field { margin-bottom: 15px; }
 .field label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 8px; }
 .field input, .field textarea { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 10px; background: #fafafa; }
-.field input:focus, .field textarea:focus { outline: none; border-color: var(--orange); }
-
 .choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .choice { border: 1px solid #ddd; border-radius: 10px; padding: 15px; text-align: center; cursor: pointer; font-weight: bold; }
 .choice:has(input:checked) { border-color: var(--orange); background: #fff4e8; color: var(--brown); }
 .choice input { display: none; }
-
 .cart-line { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; }
 .total-row { display: flex; justify-content: space-between; font-weight: 800; font-size: 20px; margin-top: 15px; color: var(--brown); }
-
 .payment-box { margin-top: 20px; padding: 15px; background: #f9f9f9; border-radius: 10px; border: 1px dashed #ccc; }
 .qr-wrap { display: none; text-align: center; margin-top: 15px; }
 .qr-wrap img { width: 200px; height: 200px; }
 .upi-apps { display: flex; gap: 10px; justify-content: center; margin-top: 15px; flex-wrap: wrap; }
 .upi-apps button { display: flex; align-items: center; gap: 5px; padding: 8px 15px; border: 1px solid #ddd; border-radius: 8px; background: white; font-weight: bold; cursor: pointer; }
 .upi-apps img { width: 20px; height: 20px; }
-
 .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: #333; color: white; padding: 12px 20px; border-radius: 30px; opacity: 0; transition: 0.3s; pointer-events: none; z-index: 999; }
 .toast.show { opacity: 1; }
 .floating-cart { position: fixed; bottom: 20px; right: 20px; background: var(--green); color: white; padding: 15px 25px; border-radius: 30px; font-weight: bold; border: none; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 99; }
-
 footer { background: var(--brown); color: white; text-align: center; padding: 30px 20px; margin-top: 50px; }
-
 @media (max-width: 800px) {
   .hero, .checkout-layout { grid-template-columns: 1fr; }
   .hero h1 { font-size: 40px; }
   .hero-photo { height: 300px; }
-  .slider-container { height: 250px; }
   .navlinks { display: none; }
 }
 </style>
@@ -105,81 +78,55 @@ footer { background: var(--brown); color: white; text-align: center; padding: 30
 <body>
 
 <div class="topbar">🥣 Fresh Pani Puri • Home Delivery</div>
-
 <header>
   <nav class="nav">
     <a href="#" class="logo">Pani Puri <span>Wala</span></a>
-    <div class="navlinks">
-      <a href="#menu">Menu</a>
-      <a href="#checkout">Order</a>
-    </div>
+    <div class="navlinks"><a href="#menu">Menu</a><a href="#checkout">Order</a></div>
     <a href="#checkout" class="btn btn-primary">Order Now</a>
   </nav>
 </header>
 
 <main>
-  <!-- HERO SECTION (Upar wali badi photo) -->
   <section class="hero">
     <div>
       <h1>Crunchy puri.<br>Chatpata <span>paani.</span></h1>
-      <p>Your favourite pani puri, full of flavour and freshness. Choose your favourites, place an order and contact us on WhatsApp.</p>
+      <p>Your favourite pani puri, full of flavour and freshness.</p>
       <div class="hero-actions">
         <a href="#menu" class="btn btn-primary">Explore Menu ↓</a>
         <a href="#checkout" class="btn btn-dark">Order Now</a>
       </div>
     </div>
     <div class="hero-photo">
-      <!-- Aapki Di Hui Doosri Photo -->
       <img src="https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=800&q=80" alt="Pani Puri">
     </div>
   </section>
 
-  <!-- SLIDER SECTION (Automatic slide hone wali photos) -->
-  <div class="slider-section">
-    <div class="slider-container">
-      <div class="slider-wrapper" id="sliderWrapper">
-        <!-- Dono photos slider mein daal di hain -->
-        <img src="https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=1000&q=80" alt="Pani Puri 1">
-        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=1000" alt="Pani Puri 2">
-        <img src="https://images.pexels.com/photos/14837647/pexels-photo-14837647.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Pani Puri 3">
-      </div>
-    </div>
-  </div>
-
   <section id="menu" class="section">
-    <div class="section-heading">
-      <h2>Our Menu</h2>
+    <div class="section-heading"><h2>Our Menu</h2></div>
+    
+    <!-- SHOP CLOSED RED ALERT -->
+    <div id="shopStatusNotice" class="notice" style="display: none; color: red; background: #ffe6e6; border-color: #ffb3b3; text-align: center; font-size: 18px;">
+      🚫 Aaj shop band hai! (Today is holiday)
     </div>
+    
     <div id="notice" class="notice">Welcome! Fresh pani puri available today.</div>
     <div id="menuStatus" style="margin-bottom: 20px; color: var(--muted);">Loading menu...</div>
     <div id="menuGrid" class="menu-grid"></div>
   </section>
 
   <section id="checkout" class="section">
-    <div class="section-heading">
-      <h2>Checkout</h2>
-    </div>
+    <div class="section-heading"><h2>Checkout</h2></div>
     <div class="checkout-layout">
-      <div class="panel">
+      <div class="panel" id="orderPanel">
         <h3>Your Details</h3>
         <form id="orderForm">
-          <div class="field">
-            <label>Name *</label>
-            <input id="customerName" required placeholder="Full name">
-          </div>
-          <div class="field">
-            <label>Mobile *</label>
-            <input id="customerPhone" type="tel" required placeholder="Phone number">
-          </div>
+          <div class="field"><label>Name *</label><input id="customerName" required placeholder="Full name"></div>
+          <div class="field"><label>Mobile *</label><input id="customerPhone" type="tel" required placeholder="Phone number"></div>
           <div class="field">
             <label>Delivery Location *</label>
             <textarea id="address" rows="2" required readonly style="cursor: pointer; background: #fff4e8; font-weight: bold; color: var(--brown);" placeholder="📍 Click here to auto-detect location"></textarea>
           </div>
-          <div class="field">
-            <label>Instructions</label>
-            <textarea id="instructions" placeholder="Spice preference..."></textarea>
-          </div>
-
+          <div class="field"><label>Instructions</label><textarea id="instructions" placeholder="Spice preference..."></textarea></div>
           <div class="field">
             <label>Payment Method *</label>
             <div class="choice-grid">
@@ -187,7 +134,6 @@ footer { background: var(--brown); color: white; text-align: center; padding: 30
               <label class="choice"><input type="radio" name="payment" value="UPI"> Online UPI</label>
             </div>
           </div>
-
           <div id="paymentBox" class="payment-box" style="display: none;">
             <p style="margin-bottom: 10px;">UPI ID: <strong>trustedcracking@axl</strong></p>
             <button type="button" id="showQr" class="btn btn-light" style="width: 100%;">Show QR Code</button>
@@ -199,16 +145,11 @@ footer { background: var(--brown); color: white; text-align: center; padding: 30
                 <button type="button" id="phonepeBtn"><img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg"> PhonePe</button>
               </div>
             </div>
-            <div class="field" style="margin-top: 15px;">
-              <label>UTR Number *</label>
-              <input id="utr" placeholder="Transaction ID">
-            </div>
+            <div class="field" style="margin-top: 15px;"><label>UTR Number *</label><input id="utr" placeholder="Transaction ID"></div>
           </div>
-
           <button class="btn btn-green" type="submit" style="margin-top: 15px;">Send WhatsApp Order →</button>
         </form>
       </div>
-
       <div class="panel">
         <h3>Your Cart</h3>
         <div id="cartItems"><div style="color: #777;">Cart is empty.</div></div>
@@ -220,37 +161,35 @@ footer { background: var(--brown); color: white; text-align: center; padding: 30
 
 <footer>
   <h2 style="color: white;">Pani Puri <span style="color: var(--orange);">Wala</span></h2>
-  <p style="margin-top: 10px; opacity: 0.8;">Fresh, crispy and full of flavour.<br>Thank you for supporting our shop!</p>
 </footer>
 
 <button id="floatingCart" class="floating-cart">🛒 Cart · 0 · ₹0</button>
 <div id="toast" class="toast"></div>
 
 <script>
-const DATA_URLS = ["https://cdn.jsdelivr.net/gh/Shaikmuzammil22/Pani-puri@main/data.json", "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/main/data.json"];
+// YAHAN AAPKI GITHUB DETAILS
+const GITHUB_USERNAME = "Shaikmuzammil22";
+const REPO_NAME = "Pani-puri";
+const BRANCH = "main";
+const DATA_URL = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/${BRANCH}/data.json`;
+
 const WHATSAPP_NUMBER = "919353481235";
 const UPI_ID = "trustedcracking@axl";
 const SHOP_NAME = "Pani Puri Wala";
 
-// Yahan maine aapki di hui Pani Puri ki photo daal di hai, taaki menu mein bhi wohi dikhe.
-const CUSTOM_IMAGES = { 
-  "pani-puri": "https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=600&q=80", 
-  "samosa": "https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=600&q=80" 
-};
-
-const state = { menu: [], cart: {} };
+const state = { menu: [], cart: {}, shopOpen: true };
 const $ = (id) => document.getElementById(id);
 
 function money(val) { return new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR" }).format(val); }
 function notify(msg) { const t = $("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 2500); }
-
 function cartEntries() { return state.menu.filter(item => (state.cart[item.id] || 0) > 0); }
 function cartCount() { return cartEntries().reduce((sum, item) => sum + state.cart[item.id], 0); }
 function cartTotal() { return cartEntries().reduce((sum, item) => sum + item.price * state.cart[item.id], 0); }
 
 function setQuantity(id, delta) {
+  if(!state.shopOpen) return notify("Shop is closed today!");
   const item = state.menu.find(e => e.id === id);
-  if (!item || !item.available) return;
+  if (!item) return;
   const next = Math.max(0, Math.min(99, (state.cart[id] || 0) + delta));
   if (next === 0) delete state.cart[id]; else state.cart[id] = next;
   renderMenu(); renderCart();
@@ -261,10 +200,9 @@ function renderMenu() {
   if (!state.menu.length) return;
   grid.innerHTML = state.menu.map(item => {
     const qty = state.cart[item.id] || 0;
-    const img = CUSTOM_IMAGES[item.id] || item.imageUrl || "https://via.placeholder.com/300";
     return `
       <article class="food-card">
-        <div class="food-image"><img src="${img}"></div>
+        <div class="food-image"><img src="${item.imageUrl || 'https://via.placeholder.com/300'}"></div>
         <div class="food-info">
           <h3>${item.name}</h3>
           <p>${item.description}</p>
@@ -296,16 +234,30 @@ function renderCart() {
 }
 
 async function loadMenu() {
-  let data = null;
-  for (const url of DATA_URLS) {
-    try { const res = await fetch(url); if (res.ok) { data = await res.json(); break; } } catch (e) {}
-  }
-  if (data) {
-    state.menu = data.menu.map(item => ({
-      id: String(item.id), name: item.name, description: item.description, price: Number(item.price), available: item.available !== false, imageUrl: item.imageUrl
-    }));
+  try {
+    const res = await fetch(DATA_URL + "?t=" + Date.now());
+    const data = await res.json();
+    
+    state.shopOpen = data.shopOpen;
+    state.menu = data.menu;
+
+    if (!state.shopOpen) {
+      $("shopStatusNotice").style.display = "block";
+      $("shopStatusNotice").innerText = data.shopClosedMessage || "Aaj shop band hai!";
+      $("notice").style.display = "none";
+      $("orderPanel").style.opacity = "0.5";
+      $("orderPanel").style.pointerEvents = "none";
+    } else {
+      $("shopStatusNotice").style.display = "none";
+      $("notice").style.display = "block";
+      $("orderPanel").style.opacity = "1";
+      $("orderPanel").style.pointerEvents = "auto";
+    }
+
     $("menuStatus").style.display = "none";
     renderMenu();
+  } catch(e) {
+    $("menuStatus").innerText = "Menu load nahi hua. Internet check karein.";
   }
 }
 
@@ -318,7 +270,6 @@ $("cartItems").addEventListener("click", e => {
   if (btn) { delete state.cart[btn.dataset.remove]; renderMenu(); renderCart(); }
 });
 $("floatingCart").addEventListener("click", () => $("checkout").scrollIntoView());
-
 document.querySelectorAll('input[name="payment"]').forEach(inp => {
   inp.addEventListener("change", () => { $("paymentBox").style.display = inp.value === "UPI" && inp.checked ? "block" : "none"; });
 });
@@ -347,9 +298,7 @@ $("address").addEventListener("click", () => {
   if (typeof window.AndroidLocation !== "undefined") {
     $("address").value = "Fetching location...";
     window.AndroidLocation.requestLocationFromWeb();
-  } else {
-    alert("Please open this in the App to auto-detect location.");
-  }
+  } else { alert("Please open this in the App to auto-detect location."); }
 });
 
 window.onNativeLocation = function(res) {
@@ -364,6 +313,7 @@ window.onNativeLocation = function(res) {
 
 $("orderForm").addEventListener("submit", (e) => {
   e.preventDefault();
+  if (!state.shopOpen) return notify("Shop is closed today.");
   if (!cartEntries().length) return notify("Cart is empty");
   if (!$("address").value) return notify("Please detect location first");
   
@@ -374,15 +324,7 @@ $("orderForm").addEventListener("submit", (e) => {
   window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg), "_blank");
 });
 
-let slideIndex = 0;
-setInterval(() => {
-  const slides = document.querySelectorAll("#sliderWrapper img");
-  if (!slides.length) return;
-  slideIndex = (slideIndex + 1) % slides.length;
-  $("sliderWrapper").style.transform = `translateX(-${slideIndex * 100}%)`;
-}, 3000);
-
-loadMenu(); renderCart();
+loadMenu();
 </script>
 </body>
 </html>
