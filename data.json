@@ -21,14 +21,14 @@
       "name": "Onion (Pyaz)",
       "description": "Fresh chopped onions",
       "price": 0,
-      "imageUrl": ""
+      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/ginger.png"
     },
     {
       "id": "adrak",
       "name": "Adrak (Ginger)",
       "description": "Fresh ginger slices",
       "price": 0,
-      "imageUrl": ""
+      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/onion.png"
     }
   ]
 }
