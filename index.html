@@ -311,7 +311,6 @@ footer p { color: #f5d8bf; line-height: 1.7; }
     </div>
 
     <div class="hero-photo reveal">
-      <!-- Fallback background image if the user's internet is slow -->
       <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1100&q=85" alt="Indian street food" onerror="this.src='https://via.placeholder.com/600x400?text=Pani+Puri'">
       <div class="photo-label">✨ Fresh • Crispy • Chatpata</div>
     </div>
@@ -362,6 +361,7 @@ footer p { color: #f5d8bf; line-height: 1.7; }
             <div class="field">
               <label for="address">Delivery address *</label>
               <textarea id="address" maxlength="350" placeholder="House number, street, area" required></textarea>
+              <!-- Location button will be injected here automatically -->
             </div>
             <div class="field">
               <label for="landmark">Landmark (optional)</label>
@@ -461,7 +461,6 @@ footer p { color: #f5d8bf; line-height: 1.7; }
 <script>
 "use strict";
 
-// Backup links for Data Loading to prevent blank screens
 const DATA_URLS = [
   "https://cdn.jsdelivr.net/gh/Shaikmuzammil22/Pani-puri@main/data.json",
   "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/main/data.json"
@@ -517,7 +516,6 @@ function renderMenu() {
     const available = item.available && item.price >= 0;
     const image = item.imageUrl || "";
 
-    // Fallback image logic if the user's json image is broken
     const imgTag = image 
       ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(item.name)}" loading="lazy" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=Pani+Puri';">`
       : `<div style="display:flex;align-items:center;justify-content:center;height:100%;background:#f4e5d2;color:var(--brown);font-weight:bold;">No Image</div>`;
@@ -578,13 +576,12 @@ async function loadMenu() {
 
   let data = null;
 
-  // Try each URL one by one until one works
   for (const url of DATA_URLS) {
     try {
       const response = await fetch(url + "?t=" + Date.now(), { cache: "no-store" });
       if (response.ok) {
         data = await response.json();
-        if (data && Array.isArray(data.menu)) break; // Success!
+        if (data && Array.isArray(data.menu)) break; 
       }
     } catch (err) {
       console.log("Failed to load from: " + url);
@@ -599,7 +596,6 @@ async function loadMenu() {
     return;
   }
 
-  // Success logic
   try {
     const oldCart = { ...state.cart };
     state.menu = data.menu.map((item, index) => ({
@@ -791,7 +787,7 @@ renderCart();
 loadMenu();
 
 /* =========================================================
-   ANDROID LOCATION BRIDGE
+   ANDROID LOCATION BRIDGE (FOR AUTO-DETECT ADDRESS)
    ========================================================= */
 function isAndroidApp() {
   return typeof window.AndroidLocation !== "undefined" &&
@@ -809,7 +805,7 @@ window.onNativeLocation = function (result) {
       if (!existing.includes(data.mapsUrl)) {
         addressBox.value = existing ? existing + "\n📍 " + data.mapsUrl : "📍 " + data.mapsUrl;
       }
-      notify("Location add ho gayi. Exact house number likh dein.");
+      notify("Location auto-detected! Exact house number likh dein.");
     }
   } catch (e) { notify("Location result parse nahi hua."); }
 };
@@ -829,12 +825,13 @@ function injectLocationButton() {
   btn.textContent = "📍 Use my current location";
 
   btn.addEventListener("click", () => {
-    notify("Location fetch ho rahi hai...");
+    notify("Location auto-detect ho rahi hai...");
     try { window.AndroidLocation.requestLocationFromWeb(); } catch (e) { notify("Location request fail ho gayi."); }
   });
   addressField.parentNode.insertBefore(btn, addressField.nextSibling);
 }
 
+// Automatically inject the button when page loads if running in App
 if (isAndroidApp()) { injectLocationButton(); }
 </script>
 </body>
