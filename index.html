@@ -182,6 +182,255 @@ footer p { color: #f5d8bf; line-height: 1.7; }
       </div>
     </div>
 
+    <!-- Main Hero Image Fix -->
+    <div class="hero-photo reveal">
+      <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1000&q=80" alt="Pani Puri" onerror="this.src='https://via.placeholder.com/600x400?text=Pani+Puri'">
+      <div class="photo-label">✨ Fresh • Crispy • Chatpata</div>
+    </div>
+  </section>
+
+  <!-- Slider Image Fix -->
+  <div class="slider-section reveal">
+    <div class="slider-container">
+      <div class="slider-wrapper" id="sliderWrapper">
+        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1200&q=80" alt="Pani Puri 1">
+        <img src="https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=1200&q=80" alt="Pani Puri 2">
+        <img src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=1200&q=80" alt="Pani Puri 3">
+        <img src="https://images.unsplash.com/photo-1567337710282-00832b415979?auto=format&fit=crop&w=1200&q=80" alt="Pani Puri 4">
+      </div>
+    </div>
+  </div>
+
+  <section id="menu" class="section">
+    <div class="section-heading reveal">
+      <div>
+        <h2>Our Menu</h2>
+        <p>Pick your favourites and adjust the quantity.</p>
+      </div>
+      <button id="refreshMenu" class="btn btn-light" type="button">↻ Refresh</button>
+    </div>
+
+    <div id="notice" class="notice reveal">Welcome! Fresh pani puri available today.</div>
+    <div id="offer" class="offer reveal">
+      <h3>Special Offer</h3>
+      <p>Ask us about today's offer!</p>
+    </div>
+
+    <div id="menuStatus" class="status-note" role="status">Loading latest menu...</div>
+    <div id="menuGrid" class="menu-grid"></div>
+  </section>
+
+  <section id="checkout" class="section">
+    <div class="section-heading reveal">
+      <div>
+        <h2>Checkout</h2>
+        <p>Enter your details to prepare your order.</p>
+      </div>
+    </div>
+
+    <div class="checkout-layout">
+      <div class="panel reveal">
+        <h3>Your Details</h3>
+        <form id="orderForm">
+          <div class="field">
+            <label for="customerName">Customer name *</label>
+            <input id="customerName" name="customerName" required maxlength="80" autocomplete="name" placeholder="Enter your full name">
+          </div>
+
+          <div class="field">
+            <label for="customerPhone">Mobile number *</label>
+            <input id="customerPhone" name="customerPhone" required type="tel" inputmode="tel" autocomplete="tel" placeholder="Enter your phone number" maxlength="20">
+          </div>
+
+          <div id="addressFields">
+            <div class="field">
+              <label for="address">Delivery address *</label>
+              <div class="map-btn-wrapper">
+                <input type="text" id="address" maxlength="350" placeholder="📍 Click to open Google Maps & auto-detect" required readonly style="cursor: pointer; background-color: #f8f9fa;">
+              </div>
+            </div>
+            <div class="field">
+              <label for="landmark">Landmark (optional)</label>
+              <input id="landmark" maxlength="120" placeholder="Nearby landmark">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="instructions">Special instructions (optional)</label>
+            <textarea id="instructions" maxlength="250" placeholder="Spice preference or order instructions"></textarea>
+          </div>
+
+          <div class="field">
+            <label>Payment method *</label>
+            <div class="choice-grid">
+              <label class="choice">
+                <input type="radio" name="payment" value="COD" checked>
+                <span>💵<br><strong>Cash on delivery</strong></span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="payment" value="UPI">
+                <span>📱<br><strong>Online UPI</strong></span>
+              </label>
+            </div>
+          </div>
+
+          <div id="paymentBox" class="payment-box" hidden>
+            <h4>Pay using UPI</h4>
+            <p>UPI ID: <strong id="upiLabel">trustedcracking@axl</strong></p>
+            <p class="status-note">Scan the QR using your UPI app. Check the payee name and amount in your payment app before confirming payment.</p>
+
+            <button type="button" id="showQr" class="btn btn-light">Show payment QR</button>
+
+            <div id="qrWrap" class="qr-wrap">
+              <img id="qrImage" alt="UPI payment QR code">
+              <p id="qrAmount"></p>
+              
+              <div class="upi-apps">
+                <a id="paytmBtn" href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg" alt="Paytm"> Paytm</a>
+                <a id="gpayBtn" href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="GPay"> GPay</a>
+                <a id="phonepeBtn" href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg" alt="PhonePe"> PhonePe</a>
+              </div>
+            </div>
+
+            <div class="field" style="margin-top:14px">
+              <label for="utr">UPI UTR / transaction reference *</label>
+              <input id="utr" maxlength="40" autocomplete="off" placeholder="Enter reference number after payment">
+            </div>
+          </div>
+
+          <button class="btn btn-green" type="submit" style="width:100%;margin-top:8px">Prepare WhatsApp Order →</button>
+          <p class="status-note">WhatsApp will open with your order details. You must press Send.</p>
+        </form>
+      </div>
+
+      <div class="panel reveal">
+        <h3>Your Cart</h3>
+        <div id="cartItems">
+          <div class="empty">Your cart is empty. Add pani puri from the menu.</div>
+        </div>
+
+        <div class="total-row">
+          <span>Total</span>
+          <span id="cartTotal">₹0.00</span>
+        </div>
+
+        <div class="payment-box">
+          <strong>Order process</strong>
+          <p class="status-note">
+            1. Select your items.<br>
+            2. Submit your details.<br>
+            3. Send the prepared WhatsApp message.<br>
+            4. For UPI orders, wait for manual payment confirmation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="logo" style="color:white">Pani Puri <span>Wala</span></div>
+  <p>Fresh, crispy and full of flavour.<br>Thank you for supporting our shop!</p>
+  <small>© <span id="year"></span> Pani Puri Wala</small>
+</footer>
+
+<button id="floatingCart" class="floating-cart" type="button">🛒 Cart · 0 · ₹0</button>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+
+const DATA_URLS = [
+  "https://cdn.jsdelivr.net/gh/Shaikmuzammil22/Pani-puri@main/data.json",
+  "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/main/data.json"
+];
+
+const WHATSAPP_NUMBER = "919353481235";
+const UPI_ID = "trustedcracking@axl";
+const SHOP_NAME = "Pani Puri Wala";
+
+// PANI PURI IMAGE FIX (Using Standard Pani Puri images)
+const CUSTOM_IMAGES = {
+  "pani-puri": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=500&q=80",
+  "samosa": "https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=500&q=80"
+};
+
+const state = { menu: [], cart: {}, loading: false };
+const $ = (id) => document.getElementById(id);
+
+function money(value) {
+  return new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 2 }).format(value);
+}
+
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (character) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[character]);
+}
+
+function notify(message) {
+  const toast = $("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  clearTimeout(notify.timer);
+  notify.timer = setTimeout(() => toast.classList.remove("show"), 2600);
+}
+
+function selectedQuantity(id) { return Number(state.cart[id] || 0); }
+function cartEntries() { return state.menu.filter(item => selectedQuantity(item.id) > 0); }
+function cartCount() { return cartEntries().reduce((sum, item) => sum + selectedQuantity(item.id), 0); }
+function cartTotal() { return cartEntries().reduce((sum, item) => sum + item.price * selectedQuantity(item.id), 0); }
+
+function setQuantity(id, delta) {
+  const item = state.menu.find(entry => entry.id === id);
+  if (!item || !item.available || item.price < 0) return;
+  const next = Math.max(0, Math.min(99, selectedQuantity(id) + delta));
+  if (next === 0) { delete state.cart[id]; } else { state.cart[id] = next; }
+  renderMenu();
+  renderCart();
+}
+
+function renderMenu() {
+  const grid = $("menuGrid");
+  if (!state.menu.length) {
+    grid.innerHTML = '<div class="notice">Menu abhi available nahi hai. Refresh karke dobara try karein.</div>';
+    return;
+  }
+  grid.innerHTML = state.menu.map((ite
+  .section { padding: 35px 15px; }
+  .hero { padding-left: 15px; padding-right: 15px; }
+  .panel { padding: 17px; }
+  .slider-container { height: 200px; }
+}
+</style>
+</head>
+
+<body>
+<div class="topbar">🥣 Fresh Pani Puri • Home Delivery</div>
+
+<header>
+  <nav class="nav">
+    <a href="#" class="logo">Pani Puri <span>Wala</span></a>
+    <div class="navlinks">
+      <a href="#menu">Menu</a>
+      <a href="#checkout">Order</a>
+      <a class="btn btn-primary" href="#checkout">Order Now</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="reveal">
+      <span class="eyebrow">Freshly served with love</span>
+      <h1>Crunchy puri.<br>Chatpata <span>paani.</span></h1>
+      <p>Your favourite pani puri, full of flavour and freshness. Choose your favourites, place an order and contact us on WhatsApp.</p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn btn-primary">Explore Menu ↓</a>
+        <a href="#checkout" class="btn btn-dark">Order Now</a>
+      </div>
+    </div>
+
     <div class="hero-photo reveal">
       <img src="https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=1100&q=85" alt="Pani Puri" onerror="this.src='https://via.placeholder.com/600x400?text=Pani+Puri'">
       <div class="photo-label">✨ Fresh • Crispy • Chatpata</div>
