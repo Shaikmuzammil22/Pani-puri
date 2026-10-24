@@ -1,20 +1,20 @@
 {
-  "shopOpen": true,
+  "shopOpen": false,
   "shopClosedMessage": "🚫 Aaj shop band hai! (Today is holiday)",
   "menu": [
     {
       "id": "pani-puri",
       "name": "Pani Puri",
       "description": "Fresh and spicy",
-      "price": 30,
-      "imageUrl": "https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=600&q=80"
+      "price": 100,
+      "imageUrl": "https://share.google/ltJ8QcKEBdEM3Q0CN"
     },
     {
       "id": "samosa",
       "name": "Samosa",
       "description": "Crispy and fresh",
-      "price": 15,
-      "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80"
+      "price": 150,
+      "imageUrl": "https://share.google/938dzlgA7jvobHfWi"
     }
   ]
 }
