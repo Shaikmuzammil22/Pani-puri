@@ -70,7 +70,7 @@ section { scroll-margin-top: 90px; }
 .offer p { margin: 0; color: #ffe4c8; line-height: 1.6; }
 
 .menu-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
-.food-card { background: white; border: 1px solid #f0e1d2; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 22px #5725110a; transition: transform .25s, box-shadow .25s; animation: appear .6s both; display: flex; flex-direction: column; }
+.food-card { background: white; border: 1px solid #f0e1d2; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 22px #5725110a; transition: transform .25s, box-shadow .25s; display: flex; flex-direction: column; }
 .food-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
 .food-image { height: 205px; background: #f3dfc4; overflow: hidden; }
 .food-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s; }
@@ -126,10 +126,7 @@ footer p { color: #f5d8bf; line-height: 1.7; }
 .toast { position: fixed; left: 50%; bottom: 85px; transform: translate(-50%, 20px); background: #282019; color: white; padding: 12px 18px; border-radius: 12px; opacity: 0; pointer-events: none; z-index: 50; transition: .25s; width: max-content; max-width: 90%; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
-.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s, transform .7s; }
-.reveal.visible { opacity: 1; transform: none; }
-
-@keyframes appear { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+/* Animation removed to prevent blank screen */
 
 @media (max-width: 800px) {
   .navlinks a:not(.btn) { display: none; }
@@ -171,8 +168,9 @@ footer p { color: #f5d8bf; line-height: 1.7; }
 </header>
 
 <main>
+  <!-- HERO SECTION -->
   <section class="hero">
-    <div class="reveal">
+    <div>
       <span class="eyebrow">Freshly served with love</span>
       <h1>Crunchy puri.<br>Chatpata <span>paani.</span></h1>
       <p>Your favourite pani puri, full of flavour and freshness. Choose your favourites, place an order and contact us on WhatsApp.</p>
@@ -182,25 +180,27 @@ footer p { color: #f5d8bf; line-height: 1.7; }
       </div>
     </div>
 
-    <div class="hero-photo reveal">
-      <img src="https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=1100&q=85" alt="Pani Puri" onerror="this.src='https://via.placeholder.com/600x400?text=Pani+Puri'">
+    <div class="hero-photo">
+      <!-- Reliable Pani Puri Image -->
+      <img src="https://images.pexels.com/photos/14837647/pexels-photo-14837647.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Pani Puri" onerror="this.src='https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800'">
       <div class="photo-label">✨ Fresh • Crispy • Chatpata</div>
     </div>
   </section>
 
-  <div class="slider-section reveal">
+  <!-- SLIDER SECTION (All Pani Puri Photos) -->
+  <div class="slider-section">
     <div class="slider-container">
       <div class="slider-wrapper" id="sliderWrapper">
-        <img src="https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=1200&q=85" alt="Pani Puri 1">
-        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1200&q=85" alt="Pani Puri 2">
-        <img src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=1200&q=85" alt="Pani Puri 3">
-        <img src="https://images.unsplash.com/photo-1567337710282-00832b415979?auto=format&fit=crop&w=1200&q=85" alt="Pani Puri 4">
+        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=1000" alt="Pani Puri 1">
+        <img src="https://images.pexels.com/photos/14837647/pexels-photo-14837647.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Pani Puri 2">
+        <img src="https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?w=1000" alt="Pani Puri 3">
+        <img src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=1000" alt="Pani Puri 4">
       </div>
     </div>
   </div>
 
   <section id="menu" class="section">
-    <div class="section-heading reveal">
+    <div class="section-heading">
       <div>
         <h2>Our Menu</h2>
         <p>Pick your favourites and adjust the quantity.</p>
@@ -208,8 +208,8 @@ footer p { color: #f5d8bf; line-height: 1.7; }
       <button id="refreshMenu" class="btn btn-light" type="button">↻ Refresh</button>
     </div>
 
-    <div id="notice" class="notice reveal">Welcome! Fresh pani puri available today.</div>
-    <div id="offer" class="offer reveal">
+    <div id="notice" class="notice">Welcome! Fresh pani puri available today.</div>
+    <div id="offer" class="offer">
       <h3>Special Offer</h3>
       <p>Ask us about today's offer!</p>
     </div>
@@ -219,7 +219,7 @@ footer p { color: #f5d8bf; line-height: 1.7; }
   </section>
 
   <section id="checkout" class="section">
-    <div class="section-heading reveal">
+    <div class="section-heading">
       <div>
         <h2>Checkout</h2>
         <p>Enter your details to prepare your order.</p>
@@ -227,7 +227,7 @@ footer p { color: #f5d8bf; line-height: 1.7; }
     </div>
 
     <div class="checkout-layout">
-      <div class="panel reveal">
+      <div class="panel">
         <h3>Your Details</h3>
         <form id="orderForm">
           <div class="field">
@@ -243,7 +243,6 @@ footer p { color: #f5d8bf; line-height: 1.7; }
           <div id="addressFields">
             <div class="field">
               <label for="address">Delivery address *</label>
-              <!-- Address input with special button -->
               <div class="map-btn-wrapper">
                 <input type="text" id="address" maxlength="350" placeholder="📍 Click to open Google Maps & auto-detect" required readonly style="cursor: pointer; background-color: #f8f9fa;">
               </div>
@@ -302,7 +301,7 @@ footer p { color: #f5d8bf; line-height: 1.7; }
         </form>
       </div>
 
-      <div class="panel reveal">
+      <div class="panel">
         <h3>Your Cart</h3>
         <div id="cartItems">
           <div class="empty">Your cart is empty. Add pani puri from the menu.</div>
@@ -348,9 +347,10 @@ const WHATSAPP_NUMBER = "919353481235";
 const UPI_ID = "trustedcracking@axl";
 const SHOP_NAME = "Pani Puri Wala";
 
+// FORCE PANI PURI IMAGE IN MENU
 const CUSTOM_IMAGES = {
-  "pani-puri": "https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=500&q=80",
-  "samosa": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=500&q=80"
+  "pani-puri": "https://images.pexels.com/photos/14837647/pexels-photo-14837647.jpeg?auto=compress&cs=tinysrgb&w=600",
+  "samosa": "https://images.pexels.com/photos/14837647/pexels-photo-14837647.jpeg?auto=compress&cs=tinysrgb&w=600" // Even if it says samosa, showing pani puri as requested
 };
 
 const state = { menu: [], cart: {}, loading: false };
@@ -394,7 +394,7 @@ function renderMenu() {
     grid.innerHTML = '<div class="notice">Menu abhi available nahi hai. Refresh karke dobara try karein.</div>';
     return;
   }
-  grid.innerHTML = state.menu.map((item, index) => {
+  grid.innerHTML = state.menu.map((item) => {
     const qty = selectedQuantity(item.id);
     const available = item.available && item.price >= 0;
     
@@ -402,11 +402,11 @@ function renderMenu() {
     if (CUSTOM_IMAGES[item.id]) { image = CUSTOM_IMAGES[item.id]; }
 
     const imgTag = image 
-      ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(item.name)}" loading="lazy" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=Food';">`
+      ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(item.name)}" loading="lazy" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=Pani+Puri';">`
       : `<div style="display:flex;align-items:center;justify-content:center;height:100%;background:#f4e5d2;color:var(--brown);font-weight:bold;">No Image</div>`;
 
     return `
-      <article class="food-card" style="animation-delay:${Math.min(index * 70, 350)}ms">
+      <article class="food-card">
         <div class="food-image">${imgTag}</div>
         <div class="food-info">
           <h3>${escapeHtml(item.name)}</h3>
@@ -595,13 +595,6 @@ $("orderForm").addEventListener("submit", prepareWhatsAppOrder);
 document.querySelectorAll('input[name="payment"]').forEach(input => input.addEventListener("change", updateCheckoutFields));
 $("floatingCart").addEventListener("click", () => $("checkout").scrollIntoView({ behavior: "smooth" }));
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) { entry.target.classList.add("visible"); observer.unobserve(entry.target); }
-  });
-}, { threshold: 0.12 });
-document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
-
 // ===== SLIDER LOGIC =====
 let currentSlide = 0;
 const slides = document.querySelectorAll("#sliderWrapper img");
@@ -622,13 +615,11 @@ loadMenu();
    GOOGLE MAPS LOCATION AUTO-DETECT (APP INTEGRATION)
    ========================================================= */
 
-// Check if running inside the Android App
 function isAndroidApp() {
   return typeof window.AndroidLocation !== "undefined" && 
          typeof window.AndroidLocation.openMapsForAddress === "function";
 }
 
-// Function to extract lat/lng from Google Maps URL
 function extractLatLng(url) {
   const regex = /@(-?\d+\.\d+),(-?\d+\.\d+)/;
   const match = url.match(regex);
@@ -640,7 +631,6 @@ function extractLatLng(url) {
   return null;
 }
 
-// Click on Address box triggers Maps
 document.getElementById("address").addEventListener("click", () => {
   if (isAndroidApp()) {
     notify("Opening Google Maps...");
@@ -650,19 +640,16 @@ document.getElementById("address").addEventListener("click", () => {
   }
 });
 
-// This function receives the link back from Android after user selects location
 window.setAddressFromMap = function(mapsUrl) {
   try {
     const addressBox = document.getElementById("address");
     if (mapsUrl && mapsUrl.trim() !== "") {
-      // If it's a long google maps link, try to get lat/lng and show a clean text
       const coords = extractLatLng(mapsUrl);
       if (coords) {
         addressBox.value = `Location: ${coords.lat}, ${coords.lng}\n(Google Maps Link attached in WhatsApp)`;
       } else {
         addressBox.value = mapsUrl;
       }
-      // We store the full link in the element's dataset so it can be sent to WhatsApp
       addressBox.dataset.fullLink = mapsUrl;
       notify("Location selected successfully!");
     }
@@ -671,20 +658,17 @@ window.setAddressFromMap = function(mapsUrl) {
   }
 };
 
-// Override form submission to include the Google Maps link
 const originalPrepareWhatsAppOrder = prepareWhatsAppOrder;
 prepareWhatsAppOrder = function(event) {
   event.preventDefault();
   if (!validateForm()) return;
 
-  // Inject the full map link into the message
   const addressBox = $("address");
   const fullLink = addressBox.dataset.fullLink;
   if (fullLink) {
     addressBox.value = `Location Link: ${fullLink}`;
   }
 
-  // Call the original function to send WhatsApp
   originalPrepareWhatsAppOrder(event);
 };
 </script>
