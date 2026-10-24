@@ -92,31 +92,12 @@ header {
   box-shadow: 0 8px 20px #00000016;
 }
 
-.btn-primary {
-  background: var(--orange);
-  color: white;
-}
+.btn-primary { background: var(--orange); color: white; }
+.btn-dark { background: var(--brown); color: white; }
+.btn-green { background: var(--green); color: white; }
+.btn-light { background: #f4e5d2; color: var(--brown); }
 
-.btn-dark {
-  background: var(--brown);
-  color: white;
-}
-
-.btn-green {
-  background: var(--green);
-  color: white;
-}
-
-.btn-light {
-  background: #f4e5d2;
-  color: var(--brown);
-}
-
-.btn:disabled {
-  opacity: .5;
-  cursor: not-allowed;
-  transform: none;
-}
+.btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
 
 .hero {
   max-width: 1180px;
@@ -149,20 +130,9 @@ header {
 }
 
 .hero h1 span { color: var(--orange); }
+.hero p { color: var(--muted); font-size: 17px; line-height: 1.8; max-width: 520px; }
 
-.hero p {
-  color: var(--muted);
-  font-size: 17px;
-  line-height: 1.8;
-  max-width: 520px;
-}
-
-.hero-actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 25px;
-}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 25px; }
 
 .hero-photo {
   position: relative;
@@ -174,375 +144,123 @@ header {
 }
 
 .hero-photo img {
-  width: 100%;
-  height: 100%;
-  min-height: 380px;
-  position: absolute;
-  inset: 0;
-  object-fit: cover;
+  width: 100%; height: 100%; min-height: 380px;
+  position: absolute; inset: 0; object-fit: cover;
 }
 
 .photo-label {
-  position: absolute;
-  left: 18px;
-  bottom: 18px;
-  background: rgba(87, 37, 17, .92);
-  color: white;
-  padding: 13px 17px;
-  border-radius: 14px;
-  font-weight: 750;
+  position: absolute; left: 18px; bottom: 18px;
+  background: rgba(87, 37, 17, .92); color: white;
+  padding: 13px 17px; border-radius: 14px; font-weight: 750;
 }
 
 section { scroll-margin-top: 90px; }
-
-.section {
-  max-width: 1180px;
-  margin: auto;
-  padding: 48px 20px;
-}
+.section { max-width: 1180px; margin: auto; padding: 48px 20px; }
 
 .section-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  gap: 15px;
-  margin-bottom: 25px;
+  display: flex; justify-content: space-between; align-items: end;
+  gap: 15px; margin-bottom: 25px;
 }
 
-.section-heading h2 {
-  color: var(--brown);
-  font-size: clamp(28px, 4vw, 40px);
-  margin: 0 0 8px;
-}
-
-.section-heading p {
-  margin: 0;
-  color: var(--muted);
-}
+.section-heading h2 { color: var(--brown); font-size: clamp(28px, 4vw, 40px); margin: 0 0 8px; }
+.section-heading p { margin: 0; color: var(--muted); }
 
 .notice {
-  background: #fff0db;
-  border: 1px solid #f3d5b4;
-  border-radius: 16px;
-  padding: 17px;
-  margin-bottom: 25px;
-  line-height: 1.7;
+  background: #fff0db; border: 1px solid #f3d5b4; border-radius: 16px;
+  padding: 17px; margin-bottom: 25px; line-height: 1.7;
 }
 
 .offer {
   background: linear-gradient(120deg, #572511, #9d4b20);
-  color: white;
-  padding: 22px;
-  border-radius: 20px;
-  margin-bottom: 28px;
+  color: white; padding: 22px; border-radius: 20px; margin-bottom: 28px;
 }
-
 .offer h3 { margin: 0 0 8px; font-size: 23px; }
 .offer p { margin: 0; color: #ffe4c8; line-height: 1.6; }
 
-.menu-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px;
-}
+.menu-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
 
 .food-card {
-  background: white;
-  border: 1px solid #f0e1d2;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 5px 22px #5725110a;
-  transition: transform .25s, box-shadow .25s;
-  animation: appear .6s both;
+  background: white; border: 1px solid #f0e1d2; border-radius: 20px;
+  overflow: hidden; box-shadow: 0 5px 22px #5725110a;
+  transition: transform .25s, box-shadow .25s; animation: appear .6s both;
 }
 
-.food-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow);
-}
-
-.food-image {
-  height: 205px;
-  background: #f3dfc4;
-  overflow: hidden;
-}
-
-.food-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform .45s;
-}
-
+.food-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+.food-image { height: 205px; background: #f3dfc4; overflow: hidden; }
+.food-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s; }
 .food-card:hover .food-image img { transform: scale(1.06); }
-
 .food-info { padding: 18px; }
+.food-info h3 { margin: 0 0 7px; font-size: 20px; color: var(--brown); }
+.food-info p { color: var(--muted); font-size: 14px; line-height: 1.6; min-height: 40px; }
+.food-bottom { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.price { font-size: 21px; font-weight: 900; color: var(--green); }
+.quantity { display: flex; align-items: center; gap: 11px; }
+.quantity button { width: 36px; height: 36px; border: 0; border-radius: 10px; background: #f7e7d4; color: var(--brown); font-size: 22px; font-weight: 850; }
+.quantity span { min-width: 16px; text-align: center; font-weight: 800; }
+.unavailable { color: #c02b22; font-size: 13px; font-weight: 800; }
 
-.food-info h3 {
-  margin: 0 0 7px;
-  font-size: 20px;
-  color: var(--brown);
-}
-
-.food-info p {
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.6;
-  min-height: 40px;
-}
-
-.food-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-}
-
-.price {
-  font-size: 21px;
-  font-weight: 900;
-  color: var(--green);
-}
-
-.quantity {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-}
-
-.quantity button {
-  width: 36px;
-  height: 36px;
-  border: 0;
-  border-radius: 10px;
-  background: #f7e7d4;
-  color: var(--brown);
-  font-size: 22px;
-  font-weight: 850;
-}
-
-.quantity span {
-  min-width: 16px;
-  text-align: center;
-  font-weight: 800;
-}
-
-.unavailable {
-  color: #c02b22;
-  font-size: 13px;
-  font-weight: 800;
-}
-
-.checkout-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  align-items: start;
-}
-
-.panel {
-  background: white;
-  border: 1px solid #eddfd1;
-  border-radius: 22px;
-  padding: 23px;
-  box-shadow: 0 7px 25px #57251108;
-}
-
-.panel h3 {
-  margin: 0 0 19px;
-  color: var(--brown);
-  font-size: 23px;
-}
-
+.checkout-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+.panel { background: white; border: 1px solid #eddfd1; border-radius: 22px; padding: 23px; box-shadow: 0 7px 25px #57251108; }
+.panel h3 { margin: 0 0 19px; color: var(--brown); font-size: 23px; }
 .field { margin-bottom: 16px; }
+.field label { display: block; margin-bottom: 7px; font-size: 13px; font-weight: 800; }
+.field input, .field textarea, .field select { width: 100%; padding: 13px 14px; border: 1px solid #dfd0c1; border-radius: 11px; background: #fffdf9; color: var(--text); outline: none; }
+.field input:focus, .field textarea:focus, .field select:focus { border-color: var(--orange); box-shadow: 0 0 0 3px #ed812d20; }
+.field textarea { resize: vertical; min-height: 90px; }
 
-.field label {
-  display: block;
-  margin-bottom: 7px;
-  font-size: 13px;
-  font-weight: 800;
-}
-
-.field input, .field textarea, .field select {
-  width: 100%;
-  padding: 13px 14px;
-  border: 1px solid #dfd0c1;
-  border-radius: 11px;
-  background: #fffdf9;
-  color: var(--text);
-  outline: none;
-}
-
-.field input:focus, .field textarea:focus, .field select:focus {
-  border-color: var(--orange);
-  box-shadow: 0 0 0 3px #ed812d20;
-}
-
-.field textarea {
-  resize: vertical;
-  min-height: 90px;
-}
-
-.choice-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.choice {
-  display: flex;
-  gap: 9px;
-  align-items: center;
-  border: 1px solid #e7d8c8;
-  border-radius: 12px;
-  padding: 13px;
-  cursor: pointer;
-  line-height: 1.5;
-}
-
-.choice:has(input:checked) {
-  border-color: var(--orange);
-  background: #fff4e8;
-}
-
+.choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.choice { display: flex; gap: 9px; align-items: center; border: 1px solid #e7d8c8; border-radius: 12px; padding: 13px; cursor: pointer; line-height: 1.5; }
+.choice:has(input:checked) { border-color: var(--orange); background: #fff4e8; }
 .choice input { accent-color: var(--orange); }
 
-.cart-line {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 13px 0;
-  border-bottom: 1px solid #f0e7de;
-}
+.cart-line { display: flex; justify-content: space-between; gap: 12px; padding: 13px 0; border-bottom: 1px solid #f0e7de; }
+.cart-line small { display: block; color: var(--muted); margin-top: 5px; }
+.remove { border: 0; background: none; color: #b52b21; font-size: 12px; padding: 4px 0; }
+.total-row { display: flex; justify-content: space-between; gap: 12px; padding-top: 17px; margin-top: 6px; font-weight: 900; font-size: 20px; }
+.empty { text-align: center; padding: 25px 10px; color: var(--muted); }
 
-.cart-line small {
-  display: block;
-  color: var(--muted);
-  margin-top: 5px;
-}
-
-.remove {
-  border: 0;
-  background: none;
-  color: #b52b21;
-  font-size: 12px;
-  padding: 4px 0;
-}
-
-.total-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding-top: 17px;
-  margin-top: 6px;
-  font-weight: 900;
-  font-size: 20px;
-}
-
-.empty {
-  text-align: center;
-  padding: 25px 10px;
-  color: var(--muted);
-}
-
-.payment-box {
-  margin-top: 16px;
-  padding: 17px;
-  border-radius: 15px;
-  background: #fff6e9;
-  border: 1px solid #f1dcc2;
-}
-
+.payment-box { margin-top: 16px; padding: 17px; border-radius: 15px; background: #fff6e9; border: 1px solid #f1dcc2; }
 .payment-box h4 { margin: 0 0 9px; color: var(--brown); }
 
 .qr-wrap {
-  display: none;
-  text-align: center;
-  padding: 15px;
-  margin-top: 13px;
-  background: white;
-  border-radius: 13px;
-  border: 1px solid #eadaca;
+  display: none; text-align: center; padding: 15px; margin-top: 13px;
+  background: white; border-radius: 13px; border: 1px solid #eadaca;
 }
-
-.qr-wrap img {
-  width: 220px;
-  height: 220px;
-  max-width: 100%;
-  object-fit: contain;
-}
-
+.qr-wrap img { width: 220px; height: 220px; max-width: 100%; object-fit: contain; }
 .qr-wrap p { color: var(--muted); font-size: 13px; line-height: 1.6; }
 
-.status-note {
-  font-size: 13px;
-  line-height: 1.6;
-  color: var(--muted);
+/* UPI App Buttons Styling */
+.upi-apps { display: flex; gap: 10px; justify-content: center; margin-top: 15px; flex-wrap: wrap; }
+.upi-apps a {
+  display: flex; align-items: center; gap: 6px; padding: 10px 16px;
+  border-radius: 10px; font-weight: bold; font-size: 14px;
+  border: 1px solid #ddd; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
+.upi-apps img { width: 22px; height: 22px; border-radius: 50%; }
 
-footer {
-  margin-top: 40px;
-  padding: 35px 20px;
-  text-align: center;
-  background: var(--brown);
-  color: white;
-}
+.status-note { font-size: 13px; line-height: 1.6; color: var(--muted); }
 
+footer { margin-top: 40px; padding: 35px 20px; text-align: center; background: var(--brown); color: white; }
 footer p { color: #f5d8bf; line-height: 1.7; }
 
 .floating-cart {
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  z-index: 30;
-  border: 0;
-  border-radius: 50px;
-  background: var(--green);
-  color: white;
-  padding: 15px 20px;
-  font-weight: 850;
-  box-shadow: 0 8px 25px #0003;
+  position: fixed; right: 18px; bottom: 18px; z-index: 30; border: 0;
+  border-radius: 50px; background: var(--green); color: white;
+  padding: 15px 20px; font-weight: 850; box-shadow: 0 8px 25px #0003;
 }
 
 .toast {
-  position: fixed;
-  left: 50%;
-  bottom: 85px;
-  transform: translate(-50%, 20px);
-  background: #282019;
-  color: white;
-  padding: 12px 18px;
-  border-radius: 12px;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 50;
-  transition: .25s;
-  width: max-content;
-  max-width: 90%;
+  position: fixed; left: 50%; bottom: 85px; transform: translate(-50%, 20px);
+  background: #282019; color: white; padding: 12px 18px; border-radius: 12px;
+  opacity: 0; pointer-events: none; z-index: 50; transition: .25s;
+  width: max-content; max-width: 90%;
 }
-
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity .7s, transform .7s;
-}
-
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s, transform .7s; }
 .reveal.visible { opacity: 1; transform: none; }
 
-@keyframes appear {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
+@keyframes appear { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 
 @media (max-width: 800px) {
   .navlinks a:not(.btn) { display: none; }
@@ -568,7 +286,256 @@ footer p { color: #f5d8bf; line-height: 1.7; }
 </head>
 
 <body>
-<div class="topbar">🥣 Fresh Pani Puri • Pickup & Home Delivery</div>
+<div class="topbar">🥣 Fresh Pani Puri • Home Delivery</div>
+
+<header>
+  <nav class="nav">
+    <a href="#" class="logo">Pani Puri <span>Wala</span></a>
+    <div class="navlinks">
+      <a href="#menu">Menu</a>
+      <a href="#checkout">Order</a>
+      <a class="btn btn-primary" href="#checkout">Order Now</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="reveal">
+      <span class="eyebrow">Freshly served with love</span>
+      <h1>Crunchy puri.<br>Chatpata <span>paani.</span></h1>
+      <p>Your favourite pani puri, full of flavour and freshness. Choose your favourites, place an order and contact us on WhatsApp.</p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn btn-primary">Explore Menu ↓</a>
+        <a href="#checkout" class="btn btn-dark">Order Now</a>
+      </div>
+    </div>
+
+    <div class="hero-photo reveal">
+      <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1100&q=85" alt="Indian street food" onerror="this.style.display='none'">
+      <div class="photo-label">✨ Fresh • Crispy • Chatpata</div>
+    </div>
+  </section>
+
+  <section id="menu" class="section">
+    <div class="section-heading reveal">
+      <div>
+        <h2>Our Menu</h2>
+        <p>Pick your favourites and adjust the quantity.</p>
+      </div>
+      <button id="refreshMenu" class="btn btn-light" type="button">↻ Refresh</button>
+    </div>
+
+    <div id="notice" class="notice reveal">Welcome! Fresh pani puri available today.</div>
+    <div id="offer" class="offer reveal">
+      <h3>Special Offer</h3>
+      <p>Ask us about today's offer!</p>
+    </div>
+
+    <div id="menuStatus" class="status-note" role="status">Loading latest menu...</div>
+    <div id="menuGrid" class="menu-grid"></div>
+  </section>
+
+  <section id="checkout" class="section">
+    <div class="section-heading reveal">
+      <div>
+        <h2>Checkout</h2>
+        <p>Enter your details to prepare your order.</p>
+      </div>
+    </div>
+
+    <div class="checkout-layout">
+      <div class="panel reveal">
+        <h3>Your Details</h3>
+        <form id="orderForm">
+          <div class="field">
+            <label for="customerName">Customer name *</label>
+            <input id="customerName" name="customerName" required maxlength="80" autocomplete="name" placeholder="Enter your full name">
+          </div>
+
+          <div class="field">
+            <label for="customerPhone">Mobile number *</label>
+            <input id="customerPhone" name="customerPhone" required type="tel" inputmode="tel" autocomplete="tel" placeholder="Enter your phone number" maxlength="20">
+          </div>
+
+          <!-- Delivery Address Fields (Pickup Removed) -->
+          <div id="addressFields">
+            <div class="field">
+              <label for="address">Delivery address *</label>
+              <textarea id="address" maxlength="350" placeholder="House number, street, area" required></textarea>
+            </div>
+            <div class="field">
+              <label for="landmark">Landmark (optional)</label>
+              <input id="landmark" maxlength="120" placeholder="Nearby landmark">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="instructions">Special instructions (optional)</label>
+            <textarea id="instructions" maxlength="250" placeholder="Spice preference or order instructions"></textarea>
+          </div>
+
+          <div class="field">
+            <label>Payment method *</label>
+            <div class="choice-grid">
+              <label class="choice">
+                <input type="radio" name="payment" value="COD" checked>
+                <span>💵<br><strong>Cash on delivery</strong></span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="payment" value="UPI">
+                <span>📱<br><strong>Online UPI</strong></span>
+              </label>
+            </div>
+          </div>
+
+          <div id="paymentBox" class="payment-box" hidden>
+            <h4>Pay using UPI</h4>
+            <p>UPI ID: <strong id="upiLabel">trustedcracking@axl</strong></p>
+            <p class="status-note">Scan the QR using your UPI app. Check the payee name and amount in your payment app before confirming payment.</p>
+
+            <button type="button" id="showQr" class="btn btn-light">Show payment QR</button>
+
+            <div id="qrWrap" class="qr-wrap">
+              <img id="qrImage" alt="UPI payment QR code">
+              <p id="qrAmount"></p>
+              
+              <!-- Direct App Redirect Buttons -->
+              <div class="upi-apps">
+                <a id="paytmBtn" href="#">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg" alt="Paytm"> Paytm
+                </a>
+                <a id="gpayBtn" href="#">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="GPay"> GPay
+                </a>
+                <a id="phonepeBtn" href="#">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg" alt="PhonePe"> PhonePe
+                </a>
+              </div>
+              <p style="margin-top: 15px; font-size: 12px;">Ya fir upar diye gaye QR code ko scan karein.</p>
+            </div>
+
+            <div class="field" style="margin-top:14px">
+              <label for="utr">UPI UTR / transaction reference *</label>
+              <input id="utr" maxlength="40" autocomplete="off" placeholder="Enter reference number after payment">
+            </div>
+          </div>
+
+          <button class="btn btn-green" type="submit" style="width:100%;margin-top:8px">Prepare WhatsApp Order →</button>
+          <p class="status-note">WhatsApp will open with your order details. You must press Send. For online payments, the shop will manually verify the transaction.</p>
+        </form>
+      </div>
+
+      <div class="panel reveal">
+        <h3>Your Cart</h3>
+        <div id="cartItems">
+          <div class="empty">Your cart is empty. Add pani puri from the menu.</div>
+        </div>
+
+        <div class="total-row">
+          <span>Total</span>
+          <span id="cartTotal">₹0.00</span>
+        </div>
+
+        <div class="payment-box">
+          <strong>Order process</strong>
+          <p class="status-note">
+            1. Select your items.<br>
+            2. Submit your details.<br>
+            3. Send the prepared WhatsApp message.<br>
+            4. For UPI orders, wait for manual payment confirmation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="logo" style="color:white">Pani Puri <span>Wala</span></div>
+  <p>Fresh, crispy and full of flavour.<br>Thank you for supporting our shop!</p>
+  <small>© <span id="year"></span> Pani Puri Wala</small>
+</footer>
+
+<button id="floatingCart" class="floating-cart" type="button">🛒 Cart · 0 · ₹0</button>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+
+const DATA_URL = "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/data.json";
+const WHATSAPP_NUMBER = "919353481235";
+const UPI_ID = "trustedcracking@axl";
+const SHOP_NAME = "Pani Puri Wala";
+
+const state = { menu: [], cart: {}, loading: false };
+const $ = (id) => document.getElementById(id);
+
+function money(value) {
+  return new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 2 }).format(value);
+}
+
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (character) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[character]);
+}
+
+function notify(message) {
+  const toast = $("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  clearTimeout(notify.timer);
+  notify.timer = setTimeout(() => toast.classList.remove("show"), 2600);
+}
+
+function selectedQuantity(id) { return Number(state.cart[id] || 0); }
+function cartEntries() { return state.menu.filter(item => selectedQuantity(item.id) > 0); }
+function cartCount() { return cartEntries().reduce((sum, item) => sum + selectedQuantity(item.id), 0); }
+function cartTotal() { return cartEntries().reduce((sum, item) => sum + item.price * selectedQuantity(item.id), 0); }
+
+function setQuantity(id, delta) {
+  const item = state.menu.find(entry => entry.id === id);
+  if (!item || !item.available || item.price < 0) return;
+  const next = Math.max(0, Math.min(99, selectedQuantity(id) + delta));
+  if (next === 0) { delete state.cart[id]; } else { state.cart[id] = next; }
+  renderMenu();
+  renderCart();
+}
+
+function renderMenu() {
+  const grid = $("menuGrid");
+  if (!state.menu.length) {
+    grid.innerHTML = '<div class="notice">Menu abhi available nahi hai. Refresh karke dobara try karein.</div>';
+    return;
+  }
+  grid.innerHTML = state.menu.map((item, index) => {
+    const qty = selectedQuantity(item.id);
+    const available = item.available && item.price >= 0;
+    const image = item.imageUrl || "";
+
+    return `
+      <article class="food-card" style="animation-delay:${Math.min(index * 70, 350)}ms">
+        <div class="food-image">
+          ${image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(item.name)}" loading="lazy" onerror="this.style.display='none'">` : ""}
+        </div>
+        <div class="food-info">
+          <h3>${escapeHtml(item.name)}</h3>
+          <p>${escapeHtml(item.description || "Fresh and delicious pani puri.")}</p>
+          <div class="food-bottom">
+            <span class="price">${item.price >= 0 ? money(item.price) : "Price unavailable"}</span>
+            ${available ? `
+              <div class="quantity" aria-label="Quantity for ${escapeHtml(item.name)}">
+                <button type="button" data-action="minus" data-id="${escapeHtml(item.id)}" aria-label="Decrease quantity">−</button>
+                <span>${qty}</span>
+                <button type="button" data-action="plus" data-id="${escapeHtml(item.id)}" aria-label="Increase quantity">+</button>
+              </div>
+            ` : '<span class="unavailable">Currently unavailable</span>'}
+          </div>
+        </div>
+      </article>
+    `;
+  }).joinsh Pani Puri • Pickup & Home Delivery</div>
 
 <header>
   <nav class="nav">
