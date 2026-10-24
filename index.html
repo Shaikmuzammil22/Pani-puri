@@ -5,82 +5,142 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#572511">
 <title>Ismail Pani Puri Wala</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 <style>
-:root { --brown: #572511; --orange: #ed812d; --cream: #fff8ed; --green: #218548; --text: #2e2119; --muted: #75695f; }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: system-ui, -apple-system, sans-serif; color: var(--text); background: var(--cream); }
+:root { 
+  --brown: #572511; 
+  --brown-light: #7a3b21;
+  --orange: #ed812d; 
+  --orange-light: #ffb066;
+  --cream: #fff8ed; 
+  --green: #218548; 
+  --green-light: #2cb865;
+  --text: #2e2119; 
+  --muted: #75695f;
+  --shadow: 0 10px 30px rgba(87, 37, 17, 0.08);
+  --shadow-hover: 0 15px 40px rgba(87, 37, 17, 0.15);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+body { color: var(--text); background: var(--cream); overflow-x: hidden; }
 button, input, textarea { font: inherit; }
 a { color: inherit; text-decoration: none; }
-.topbar { background: var(--brown); color: white; text-align: center; padding: 10px; font-size: 13px; }
-header { position: sticky; top: 0; z-index: 100; background: rgba(255, 248, 237, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid #eadaca; }
+
+/* TOPBAR & NAV ANIMATION */
+.topbar { background: linear-gradient(90deg, var(--brown), var(--brown-light)); color: white; text-align: center; padding: 10px; font-size: 13px; font-weight: 300; letter-spacing: 1px; animation: slideDown 0.5s ease; }
+header { position: sticky; top: 0; z-index: 100; background: rgba(255, 248, 237, 0.85); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(234, 218, 202, 0.5); transition: all 0.3s ease; }
 .nav { max-width: 1180px; margin: auto; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; }
-.logo { font-size: 22px; font-weight: 900; color: var(--brown); }
+.logo { font-size: 24px; font-weight: 800; color: var(--brown); letter-spacing: -0.5px; transition: transform 0.3s; }
+.logo:hover { transform: scale(1.05); }
 .logo span { color: var(--orange); }
-.navlinks { display: flex; gap: 20px; font-size: 14px; font-weight: 600; }
-.btn { border: 0; border-radius: 12px; padding: 12px 18px; font-weight: 700; cursor: pointer; transition: 0.2s; }
-.btn:hover { opacity: 0.9; transform: translateY(-2px); }
-.btn-primary { background: var(--orange); color: white; }
-.btn-dark { background: var(--brown); color: white; }
-.btn-green { background: var(--green); color: white; width: 100%; font-size: 16px; padding: 15px; }
+.navlinks { display: flex; gap: 25px; font-size: 15px; font-weight: 600; color: var(--muted); }
+.navlinks a { position: relative; transition: color 0.3s; }
+.navlinks a::after { content: ''; position: absolute; width: 0%; height: 2px; bottom: -5px; left: 0; background: var(--orange); transition: width 0.3s; }
+.navlinks a:hover { color: var(--brown); }
+.navlinks a:hover::after { width: 100%; }
+
+/* BUTTON ANIMATIONS */
+.btn { border: 0; border-radius: 12px; padding: 12px 22px; font-weight: 600; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); position: relative; overflow: hidden; z-index: 1; }
+.btn::before { content: ''; position: absolute; top: 0; left: 0; width: 0%; height: 100%; background: rgba(255,255,255,0.2); transition: width 0.3s; z-index: -1; }
+.btn:hover::before { width: 100%; }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+.btn-primary { background: linear-gradient(135deg, var(--orange), var(--orange-light)); color: white; }
+.btn-dark { background: linear-gradient(135deg, var(--brown), var(--brown-light)); color: white; }
+.btn-green { background: linear-gradient(135deg, var(--green), var(--green-light)); color: white; width: 100%; font-size: 17px; padding: 16px; letter-spacing: 1px; }
 .btn-light { background: #f4e5d2; color: var(--brown); }
 
-/* HERO SECTION WITH IMAGE & TEXT OVERLAY */
-.hero { max-width: 1180px; margin: 20px auto; padding: 0 20px; }
-.hero-photo { position: relative; border-radius: 30px; overflow: hidden; height: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-.hero-photo img { width: 100%; height: 100%; object-fit: cover; }
-.hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
-.hero-overlay h1 { font-size: 60px; color: white; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); margin-bottom: 10px; letter-spacing: 2px; }
-.hero-overlay p { color: #fff; font-size: 18px; font-weight: bold; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); margin-bottom: 20px; }
+/* PREMIUM HERO SECTION */
+.hero { max-width: 1180px; margin: 30px auto; padding: 0 20px; }
+.hero-photo { position: relative; border-radius: 35px; overflow: hidden; height: 480px; box-shadow: 0 20px 50px rgba(87, 37, 17, 0.2); animation: zoomIn 1s ease; }
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 10s ease; }
+.hero-photo:hover img { transform: scale(1.1); }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.4) 100%); display: flex; flex-direction: column; justify-content: flex-end; align-items: center; padding: 50px 20px; text-align: center; }
+.hero-overlay h1 { font-size: 64px; font-weight: 800; color: white; text-shadow: 2px 4px 15px rgba(0,0,0,0.6); margin-bottom: 10px; letter-spacing: 2px; animation: fadeUp 0.8s ease 0.3s both; }
+.hero-overlay p { color: var(--orange-light); font-size: 20px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 25px; animation: fadeUp 0.8s ease 0.5s both; }
 
-.section { max-width: 1180px; margin: auto; padding: 40px 20px; }
-.section-heading h2 { color: var(--brown); font-size: 32px; margin-bottom: 20px; }
-.notice { background: #fff0db; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #f3d5b4; font-weight: bold; }
-.menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
-.food-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
-.food-image { height: 200px; width: 100%; background: #eee; }
-.food-image img { width: 100%; height: 100%; object-fit: cover; }
-.food-info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-.food-info h3 { color: var(--brown); font-size: 20px; margin-bottom: 8px; }
-.food-info p { color: var(--muted); font-size: 14px; margin-bottom: 15px; }
+/* SECTIONS */
+.section { max-width: 1180px; margin: auto; padding: 60px 20px; }
+.section-heading h2 { color: var(--brown); font-size: 36px; font-weight: 800; margin-bottom: 30px; position: relative; display: inline-block; }
+.section-heading h2::after { content: ''; position: absolute; width: 50%; height: 4px; background: var(--orange); bottom: -10px; left: 0; border-radius: 2px; }
+
+/* NOTICE BOX */
+.notice { background: #fff0db; padding: 15px 20px; border-radius: 12px; margin-bottom: 25px; border-left: 5px solid var(--orange); font-weight: 600; box-shadow: var(--shadow); }
+
+/* MENU GRID & CARD ANIMATIONS */
+.menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+.food-card { background: white; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); opacity: 0; animation: fadeUp 0.6s ease forwards; }
+.food-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); }
+.food-image { height: 220px; width: 100%; overflow: hidden; position: relative; }
+.food-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.food-card:hover .food-image img { transform: scale(1.08); }
+.food-info { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+.food-info h3 { color: var(--brown); font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+.food-info p { color: var(--muted); font-size: 14px; margin-bottom: 20px; line-height: 1.6; }
 .food-bottom { display: flex; justify-content: space-between; align-items: center; }
-.price { font-size: 20px; font-weight: 800; color: var(--green); }
-.quantity { display: flex; align-items: center; gap: 12px; background: #f4e5d2; padding: 5px 10px; border-radius: 10px; }
-.quantity button { background: none; border: none; font-size: 20px; font-weight: bold; color: var(--brown); cursor: pointer; }
-.quantity span { font-weight: bold; min-width: 20px; text-align: center; }
+.price { font-size: 22px; font-weight: 800; color: var(--green); }
 
-.checkout-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
-.panel { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-.panel h3 { color: var(--brown); margin-bottom: 20px; font-size: 22px; }
-.field { margin-bottom: 15px; }
-.field label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 8px; }
-.field input, .field textarea { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 10px; background: #fafafa; }
-.choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.choice { border: 1px solid #ddd; border-radius: 10px; padding: 15px; text-align: center; cursor: pointer; font-weight: bold; }
-.choice:has(input:checked) { border-color: var(--orange); background: #fff4e8; color: var(--brown); }
+/* QUANTITY BUTTON */
+.quantity { display: flex; align-items: center; gap: 15px; background: #f4e5d2; padding: 6px 14px; border-radius: 15px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); }
+.quantity button { background: none; border: none; font-size: 22px; font-weight: bold; color: var(--brown); cursor: pointer; transition: transform 0.2s; }
+.quantity button:hover { transform: scale(1.2); color: var(--orange); }
+.quantity span { font-weight: 800; min-width: 20px; text-align: center; }
+
+/* CHECKOUT SECTION */
+.checkout-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+.panel { background: white; padding: 35px; border-radius: 25px; box-shadow: var(--shadow); transition: box-shadow 0.3s; }
+.panel:hover { box-shadow: var(--shadow-hover); }
+.panel h3 { color: var(--brown); margin-bottom: 25px; font-size: 26px; font-weight: 800; }
+.field { margin-bottom: 20px; position: relative; }
+.field label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 10px; color: var(--brown); }
+.field input, .field textarea { width: 100%; padding: 16px; border: 2px solid #eee; border-radius: 12px; background: #fafafa; transition: all 0.3s; font-size: 15px; }
+.field input:focus, .field textarea:focus { border-color: var(--orange); background: white; outline: none; box-shadow: 0 0 15px rgba(237, 129, 45, 0.15); }
+
+/* RADIO BUTTONS */
+.choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.choice { border: 2px solid #eee; border-radius: 12px; padding: 18px; text-align: center; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+.choice:has(input:checked) { border-color: var(--orange); background: #fff8ed; color: var(--brown); box-shadow: 0 5px 15px rgba(237, 129, 45, 0.15); }
 .choice input { display: none; }
-.cart-line { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; }
-.total-row { display: flex; justify-content: space-between; font-weight: 800; font-size: 20px; margin-top: 15px; color: var(--brown); }
-.payment-box { margin-top: 20px; padding: 15px; background: #f9f9f9; border-radius: 10px; border: 1px dashed #ccc; }
-.qr-wrap { display: none; text-align: center; margin-top: 15px; }
-.qr-wrap img { width: 200px; height: 200px; }
-.upi-apps { display: flex; gap: 10px; justify-content: center; margin-top: 15px; flex-wrap: wrap; }
-.upi-apps button { display: flex; align-items: center; gap: 5px; padding: 8px 15px; border: 1px solid #ddd; border-radius: 8px; background: white; font-weight: bold; cursor: pointer; }
-.upi-apps img { width: 20px; height: 20px; }
-.toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: #333; color: white; padding: 12px 20px; border-radius: 30px; opacity: 0; transition: 0.3s; pointer-events: none; z-index: 999; }
-.toast.show { opacity: 1; }
-.floating-cart { position: fixed; bottom: 20px; right: 20px; background: var(--green); color: white; padding: 15px 25px; border-radius: 30px; font-weight: bold; border: none; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 99; }
-footer { background: var(--brown); color: white; text-align: center; padding: 30px 20px; margin-top: 50px; }
+
+/* CART */
+.cart-line { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #f0f0f0; animation: fadeIn 0.3s ease; }
+.total-row { display: flex; justify-content: space-between; font-weight: 800; font-size: 24px; margin-top: 25px; color: var(--brown); }
+
+/* PAYMENT BOX */
+.payment-box { margin-top: 25px; padding: 20px; background: #fff8ed; border-radius: 15px; border: 2px dashed #f3d5b4; animation: fadeIn 0.4s ease; }
+.qr-wrap { display: none; text-align: center; margin-top: 20px; }
+.qr-wrap img { width: 220px; height: 220px; border-radius: 15px; box-shadow: var(--shadow); }
+.upi-apps { display: flex; gap: 15px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+.upi-apps button { display: flex; align-items: center; gap: 8px; padding: 10px 20px; border: 2px solid #eee; border-radius: 12px; background: white; font-weight: 700; cursor: pointer; transition: all 0.3s; }
+.upi-apps button:hover { border-color: var(--orange); transform: translateY(-2px); }
+.upi-apps img { width: 24px; height: 24px; }
+
+/* TOAST & FLOATING CART */
+.toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--brown); color: white; padding: 15px 25px; border-radius: 50px; opacity: 0; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); pointer-events: none; z-index: 999; box-shadow: 0 10px 30px rgba(0,0,0,0.2); font-weight: 600; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.floating-cart { position: fixed; bottom: 25px; right: 25px; background: linear-gradient(135deg, var(--green), var(--green-light)); color: white; padding: 18px 30px; border-radius: 50px; font-weight: 800; border: none; cursor: pointer; box-shadow: 0 10px 25px rgba(33, 133, 72, 0.4); z-index: 99; transition: all 0.3s; animation: pulse 2s infinite; }
+.floating-cart:hover { transform: translateY(-5px) scale(1.05); }
+
+footer { background: var(--brown); color: white; text-align: center; padding: 40px 20px; margin-top: 60px; }
+
+/* KEYFRAMES ANIMATIONS */
+@keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+@keyframes zoomIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes fadeUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(33, 133, 72, 0.5); } 70% { box-shadow: 0 0 0 15px rgba(33, 133, 72, 0); } 100% { box-shadow: 0 0 0 0 rgba(33, 133, 72, 0); } }
+
+/* RESPONSIVE */
 @media (max-width: 800px) {
-  .hero-overlay h1 { font-size: 36px; }
-  .hero-photo { height: 250px; }
+  .hero-overlay h1 { font-size: 42px; }
+  .hero-photo { height: 350px; }
   .checkout-layout { grid-template-columns: 1fr; }
   .navlinks { display: none; }
+  .panel { padding: 25px; }
 }
 </style>
 </head>
 <body>
 
-<div class="topbar">🥣 Fresh Pani Puri • Home Delivery</div>
+<div class="topbar">✨ Premium Quality • Freshly Served • Home Delivery ✨</div>
 <header>
   <nav class="nav">
     <a href="#" class="logo">Ismail <span>Pani Puri</span></a>
@@ -90,29 +150,28 @@ footer { background: var(--brown); color: white; text-align: center; padding: 30
 </header>
 
 <main>
-  <!-- NEW HERO SECTION -->
+  <!-- PREMIUM HERO SECTION -->
   <section class="hero">
     <div class="hero-photo">
       <img src="https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=1200&q=80" alt="Pani Puri Background">
       <div class="hero-overlay">
         <h1>ISMAIL PANI PURI</h1>
-        <p>Fresh • Crispy • Chatpata</p>
-        <a href="#menu" class="btn btn-primary">Explore Menu ↓</a>
+        <p>Taste the Tradition</p>
+        <a href="#menu" class="btn btn-primary" style="padding: 15px 35px; font-size: 16px;">Explore Menu ↓</a>
       </div>
     </div>
   </section>
 
   <section id="menu" class="section">
-    <div class="section-heading"><h2>Our Menu</h2></div>
+    <div class="section-heading"><h2>Our Premium Menu</h2></div>
     
-    <div id="shopStatusNotice" class="notice" style="display: none; color: red; background: #ffe6e6; border-color: #ffb3b3; text-align: center; font-size: 18px;">
+    <div id="shopStatusNotice" class="notice" style="display: none; color: red; background: #ffe6e6; border-left-color: red; text-align: center; font-size: 18px;">
       🚫 Aaj shop band hai! (Today is holiday)
     </div>
     
     <div id="notice" class="notice">Welcome! Fresh items available today.</div>
     <div id="menuStatus" style="margin-bottom: 20px; color: var(--muted);">Loading menu...</div>
     
-    <!-- YAHAN SARA MENU (PANIPURI, SAMOSA, ONION, ADRAK) AAYEGA -->
     <div id="menuGrid" class="menu-grid"></div>
   </section>
 
@@ -122,22 +181,22 @@ footer { background: var(--brown); color: white; text-align: center; padding: 30
       <div class="panel" id="orderPanel">
         <h3>Your Details</h3>
         <form id="orderForm">
-          <div class="field"><label>Name *</label><input id="customerName" required placeholder="Full name"></div>
-          <div class="field"><label>Mobile *</label><input id="customerPhone" type="tel" required placeholder="Phone number"></div>
+          <div class="field"><label>Name *</label><input id="customerName" required placeholder="Enter your full name"></div>
+          <div class="field"><label>Mobile *</label><input id="customerPhone" type="tel" required placeholder="Enter your phone number"></div>
           <div class="field">
             <label>Delivery Location *</label>
-            <textarea id="address" rows="2" required readonly style="cursor: pointer; background: #fff4e8; font-weight: bold; color: var(--brown);" placeholder="📍 Click here to auto-detect location"></textarea>
+            <textarea id="address" rows="2" required readonly style="cursor: pointer; background: #fff4e8; font-weight: bold; color: var(--brown); border-color: var(--orange-light);" placeholder="📍 Click here to auto-detect location"></textarea>
           </div>
-          <div class="field"><label>Instructions</label><textarea id="instructions" placeholder="Spice preference..."></textarea></div>
+          <!-- INSTRUCTIONS SECTION REMOVED AS REQUESTED -->
           <div class="field">
             <label>Payment Method *</label>
             <div class="choice-grid">
-              <label class="choice"><input type="radio" name="payment" value="COD" checked> Cash on Delivery</label>
-              <label class="choice"><input type="radio" name="payment" value="UPI"> Online UPI</label>
+              <label class="choice"><input type="radio" name="payment" value="COD" checked> 💵 Cash</label>
+              <label class="choice"><input type="radio" name="payment" value="UPI"> 📱 Online UPI</label>
             </div>
           </div>
           <div id="paymentBox" class="payment-box" style="display: none;">
-            <p style="margin-bottom: 10px;">UPI ID: <strong>trustedcracking@axl</strong></p>
+            <p style="margin-bottom: 15px; font-weight: 600;">UPI ID: <strong style="color: var(--brown);">trustedcracking@axl</strong></p>
             <button type="button" id="showQr" class="btn btn-light" style="width: 100%;">Show QR Code</button>
             <div id="qrWrap" class="qr-wrap">
               <img id="qrImage" alt="QR">
@@ -147,14 +206,14 @@ footer { background: var(--brown); color: white; text-align: center; padding: 30
                 <button type="button" id="phonepeBtn"><img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg"> PhonePe</button>
               </div>
             </div>
-            <div class="field" style="margin-top: 15px;"><label>UTR Number *</label><input id="utr" placeholder="Transaction ID"></div>
+            <div class="field" style="margin-top: 20px;"><label>UTR Number *</label><input id="utr" placeholder="Transaction ID"></div>
           </div>
-          <button class="btn btn-green" type="submit" style="margin-top: 15px;">Send WhatsApp Order →</button>
+          <button class="btn btn-green" type="submit" style="margin-top: 20px;">Send WhatsApp Order →</button>
         </form>
       </div>
       <div class="panel">
         <h3>Your Cart</h3>
-        <div id="cartItems"><div style="color: #777;">Cart is empty.</div></div>
+        <div id="cartItems"><div style="color: var(--muted); text-align: center; padding: 20px;">Your cart is empty.</div></div>
         <div class="total-row"><span>Total</span><span id="cartTotal">₹0.00</span></div>
       </div>
     </div>
@@ -162,7 +221,8 @@ footer { background: var(--brown); color: white; text-align: center; padding: 30
 </main>
 
 <footer>
-  <h2 style="color: white;">Ismail <span style="color: var(--orange);">Pani Puri</span></h2>
+  <h2 style="color: white; font-size: 28px;">Ismail <span style="color: var(--orange);">Pani Puri</span></h2>
+  <p style="margin-top: 10px; font-weight: 300; color: #ddd;">Premium Quality & Taste</p>
 </footer>
 
 <button id="floatingCart" class="floating-cart">🛒 Cart · 0 · ₹0</button>
@@ -199,11 +259,10 @@ function setQuantity(id, delta) {
 function renderMenu() {
   const grid = $("menuGrid");
   if (!state.menu.length) return;
-  grid.innerHTML = state.menu.map(item => {
+  grid.innerHTML = state.menu.map((item, index) => {
     const qty = state.cart[item.id] || 0;
     const available = item.price > 0;
     
-    // Agar price 0 hai, toh out of stock dikhao
     let priceTag = available ? money(item.price) : `<span style="color:red; font-weight:bold;">Out of Stock</span>`;
     let qtyBox = available ? `
       <div class="quantity">
@@ -213,7 +272,7 @@ function renderMenu() {
       </div>` : '';
 
     return `
-      <article class="food-card">
+      <article class="food-card" style="animation-delay: ${index * 0.1}s">
         <div class="food-image"><img src="${item.imageUrl || 'https://via.placeholder.com/300'}" onerror="this.src='https://via.placeholder.com/300'"></div>
         <div class="food-info">
           <h3>${item.name}</h3>
@@ -232,11 +291,11 @@ function renderCart() {
   const items = cartEntries();
   $("cartItems").innerHTML = items.length ? items.map(item => `
     <div class="cart-line">
-      <div><strong>${item.name}</strong><br><small>${money(item.price)} × ${state.cart[item.id]}</small><br>
-      <button class="remove" data-remove="${item.id}" style="color:red;border:none;background:none;cursor:pointer;margin-top:5px;">Remove</button></div>
+      <div><strong>${item.name}</strong><br><small style="color:var(--muted);">${money(item.price)} × ${state.cart[item.id]}</small><br>
+      <button class="remove" data-remove="${item.id}" style="color:#e74c3c;border:none;background:none;cursor:pointer;margin-top:5px;font-size:13px;font-weight:600;">Remove</button></div>
       <strong>${money(item.price * state.cart[item.id])}</strong>
     </div>
-  `).join("") : "<div style='color: #777;'>Cart is empty.</div>";
+  `).join("") : "<div style='color: var(--muted); text-align: center; padding: 20px;'>Your cart is empty.</div>";
   $("cartTotal").textContent = money(cartTotal());
   $("floatingCart").textContent = `🛒 Cart · ${cartCount()} · ${money(cartTotal())}`;
 }
@@ -253,7 +312,7 @@ async function loadMenu() {
       $("shopStatusNotice").style.display = "block";
       $("shopStatusNotice").innerText = data.shopClosedMessage || "Aaj shop band hai!";
       $("notice").style.display = "none";
-      $("orderPanel").style.opacity = "0.5";
+      $("orderPanel").style.opacity = "0.6";
       $("orderPanel").style.pointerEvents = "none";
     } else {
       $("shopStatusNotice").style.display = "none";
