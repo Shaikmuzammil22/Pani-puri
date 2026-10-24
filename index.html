@@ -118,6 +118,7 @@ footer { background: var(--brown); color: white; text-align: center; padding: 30
 </header>
 
 <main>
+  <!-- HERO SECTION (Upar wali badi photo) -->
   <section class="hero">
     <div>
       <h1>Crunchy puri.<br>Chatpata <span>paani.</span></h1>
@@ -128,16 +129,19 @@ footer { background: var(--brown); color: white; text-align: center; padding: 30
       </div>
     </div>
     <div class="hero-photo">
-      <img src="https://images.pexels.com/photos/14837647/pexels-photo-14837647.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Pani Puri">
+      <!-- Aapki Di Hui Doosri Photo -->
+      <img src="https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=800&q=80" alt="Pani Puri">
     </div>
   </section>
 
+  <!-- SLIDER SECTION (Automatic slide hone wali photos) -->
   <div class="slider-section">
     <div class="slider-container">
       <div class="slider-wrapper" id="sliderWrapper">
-        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=1000" alt="Pani Puri 1">
-        <img src="https://images.pexels.com/photos/14837647/pexels-photo-14837647.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Pani Puri 2">
-        <img src="https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?w=1000" alt="Pani Puri 3">
+        <!-- Dono photos slider mein daal di hain -->
+        <img src="https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=1000&q=80" alt="Pani Puri 1">
+        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=1000" alt="Pani Puri 2">
+        <img src="https://images.pexels.com/photos/14837647/pexels-photo-14837647.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Pani Puri 3">
       </div>
     </div>
   </div>
@@ -227,7 +231,12 @@ const DATA_URLS = ["https://cdn.jsdelivr.net/gh/Shaikmuzammil22/Pani-puri@main/d
 const WHATSAPP_NUMBER = "919353481235";
 const UPI_ID = "trustedcracking@axl";
 const SHOP_NAME = "Pani Puri Wala";
-const CUSTOM_IMAGES = { "pani-puri": "https://images.pexels.com/photos/14837647/pexels-photo-14837647.jpeg?auto=compress&cs=tinysrgb&w=600", "samosa": "https://images.pexels.com/photos/14837647/pexels-photo-14837647.jpeg?auto=compress&cs=tinysrgb&w=600" };
+
+// Yahan maine aapki di hui Pani Puri ki photo daal di hai, taaki menu mein bhi wohi dikhe.
+const CUSTOM_IMAGES = { 
+  "pani-puri": "https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=600&q=80", 
+  "samosa": "https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=600&q=80" 
+};
 
 const state = { menu: [], cart: {} };
 const $ = (id) => document.getElementById(id);
