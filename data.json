@@ -7,14 +7,14 @@
       "name": "Pani Puri",
       "description": "Fresh and spicy",
       "price": 100,
-      "imageUrl": "https://share.google/ltJ8QcKEBdEM3Q0CN"
+      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/panipuri.jpg"
     },
     {
       "id": "samosa",
       "name": "Samosa",
       "description": "Crispy and fresh",
       "price": 150,
-      "imageUrl": "https://share.google/938dzlgA7jvobHfWi"
+      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/samosa.png"
     }
   ]
 }
