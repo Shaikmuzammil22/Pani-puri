@@ -154,6 +154,34 @@ header {
   padding: 13px 17px; border-radius: 14px; font-weight: 750;
 }
 
+/* ===== SLIDER STYLES ===== */
+.slider-section {
+  max-width: 1180px;
+  margin: auto;
+  padding: 20px;
+}
+.slider-container {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: #000;
+}
+.slider-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+.slider-wrapper img {
+  min-width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* ========================== */
+
 section { scroll-margin-top: 90px; }
 .section { max-width: 1180px; margin: auto; padding: 48px 20px; }
 
@@ -183,16 +211,17 @@ section { scroll-margin-top: 90px; }
   background: white; border: 1px solid #f0e1d2; border-radius: 20px;
   overflow: hidden; box-shadow: 0 5px 22px #5725110a;
   transition: transform .25s, box-shadow .25s; animation: appear .6s both;
+  display: flex; flex-direction: column;
 }
 
 .food-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
 .food-image { height: 205px; background: #f3dfc4; overflow: hidden; }
 .food-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s; }
 .food-card:hover .food-image img { transform: scale(1.06); }
-.food-info { padding: 18px; }
+.food-info { padding: 18px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
 .food-info h3 { margin: 0 0 7px; font-size: 20px; color: var(--brown); }
 .food-info p { color: var(--muted); font-size: 14px; line-height: 1.6; min-height: 40px; }
-.food-bottom { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.food-bottom { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px; }
 .price { font-size: 21px; font-weight: 900; color: var(--green); }
 .quantity { display: flex; align-items: center; gap: 11px; }
 .quantity button { width: 36px; height: 36px; border: 0; border-radius: 10px; background: #f7e7d4; color: var(--brown); font-size: 22px; font-weight: 850; }
@@ -272,6 +301,7 @@ footer p { color: #f5d8bf; line-height: 1.7; }
   .food-info p { font-size: 13px; }
   .food-bottom { align-items: flex-start; flex-direction: column; }
   .checkout-layout { grid-template-columns: 1fr; }
+  .slider-container { height: 250px; border-radius: 20px; }
 }
 
 @media (max-width: 420px) {
@@ -280,6 +310,7 @@ footer p { color: #f5d8bf; line-height: 1.7; }
   .section { padding: 35px 15px; }
   .hero { padding-left: 15px; padding-right: 15px; }
   .panel { padding: 17px; }
+  .slider-container { height: 200px; }
 }
 </style>
 </head>
@@ -299,6 +330,7 @@ footer p { color: #f5d8bf; line-height: 1.7; }
 </header>
 
 <main>
+  <!-- HERO SECTION -->
   <section class="hero">
     <div class="reveal">
       <span class="eyebrow">Freshly served with love</span>
@@ -311,11 +343,26 @@ footer p { color: #f5d8bf; line-height: 1.7; }
     </div>
 
     <div class="hero-photo reveal">
-      <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1100&q=85" alt="Indian street food" onerror="this.src='https://via.placeholder.com/600x400?text=Pani+Puri'">
+      <!-- FIXED HERO IMAGE (PANIPURI) -->
+      <img src="https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=1100&q=85" alt="Pani Puri" onerror="this.src='https://via.placeholder.com/600x400?text=Pani+Puri'">
       <div class="photo-label">✨ Fresh • Crispy • Chatpata</div>
     </div>
   </section>
 
+  <!-- NEW SLIDER SECTION -->
+  <div class="slider-section reveal">
+    <div class="slider-container">
+      <div class="slider-wrapper" id="sliderWrapper">
+        <!-- You can change these image URLs with your own photos -->
+        <img src="https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=1200&q=85" alt="Pani Puri 1">
+        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1200&q=85" alt="Pani Puri 2">
+        <img src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=1200&q=85" alt="Pani Puri 3">
+        <img src="https://images.unsplash.com/photo-1567337710282-00832b415979?auto=format&fit=crop&w=1200&q=85" alt="Pani Puri 4">
+      </div>
+    </div>
+  </div>
+
+  <!-- MENU SECTION -->
   <section id="menu" class="section">
     <div class="section-heading reveal">
       <div>
@@ -335,6 +382,7 @@ footer p { color: #f5d8bf; line-height: 1.7; }
     <div id="menuGrid" class="menu-grid"></div>
   </section>
 
+  <!-- CHECKOUT SECTION -->
   <section id="checkout" class="section">
     <div class="section-heading reveal">
       <div>
@@ -361,7 +409,7 @@ footer p { color: #f5d8bf; line-height: 1.7; }
             <div class="field">
               <label for="address">Delivery address *</label>
               <textarea id="address" maxlength="350" placeholder="House number, street, area" required></textarea>
-              <!-- Location button will be injected here automatically -->
+              <!-- Location button is auto-injected here by JS -->
             </div>
             <div class="field">
               <label for="landmark">Landmark (optional)</label>
@@ -470,6 +518,12 @@ const WHATSAPP_NUMBER = "919353481235";
 const UPI_ID = "trustedcracking@axl";
 const SHOP_NAME = "Pani Puri Wala";
 
+// FIX: Force correct images for items regardless of broken data.json links
+const CUSTOM_IMAGES = {
+  "pani-puri": "https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=500&q=80",
+  "samosa": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=500&q=80"
+};
+
 const state = { menu: [], cart: {}, loading: false };
 const $ = (id) => document.getElementById(id);
 
@@ -514,10 +568,15 @@ function renderMenu() {
   grid.innerHTML = state.menu.map((item, index) => {
     const qty = selectedQuantity(item.id);
     const available = item.available && item.price >= 0;
-    const image = item.imageUrl || "";
+    
+    // Use Custom Images if available for the item, else fallback to data.json image
+    let image = item.imageUrl || "";
+    if (CUSTOM_IMAGES[item.id]) {
+      image = CUSTOM_IMAGES[item.id];
+    }
 
     const imgTag = image 
-      ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(item.name)}" loading="lazy" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=Pani+Puri';">`
+      ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(item.name)}" loading="lazy" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=Food';">`
       : `<div style="display:flex;align-items:center;justify-content:center;height:100%;background:#f4e5d2;color:var(--brown);font-weight:bold;">No Image</div>`;
 
     return `
@@ -527,7 +586,7 @@ function renderMenu() {
         </div>
         <div class="food-info">
           <h3>${escapeHtml(item.name)}</h3>
-          <p>${escapeHtml(item.description || "Fresh and delicious pani puri.")}</p>
+          <p>${escapeHtml(item.description || "Fresh and delicious food.")}</p>
           <div class="food-bottom">
             <span class="price">${item.price >= 0 ? money(item.price) : "Price unavailable"}</span>
             ${available ? `
@@ -547,7 +606,7 @@ function renderMenu() {
 function renderCart() {
   const items = cartEntries();
   if (!items.length) {
-    $("cartItems").innerHTML = '<div class="empty">Your cart is empty. Add pani puri from the menu.</div>';
+    $("cartItems").innerHTML = '<div class="empty">Your cart is empty. Add food from the menu.</div>';
   } else {
     $("cartItems").innerHTML = items.map(item => {
       const qty = selectedQuantity(item.id);
@@ -600,7 +659,7 @@ async function loadMenu() {
     const oldCart = { ...state.cart };
     state.menu = data.menu.map((item, index) => ({
       id: String(item.id || `item-${index}`),
-      name: String(item.name || "Pani Puri"),
+      name: String(item.name || "Food Item"),
       description: String(item.description || ""),
       price: Number.isFinite(Number(item.price)) ? Number(item.price) : -1,
       available: item.available !== false,
@@ -614,7 +673,7 @@ async function loadMenu() {
       }
     });
 
-    $("notice").textContent = data.notice || "Welcome! Fresh pani puri available today.";
+    $("notice").textContent = data.notice || "Welcome! Fresh food available today.";
     $("offer").innerHTML = `<h3>🎉 ${escapeHtml(data.offerTitle || "Special Offer")}</h3><p>${escapeHtml(data.offerText || "Ask us about today's offer!")}</p>`;
     $("menuStatus").textContent = `Menu loaded successfully · ${state.menu.length} items`;
     
@@ -676,7 +735,7 @@ function showQr() {
 
 function validateForm() {
   if (!cartEntries().length) {
-    notify("Please pehle cart mein pani puri add karein.");
+    notify("Please pehle cart mein item add karein.");
     $("menu").scrollIntoView({ behavior: "smooth" });
     return false;
   }
@@ -778,6 +837,17 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.12 });
 
 document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
+
+// ===== SLIDER LOGIC =====
+let currentSlide = 0;
+const slides = document.querySelectorAll("#sliderWrapper img");
+if (slides.length > 0) {
+  setInterval(() => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    document.getElementById("sliderWrapper").style.transform = `translateX(-${currentSlide * 100}%)`;
+  }, 3000); // Changes image every 3 seconds
+}
+// ========================
 
 $("year").textContent = new Date().getFullYear();
 $("upiLabel").textContent = UPI_ID;
