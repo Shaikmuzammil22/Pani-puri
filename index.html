@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#572511">
-<title>Pani Puri Wala | Fresh & Crispy</title>
+<title>Ismail Pani Puri Wala</title>
 <style>
 :root { --brown: #572511; --orange: #ed812d; --cream: #fff8ed; --green: #218548; --text: #2e2119; --muted: #75695f; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -23,19 +23,21 @@ header { position: sticky; top: 0; z-index: 100; background: rgba(255, 248, 237,
 .btn-dark { background: var(--brown); color: white; }
 .btn-green { background: var(--green); color: white; width: 100%; font-size: 16px; padding: 15px; }
 .btn-light { background: #f4e5d2; color: var(--brown); }
-.hero { max-width: 1180px; margin: auto; padding: 60px 20px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 40px; }
-.hero h1 { font-size: 50px; line-height: 1.1; color: var(--brown); margin-bottom: 20px; }
-.hero h1 span { color: var(--orange); }
-.hero p { color: var(--muted); font-size: 17px; line-height: 1.6; margin-bottom: 30px; }
-.hero-actions { display: flex; gap: 15px; }
-.hero-photo { border-radius: 30px; overflow: hidden; height: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+
+/* HERO SECTION WITH IMAGE & TEXT OVERLAY */
+.hero { max-width: 1180px; margin: 20px auto; padding: 0 20px; }
+.hero-photo { position: relative; border-radius: 30px; overflow: hidden; height: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
 .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
-.section { max-width: 1180px; margin: auto; padding: 50px 20px; }
+.hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
+.hero-overlay h1 { font-size: 60px; color: white; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); margin-bottom: 10px; letter-spacing: 2px; }
+.hero-overlay p { color: #fff; font-size: 18px; font-weight: bold; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); margin-bottom: 20px; }
+
+.section { max-width: 1180px; margin: auto; padding: 40px 20px; }
 .section-heading h2 { color: var(--brown); font-size: 32px; margin-bottom: 20px; }
 .notice { background: #fff0db; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #f3d5b4; font-weight: bold; }
 .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
 .food-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
-.food-image { height: 200px; width: 100%; }
+.food-image { height: 200px; width: 100%; background: #eee; }
 .food-image img { width: 100%; height: 100%; object-fit: cover; }
 .food-info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
 .food-info h3 { color: var(--brown); font-size: 20px; margin-bottom: 8px; }
@@ -45,6 +47,7 @@ header { position: sticky; top: 0; z-index: 100; background: rgba(255, 248, 237,
 .quantity { display: flex; align-items: center; gap: 12px; background: #f4e5d2; padding: 5px 10px; border-radius: 10px; }
 .quantity button { background: none; border: none; font-size: 20px; font-weight: bold; color: var(--brown); cursor: pointer; }
 .quantity span { font-weight: bold; min-width: 20px; text-align: center; }
+
 .checkout-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
 .panel { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
 .panel h3 { color: var(--brown); margin-bottom: 20px; font-size: 22px; }
@@ -68,9 +71,9 @@ header { position: sticky; top: 0; z-index: 100; background: rgba(255, 248, 237,
 .floating-cart { position: fixed; bottom: 20px; right: 20px; background: var(--green); color: white; padding: 15px 25px; border-radius: 30px; font-weight: bold; border: none; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 99; }
 footer { background: var(--brown); color: white; text-align: center; padding: 30px 20px; margin-top: 50px; }
 @media (max-width: 800px) {
-  .hero, .checkout-layout { grid-template-columns: 1fr; }
-  .hero h1 { font-size: 40px; }
-  .hero-photo { height: 300px; }
+  .hero-overlay h1 { font-size: 36px; }
+  .hero-photo { height: 250px; }
+  .checkout-layout { grid-template-columns: 1fr; }
   .navlinks { display: none; }
 }
 </style>
@@ -80,37 +83,36 @@ footer { background: var(--brown); color: white; text-align: center; padding: 30
 <div class="topbar">🥣 Fresh Pani Puri • Home Delivery</div>
 <header>
   <nav class="nav">
-    <a href="#" class="logo">Pani Puri <span>Wala</span></a>
+    <a href="#" class="logo">Ismail <span>Pani Puri</span></a>
     <div class="navlinks"><a href="#menu">Menu</a><a href="#checkout">Order</a></div>
     <a href="#checkout" class="btn btn-primary">Order Now</a>
   </nav>
 </header>
 
 <main>
+  <!-- NEW HERO SECTION -->
   <section class="hero">
-    <div>
-      <h1>Crunchy puri.<br>Chatpata <span>paani.</span></h1>
-      <p>Your favourite pani puri, full of flavour and freshness.</p>
-      <div class="hero-actions">
-        <a href="#menu" class="btn btn-primary">Explore Menu ↓</a>
-        <a href="#checkout" class="btn btn-dark">Order Now</a>
-      </div>
-    </div>
     <div class="hero-photo">
-      <img src="https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=800&q=80" alt="Pani Puri">
+      <img src="https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=1200&q=80" alt="Pani Puri Background">
+      <div class="hero-overlay">
+        <h1>ISMAIL PANI PURI</h1>
+        <p>Fresh • Crispy • Chatpata</p>
+        <a href="#menu" class="btn btn-primary">Explore Menu ↓</a>
+      </div>
     </div>
   </section>
 
   <section id="menu" class="section">
     <div class="section-heading"><h2>Our Menu</h2></div>
     
-    <!-- SHOP CLOSED RED ALERT -->
     <div id="shopStatusNotice" class="notice" style="display: none; color: red; background: #ffe6e6; border-color: #ffb3b3; text-align: center; font-size: 18px;">
       🚫 Aaj shop band hai! (Today is holiday)
     </div>
     
-    <div id="notice" class="notice">Welcome! Fresh pani puri available today.</div>
+    <div id="notice" class="notice">Welcome! Fresh items available today.</div>
     <div id="menuStatus" style="margin-bottom: 20px; color: var(--muted);">Loading menu...</div>
+    
+    <!-- YAHAN SARA MENU (PANIPURI, SAMOSA, ONION, ADRAK) AAYEGA -->
     <div id="menuGrid" class="menu-grid"></div>
   </section>
 
@@ -160,14 +162,13 @@ footer { background: var(--brown); color: white; text-align: center; padding: 30
 </main>
 
 <footer>
-  <h2 style="color: white;">Pani Puri <span style="color: var(--orange);">Wala</span></h2>
+  <h2 style="color: white;">Ismail <span style="color: var(--orange);">Pani Puri</span></h2>
 </footer>
 
 <button id="floatingCart" class="floating-cart">🛒 Cart · 0 · ₹0</button>
 <div id="toast" class="toast"></div>
 
 <script>
-// YAHAN AAPKI GITHUB DETAILS
 const GITHUB_USERNAME = "Shaikmuzammil22";
 const REPO_NAME = "Pani-puri";
 const BRANCH = "main";
@@ -175,7 +176,7 @@ const DATA_URL = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NA
 
 const WHATSAPP_NUMBER = "919353481235";
 const UPI_ID = "trustedcracking@axl";
-const SHOP_NAME = "Pani Puri Wala";
+const SHOP_NAME = "Ismail Pani Puri";
 
 const state = { menu: [], cart: {}, shopOpen: true };
 const $ = (id) => document.getElementById(id);
@@ -189,7 +190,7 @@ function cartTotal() { return cartEntries().reduce((sum, item) => sum + item.pri
 function setQuantity(id, delta) {
   if(!state.shopOpen) return notify("Shop is closed today!");
   const item = state.menu.find(e => e.id === id);
-  if (!item) return;
+  if (!item || item.price <= 0) return;
   const next = Math.max(0, Math.min(99, (state.cart[id] || 0) + delta));
   if (next === 0) delete state.cart[id]; else state.cart[id] = next;
   renderMenu(); renderCart();
@@ -200,19 +201,26 @@ function renderMenu() {
   if (!state.menu.length) return;
   grid.innerHTML = state.menu.map(item => {
     const qty = state.cart[item.id] || 0;
+    const available = item.price > 0;
+    
+    // Agar price 0 hai, toh out of stock dikhao
+    let priceTag = available ? money(item.price) : `<span style="color:red; font-weight:bold;">Out of Stock</span>`;
+    let qtyBox = available ? `
+      <div class="quantity">
+        <button data-action="minus" data-id="${item.id}">−</button>
+        <span>${qty}</span>
+        <button data-action="plus" data-id="${item.id}">+</button>
+      </div>` : '';
+
     return `
       <article class="food-card">
-        <div class="food-image"><img src="${item.imageUrl || 'https://via.placeholder.com/300'}"></div>
+        <div class="food-image"><img src="${item.imageUrl || 'https://via.placeholder.com/300'}" onerror="this.src='https://via.placeholder.com/300'"></div>
         <div class="food-info">
           <h3>${item.name}</h3>
           <p>${item.description}</p>
           <div class="food-bottom">
-            <span class="price">${money(item.price)}</span>
-            <div class="quantity">
-              <button data-action="minus" data-id="${item.id}">−</button>
-              <span>${qty}</span>
-              <button data-action="plus" data-id="${item.id}">+</button>
-            </div>
+            <span class="price">${priceTag}</span>
+            ${qtyBox}
           </div>
         </div>
       </article>
