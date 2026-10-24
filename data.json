@@ -1,34 +1,34 @@
 {
-  "shopOpen": false,
+  "shopOpen": true,
   "shopClosedMessage": "🚫 Aaj shop band hai! (Today is holiday)",
   "menu": [
     {
       "id": "pani-puri",
       "name": "Pani Puri",
       "description": "Fresh and spicy",
-      "price": 1000,
+      "price": 100,
       "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/panipuri.jpg"
     },
     {
       "id": "samosa",
       "name": "Samosa",
       "description": "Crispy and fresh",
-      "price": 1500,
+      "price": 150,
       "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/samosa.png"
     },
     {
       "id": "onion",
       "name": "Onion (Pyaz)",
       "description": "Fresh chopped onions",
-      "price": 500,
-      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/onion.png"
+      "price": 0,
+      "imageUrl": ""
     },
     {
       "id": "adrak",
       "name": "Adrak (Ginger)",
       "description": "Fresh ginger slices",
-      "price": 200,
-      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/ginger.png"
+      "price": 0,
+      "imageUrl": ""
     }
   ]
 }
