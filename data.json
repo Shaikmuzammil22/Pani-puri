@@ -1,25 +1,20 @@
-
 {
-  "shopName": "Pani Puri Wala",
-  "notice": "Welcome! Fresh pani puri available today.",
-  "offerTitle": "Special Offer",
-  "offerText": "Ask us about today's offer!",
+  "shopOpen": true,
+  "shopClosedMessage": "🚫 Aaj shop band hai! (Today is holiday)",
   "menu": [
     {
       "id": "pani-puri",
       "name": "Pani Puri",
       "description": "Fresh and spicy",
       "price": 30,
-      "imageUrl": "https://example.com/pani-puri.jpg",
-      "available": true
+      "imageUrl": "https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=600&q=80"
     },
     {
       "id": "samosa",
       "name": "Samosa",
       "description": "Crispy and fresh",
       "price": 15,
-      "imageUrl": "https://example.com/samosa.jpg",
-      "available": true
+      "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80"
     }
   ]
 }
