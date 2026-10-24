@@ -21,199 +21,56 @@
 }
 
 * { box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
-
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-  color: var(--text);
-  background: var(--cream);
-}
-
+body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--text); background: var(--cream); }
 button, input, textarea, select { font: inherit; }
 button { cursor: pointer; }
-
 a { color: inherit; text-decoration: none; }
 
-.topbar {
-  background: var(--brown);
-  color: white;
-  text-align: center;
-  padding: 9px 12px;
-  font-size: 13px;
-}
-
-header {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  background: rgba(255, 248, 237, .96);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid #eadaca;
-}
-
-.nav {
-  max-width: 1180px;
-  margin: auto;
-  padding: 14px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-}
-
-.logo {
-  font-size: 21px;
-  font-weight: 900;
-  color: var(--brown);
-}
-
+.topbar { background: var(--brown); color: white; text-align: center; padding: 9px 12px; font-size: 13px; }
+header { position: sticky; top: 0; z-index: 20; background: rgba(255, 248, 237, .96); backdrop-filter: blur(12px); border-bottom: 1px solid #eadaca; }
+.nav { max-width: 1180px; margin: auto; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+.logo { font-size: 21px; font-weight: 900; color: var(--brown); }
 .logo span { color: var(--orange); }
+.navlinks { display: flex; align-items: center; gap: 22px; font-size: 14px; font-weight: 650; }
 
-.navlinks {
-  display: flex;
-  align-items: center;
-  gap: 22px;
-  font-size: 14px;
-  font-weight: 650;
-}
-
-.btn {
-  border: 0;
-  border-radius: 12px;
-  padding: 13px 18px;
-  font-weight: 750;
-  transition: transform .2s, box-shadow .2s, opacity .2s;
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px #00000016;
-}
-
+.btn { border: 0; border-radius: 12px; padding: 13px 18px; font-weight: 750; transition: transform .2s, box-shadow .2s, opacity .2s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px #00000016; }
 .btn-primary { background: var(--orange); color: white; }
 .btn-dark { background: var(--brown); color: white; }
 .btn-green { background: var(--green); color: white; }
 .btn-light { background: #f4e5d2; color: var(--brown); }
-
 .btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
 
-.hero {
-  max-width: 1180px;
-  margin: auto;
-  padding: 65px 20px 55px;
-  display: grid;
-  grid-template-columns: 1.05fr .95fr;
-  align-items: center;
-  gap: 45px;
-}
-
-.eyebrow {
-  display: inline-block;
-  background: #ffead5;
-  color: #a34d16;
-  border-radius: 30px;
-  padding: 8px 13px;
-  font-size: 12px;
-  font-weight: 850;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-.hero h1 {
-  font-size: clamp(42px, 6vw, 72px);
-  line-height: 1.04;
-  letter-spacing: -2px;
-  color: var(--brown);
-  margin: 19px 0;
-}
-
+.hero { max-width: 1180px; margin: auto; padding: 65px 20px 55px; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 45px; }
+.eyebrow { display: inline-block; background: #ffead5; color: #a34d16; border-radius: 30px; padding: 8px 13px; font-size: 12px; font-weight: 850; letter-spacing: 1px; text-transform: uppercase; }
+.hero h1 { font-size: clamp(42px, 6vw, 72px); line-height: 1.04; letter-spacing: -2px; color: var(--brown); margin: 19px 0; }
 .hero h1 span { color: var(--orange); }
 .hero p { color: var(--muted); font-size: 17px; line-height: 1.8; max-width: 520px; }
-
 .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 25px; }
+.hero-photo { position: relative; min-height: 380px; border-radius: 35px; overflow: hidden; background: #e7b67b; box-shadow: var(--shadow); }
+.hero-photo img { width: 100%; height: 100%; min-height: 380px; position: absolute; inset: 0; object-fit: cover; }
+.photo-label { position: absolute; left: 18px; bottom: 18px; background: rgba(87, 37, 17, .92); color: white; padding: 13px 17px; border-radius: 14px; font-weight: 750; }
 
-.hero-photo {
-  position: relative;
-  min-height: 380px;
-  border-radius: 35px;
-  overflow: hidden;
-  background: #e7b67b;
-  box-shadow: var(--shadow);
-}
-
-.hero-photo img {
-  width: 100%; height: 100%; min-height: 380px;
-  position: absolute; inset: 0; object-fit: cover;
-}
-
-.photo-label {
-  position: absolute; left: 18px; bottom: 18px;
-  background: rgba(87, 37, 17, .92); color: white;
-  padding: 13px 17px; border-radius: 14px; font-weight: 750;
-}
-
-/* ===== SLIDER STYLES ===== */
-.slider-section {
-  max-width: 1180px;
-  margin: auto;
-  padding: 20px;
-}
-.slider-container {
-  position: relative;
-  width: 100%;
-  height: 350px;
-  border-radius: 25px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  background: #000;
-}
-.slider-wrapper {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.5s ease-in-out;
-}
-.slider-wrapper img {
-  min-width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-/* ========================== */
+/* SLIDER STYLES */
+.slider-section { max-width: 1180px; margin: auto; padding: 20px; }
+.slider-container { position: relative; width: 100%; height: 350px; border-radius: 25px; overflow: hidden; box-shadow: var(--shadow); background: #000; }
+.slider-wrapper { display: flex; width: 100%; height: 100%; transition: transform 0.5s ease-in-out; }
+.slider-wrapper img { min-width: 100%; height: 100%; object-fit: cover; }
 
 section { scroll-margin-top: 90px; }
 .section { max-width: 1180px; margin: auto; padding: 48px 20px; }
-
-.section-heading {
-  display: flex; justify-content: space-between; align-items: end;
-  gap: 15px; margin-bottom: 25px;
-}
-
+.section-heading { display: flex; justify-content: space-between; align-items: end; gap: 15px; margin-bottom: 25px; }
 .section-heading h2 { color: var(--brown); font-size: clamp(28px, 4vw, 40px); margin: 0 0 8px; }
 .section-heading p { margin: 0; color: var(--muted); }
 
-.notice {
-  background: #fff0db; border: 1px solid #f3d5b4; border-radius: 16px;
-  padding: 17px; margin-bottom: 25px; line-height: 1.7;
-}
-
-.offer {
-  background: linear-gradient(120deg, #572511, #9d4b20);
-  color: white; padding: 22px; border-radius: 20px; margin-bottom: 28px;
-}
+.notice { background: #fff0db; border: 1px solid #f3d5b4; border-radius: 16px; padding: 17px; margin-bottom: 25px; line-height: 1.7; }
+.offer { background: linear-gradient(120deg, #572511, #9d4b20); color: white; padding: 22px; border-radius: 20px; margin-bottom: 28px; }
 .offer h3 { margin: 0 0 8px; font-size: 23px; }
 .offer p { margin: 0; color: #ffe4c8; line-height: 1.6; }
 
 .menu-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
-
-.food-card {
-  background: white; border: 1px solid #f0e1d2; border-radius: 20px;
-  overflow: hidden; box-shadow: 0 5px 22px #5725110a;
-  transition: transform .25s, box-shadow .25s; animation: appear .6s both;
-  display: flex; flex-direction: column;
-}
-
+.food-card { background: white; border: 1px solid #f0e1d2; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 22px #5725110a; transition: transform .25s, box-shadow .25s; animation: appear .6s both; display: flex; flex-direction: column; }
 .food-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
 .food-image { height: 205px; background: #f3dfc4; overflow: hidden; }
 .food-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s; }
@@ -251,19 +108,12 @@ section { scroll-margin-top: 90px; }
 .payment-box { margin-top: 16px; padding: 17px; border-radius: 15px; background: #fff6e9; border: 1px solid #f1dcc2; }
 .payment-box h4 { margin: 0 0 9px; color: var(--brown); }
 
-.qr-wrap {
-  display: none; text-align: center; padding: 15px; margin-top: 13px;
-  background: white; border-radius: 13px; border: 1px solid #eadaca;
-}
+.qr-wrap { display: none; text-align: center; padding: 15px; margin-top: 13px; background: white; border-radius: 13px; border: 1px solid #eadaca; }
 .qr-wrap img { width: 220px; height: 220px; max-width: 100%; object-fit: contain; }
 .qr-wrap p { color: var(--muted); font-size: 13px; line-height: 1.6; }
 
 .upi-apps { display: flex; gap: 10px; justify-content: center; margin-top: 15px; flex-wrap: wrap; }
-.upi-apps a {
-  display: flex; align-items: center; gap: 6px; padding: 10px 16px;
-  border-radius: 10px; font-weight: bold; font-size: 14px;
-  border: 1px solid #ddd; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
+.upi-apps a { display: flex; align-items: center; gap: 6px; padding: 10px 16px; border-radius: 10px; font-weight: bold; font-size: 14px; border: 1px solid #ddd; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 .upi-apps img { width: 22px; height: 22px; border-radius: 50%; }
 
 .status-note { font-size: 13px; line-height: 1.6; color: var(--muted); }
@@ -271,18 +121,9 @@ section { scroll-margin-top: 90px; }
 footer { margin-top: 40px; padding: 35px 20px; text-align: center; background: var(--brown); color: white; }
 footer p { color: #f5d8bf; line-height: 1.7; }
 
-.floating-cart {
-  position: fixed; right: 18px; bottom: 18px; z-index: 30; border: 0;
-  border-radius: 50px; background: var(--green); color: white;
-  padding: 15px 20px; font-weight: 850; box-shadow: 0 8px 25px #0003;
-}
+.floating-cart { position: fixed; right: 18px; bottom: 18px; z-index: 30; border: 0; border-radius: 50px; background: var(--green); color: white; padding: 15px 20px; font-weight: 850; box-shadow: 0 8px 25px #0003; }
 
-.toast {
-  position: fixed; left: 50%; bottom: 85px; transform: translate(-50%, 20px);
-  background: #282019; color: white; padding: 12px 18px; border-radius: 12px;
-  opacity: 0; pointer-events: none; z-index: 50; transition: .25s;
-  width: max-content; max-width: 90%;
-}
+.toast { position: fixed; left: 50%; bottom: 85px; transform: translate(-50%, 20px); background: #282019; color: white; padding: 12px 18px; border-radius: 12px; opacity: 0; pointer-events: none; z-index: 50; transition: .25s; width: max-content; max-width: 90%; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s, transform .7s; }
@@ -330,7 +171,6 @@ footer p { color: #f5d8bf; line-height: 1.7; }
 </header>
 
 <main>
-  <!-- HERO SECTION -->
   <section class="hero">
     <div class="reveal">
       <span class="eyebrow">Freshly served with love</span>
@@ -343,17 +183,14 @@ footer p { color: #f5d8bf; line-height: 1.7; }
     </div>
 
     <div class="hero-photo reveal">
-      <!-- FIXED HERO IMAGE (PANIPURI) -->
       <img src="https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=1100&q=85" alt="Pani Puri" onerror="this.src='https://via.placeholder.com/600x400?text=Pani+Puri'">
       <div class="photo-label">✨ Fresh • Crispy • Chatpata</div>
     </div>
   </section>
 
-  <!-- NEW SLIDER SECTION -->
   <div class="slider-section reveal">
     <div class="slider-container">
       <div class="slider-wrapper" id="sliderWrapper">
-        <!-- You can change these image URLs with your own photos -->
         <img src="https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=1200&q=85" alt="Pani Puri 1">
         <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1200&q=85" alt="Pani Puri 2">
         <img src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=1200&q=85" alt="Pani Puri 3">
@@ -362,7 +199,6 @@ footer p { color: #f5d8bf; line-height: 1.7; }
     </div>
   </div>
 
-  <!-- MENU SECTION -->
   <section id="menu" class="section">
     <div class="section-heading reveal">
       <div>
@@ -382,7 +218,6 @@ footer p { color: #f5d8bf; line-height: 1.7; }
     <div id="menuGrid" class="menu-grid"></div>
   </section>
 
-  <!-- CHECKOUT SECTION -->
   <section id="checkout" class="section">
     <div class="section-heading reveal">
       <div>
@@ -408,8 +243,10 @@ footer p { color: #f5d8bf; line-height: 1.7; }
           <div id="addressFields">
             <div class="field">
               <label for="address">Delivery address *</label>
-              <textarea id="address" maxlength="350" placeholder="House number, street, area" required></textarea>
-              <!-- Location button is auto-injected here by JS -->
+              <!-- Address input with special button -->
+              <div class="map-btn-wrapper">
+                <input type="text" id="address" maxlength="350" placeholder="📍 Click to open Google Maps & auto-detect" required readonly style="cursor: pointer; background-color: #f8f9fa;">
+              </div>
             </div>
             <div class="field">
               <label for="landmark">Landmark (optional)</label>
@@ -448,17 +285,10 @@ footer p { color: #f5d8bf; line-height: 1.7; }
               <p id="qrAmount"></p>
               
               <div class="upi-apps">
-                <a id="paytmBtn" href="#">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg" alt="Paytm"> Paytm
-                </a>
-                <a id="gpayBtn" href="#">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="GPay"> GPay
-                </a>
-                <a id="phonepeBtn" href="#">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg" alt="PhonePe"> PhonePe
-                </a>
+                <a id="paytmBtn" href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg" alt="Paytm"> Paytm</a>
+                <a id="gpayBtn" href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="GPay"> GPay</a>
+                <a id="phonepeBtn" href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg" alt="PhonePe"> PhonePe</a>
               </div>
-              <p style="margin-top: 15px; font-size: 12px;">Ya fir upar diye gaye QR code ko scan karein.</p>
             </div>
 
             <div class="field" style="margin-top:14px">
@@ -468,7 +298,7 @@ footer p { color: #f5d8bf; line-height: 1.7; }
           </div>
 
           <button class="btn btn-green" type="submit" style="width:100%;margin-top:8px">Prepare WhatsApp Order →</button>
-          <p class="status-note">WhatsApp will open with your order details. You must press Send. For online payments, the shop will manually verify the transaction.</p>
+          <p class="status-note">WhatsApp will open with your order details. You must press Send.</p>
         </form>
       </div>
 
@@ -518,7 +348,6 @@ const WHATSAPP_NUMBER = "919353481235";
 const UPI_ID = "trustedcracking@axl";
 const SHOP_NAME = "Pani Puri Wala";
 
-// FIX: Force correct images for items regardless of broken data.json links
 const CUSTOM_IMAGES = {
   "pani-puri": "https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=500&q=80",
   "samosa": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=500&q=80"
@@ -569,11 +398,8 @@ function renderMenu() {
     const qty = selectedQuantity(item.id);
     const available = item.available && item.price >= 0;
     
-    // Use Custom Images if available for the item, else fallback to data.json image
     let image = item.imageUrl || "";
-    if (CUSTOM_IMAGES[item.id]) {
-      image = CUSTOM_IMAGES[item.id];
-    }
+    if (CUSTOM_IMAGES[item.id]) { image = CUSTOM_IMAGES[item.id]; }
 
     const imgTag = image 
       ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(item.name)}" loading="lazy" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=Food';">`
@@ -581,19 +407,17 @@ function renderMenu() {
 
     return `
       <article class="food-card" style="animation-delay:${Math.min(index * 70, 350)}ms">
-        <div class="food-image">
-          ${imgTag}
-        </div>
+        <div class="food-image">${imgTag}</div>
         <div class="food-info">
           <h3>${escapeHtml(item.name)}</h3>
           <p>${escapeHtml(item.description || "Fresh and delicious food.")}</p>
           <div class="food-bottom">
             <span class="price">${item.price >= 0 ? money(item.price) : "Price unavailable"}</span>
             ${available ? `
-              <div class="quantity" aria-label="Quantity for ${escapeHtml(item.name)}">
-                <button type="button" data-action="minus" data-id="${escapeHtml(item.id)}" aria-label="Decrease quantity">−</button>
+              <div class="quantity">
+                <button type="button" data-action="minus" data-id="${escapeHtml(item.id)}">−</button>
                 <span>${qty}</span>
-                <button type="button" data-action="plus" data-id="${escapeHtml(item.id)}" aria-label="Increase quantity">+</button>
+                <button type="button" data-action="plus" data-id="${escapeHtml(item.id)}">+</button>
               </div>
             ` : '<span class="unavailable">Currently unavailable</span>'}
           </div>
@@ -634,7 +458,6 @@ async function loadMenu() {
   $("menuStatus").textContent = "Loading latest menu...";
 
   let data = null;
-
   for (const url of DATA_URLS) {
     try {
       const response = await fetch(url + "?t=" + Date.now(), { cache: "no-store" });
@@ -642,14 +465,11 @@ async function loadMenu() {
         data = await response.json();
         if (data && Array.isArray(data.menu)) break; 
       }
-    } catch (err) {
-      console.log("Failed to load from: " + url);
-    }
+    } catch (err) {}
   }
 
   if (!data || !Array.isArray(data.menu)) {
     $("menuStatus").textContent = "Menu load nahi hua. Internet check karein aur Refresh dabayein.";
-    notify("Internet issue. Menu load nahi ho paya.");
     state.loading = false;
     $("refreshMenu").disabled = false;
     return;
@@ -676,21 +496,17 @@ async function loadMenu() {
     $("notice").textContent = data.notice || "Welcome! Fresh food available today.";
     $("offer").innerHTML = `<h3>🎉 ${escapeHtml(data.offerTitle || "Special Offer")}</h3><p>${escapeHtml(data.offerText || "Ask us about today's offer!")}</p>`;
     $("menuStatus").textContent = `Menu loaded successfully · ${state.menu.length} items`;
-    
     renderMenu();
     renderCart();
   } catch (error) {
     $("menuStatus").textContent = "Menu format error.";
-    notify("Menu error.");
   } finally {
     state.loading = false;
     $("refreshMenu").disabled = false;
   }
 }
 
-function paymentMethod() {
-  return document.querySelector('input[name="payment"]:checked').value;
-}
+function paymentMethod() { return document.querySelector('input[name="payment"]:checked').value; }
 
 function updateCheckoutFields() {
   const isUpi = paymentMethod() === "UPI";
@@ -700,59 +516,32 @@ function updateCheckoutFields() {
 }
 
 function makeUpiUri() {
-  const params = new URLSearchParams({
-    pa: UPI_ID,
-    pn: SHOP_NAME,
-    am: cartTotal().toFixed(2),
-    cu: "INR",
-    tn: "Pani Puri Wala order"
-  });
+  const params = new URLSearchParams({ pa: UPI_ID, pn: SHOP_NAME, am: cartTotal().toFixed(2), cu: "INR", tn: "Pani Puri Wala order" });
   return "upi://pay?" + params.toString();
 }
 
 function updateQr() {
   if (!$("qrImage")) return;
-  const amount = cartTotal();
-  $("qrAmount").textContent = "Payment amount: " + money(amount) + ". Verify the payee and amount in your UPI app.";
+  $("qrAmount").textContent = "Payment amount: " + money(cartTotal()) + ". Verify the payee and amount in your UPI app.";
   $("qrImage").dataset.upiUri = makeUpiUri();
 }
 
 function showQr() {
-  if (!cartEntries().length) {
-    notify("QR dikhane se pehle cart mein item add karein.");
-    return;
-  }
+  if (!cartEntries().length) { notify("QR dikhane se pehle cart mein item add karein."); return; }
   const uri = makeUpiUri();
   $("qrImage").src = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" + encodeURIComponent(uri);
-  
   $("paytmBtn").href = "paytmmp://pay?pa=" + UPI_ID + "&pn=" + encodeURIComponent(SHOP_NAME) + "&am=" + cartTotal().toFixed(2) + "&cu=INR";
   $("gpayBtn").href = "tez://upi/pay?pa=" + UPI_ID + "&pn=" + encodeURIComponent(SHOP_NAME) + "&am=" + cartTotal().toFixed(2) + "&cu=INR";
   $("phonepeBtn").href = "phonepe://pay?pa=" + UPI_ID + "&pn=" + encodeURIComponent(SHOP_NAME) + "&am=" + cartTotal().toFixed(2) + "&cu=INR";
-
   $("qrWrap").style.display = "block";
   $("qrWrap").scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
 function validateForm() {
-  if (!cartEntries().length) {
-    notify("Please pehle cart mein item add karein.");
-    $("menu").scrollIntoView({ behavior: "smooth" });
-    return false;
-  }
-  if (cartTotal() <= 0) {
-    notify("Cart total valid nahi hai.");
-    return false;
-  }
-  if (!$("address").value.trim()) {
-    $("address").focus();
-    notify("Delivery address enter karein.");
-    return false;
-  }
-  if (paymentMethod() === "UPI" && !$("utr").value.trim()) {
-    $("utr").focus();
-    notify("Payment ke baad UTR/reference number enter karein.");
-    return false;
-  }
+  if (!cartEntries().length) { notify("Please pehle cart mein item add karein."); $("menu").scrollIntoView({ behavior: "smooth" }); return false; }
+  if (cartTotal() <= 0) { notify("Cart total valid nahi hai."); return false; }
+  if (!$("address").value.trim()) { $("address").focus(); notify("Delivery address select karein."); return false; }
+  if (paymentMethod() === "UPI" && !$("utr").value.trim()) { $("utr").focus(); notify("Payment ke baad UTR enter karein."); return false; }
   return true;
 }
 
@@ -769,32 +558,17 @@ function prepareWhatsAppOrder(event) {
   const utr = $("utr").value.trim();
   const orderId = "PPW-" + Date.now().toString().slice(-10);
 
-  let message = `🛒 *${SHOP_NAME} — New Order*\n`;
-  message += `Order ID: ${orderId}\n`;
-  message += `Customer: ${name}\n`;
-  message += `Phone: ${phone}\n`;
-  message += `Order type: Home Delivery\n`;
-  message += `Address: ${address}\n`;
+  let message = `🛒 *${SHOP_NAME} — New Order*\nOrder ID: ${orderId}\nCustomer: ${name}\nPhone: ${phone}\nOrder type: Home Delivery\nAddress: ${address}\n`;
   if (landmark) message += `Landmark: ${landmark}\n`;
 
   message += "\n*Items:*\n";
-  cartEntries().forEach(item => {
-    const qty = selectedQuantity(item.id);
-    message += `• ${item.name} × ${qty} = ${money(item.price * qty)}\n`;
-  });
+  cartEntries().forEach(item => { message += `• ${item.name} × ${selectedQuantity(item.id)} = ${money(item.price * selectedQuantity(item.id))}\n`; });
 
-  message += `\n*Total: ${money(cartTotal())}*\n`;
-  message += `Payment method: ${payment === "UPI" ? "UPI — verification pending" : "Cash on delivery"}\n`;
-
-  if (payment === "UPI") {
-    message += `UPI ID: ${UPI_ID}\n`;
-    message += `Customer-provided UTR: ${utr}\n`;
-    message += `*Please verify payment in the bank/UPI app before preparing the order.*\n`;
-  }
-
+  message += `\n*Total: ${money(cartTotal())}*\nPayment method: ${payment === "UPI" ? "UPI — verification pending" : "Cash on delivery"}\n`;
+  if (payment === "UPI") message += `UPI ID: ${UPI_ID}\nCustomer-provided UTR: ${utr}\n*Please verify payment before preparing.*\n`;
   if (instructions) message += `Instructions: ${instructions}\n`;
 
-  message += "\nPlease confirm this order and availability.";
+  message += "\nPlease confirm this order.";
   const url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
   window.open(url, "_blank", "noopener,noreferrer");
   notify("WhatsApp opened. Message check karke Send karein.");
@@ -818,24 +592,14 @@ $("cartItems").addEventListener("click", event => {
 $("refreshMenu").addEventListener("click", loadMenu);
 $("showQr").addEventListener("click", showQr);
 $("orderForm").addEventListener("submit", prepareWhatsAppOrder);
-
-document.querySelectorAll('input[name="payment"]').forEach(input => {
-  input.addEventListener("change", updateCheckoutFields);
-});
-
-$("floatingCart").addEventListener("click", () => {
-  $("checkout").scrollIntoView({ behavior: "smooth" });
-});
+document.querySelectorAll('input[name="payment"]').forEach(input => input.addEventListener("change", updateCheckoutFields));
+$("floatingCart").addEventListener("click", () => $("checkout").scrollIntoView({ behavior: "smooth" }));
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-      observer.unobserve(entry.target);
-    }
+    if (entry.isIntersecting) { entry.target.classList.add("visible"); observer.unobserve(entry.target); }
   });
 }, { threshold: 0.12 });
-
 document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
 
 // ===== SLIDER LOGIC =====
@@ -845,64 +609,84 @@ if (slides.length > 0) {
   setInterval(() => {
     currentSlide = (currentSlide + 1) % slides.length;
     document.getElementById("sliderWrapper").style.transform = `translateX(-${currentSlide * 100}%)`;
-  }, 3000); // Changes image every 3 seconds
+  }, 3000);
 }
-// ========================
 
 $("year").textContent = new Date().getFullYear();
 $("upiLabel").textContent = UPI_ID;
-
 updateCheckoutFields();
 renderCart();
 loadMenu();
 
 /* =========================================================
-   ANDROID LOCATION BRIDGE (FOR AUTO-DETECT ADDRESS)
+   GOOGLE MAPS LOCATION AUTO-DETECT (APP INTEGRATION)
    ========================================================= */
+
+// Check if running inside the Android App
 function isAndroidApp() {
-  return typeof window.AndroidLocation !== "undefined" &&
-         window.AndroidLocation !== null &&
-         typeof window.AndroidLocation.requestLocationFromWeb === "function";
+  return typeof window.AndroidLocation !== "undefined" && 
+         typeof window.AndroidLocation.openMapsForAddress === "function";
 }
 
-window.onNativeLocation = function (result) {
+// Function to extract lat/lng from Google Maps URL
+function extractLatLng(url) {
+  const regex = /@(-?\d+\.\d+),(-?\d+\.\d+)/;
+  const match = url.match(regex);
+  if (match) return { lat: match[1], lng: match[2] };
+  
+  const qRegex = /[?&]q=(-?\d+\.\d+),(-?\d+\.\d+)/;
+  const qMatch = url.match(qRegex);
+  if (qMatch) return { lat: qMatch[1], lng: qMatch[2] };
+  return null;
+}
+
+// Click on Address box triggers Maps
+document.getElementById("address").addEventListener("click", () => {
+  if (isAndroidApp()) {
+    notify("Opening Google Maps...");
+    window.AndroidLocation.openMapsForAddress();
+  } else {
+    alert("Please open this website inside the Pani Puri App to auto-detect location.");
+  }
+});
+
+// This function receives the link back from Android after user selects location
+window.setAddressFromMap = function(mapsUrl) {
   try {
-    const data = typeof result === "string" ? JSON.parse(result) : result;
-    if (data.error) { notify(data.error); return; }
     const addressBox = document.getElementById("address");
-    if (addressBox && data.mapsUrl) {
-      const existing = addressBox.value.trim();
-      if (!existing.includes(data.mapsUrl)) {
-        addressBox.value = existing ? existing + "\n📍 " + data.mapsUrl : "📍 " + data.mapsUrl;
+    if (mapsUrl && mapsUrl.trim() !== "") {
+      // If it's a long google maps link, try to get lat/lng and show a clean text
+      const coords = extractLatLng(mapsUrl);
+      if (coords) {
+        addressBox.value = `Location: ${coords.lat}, ${coords.lng}\n(Google Maps Link attached in WhatsApp)`;
+      } else {
+        addressBox.value = mapsUrl;
       }
-      notify("Location auto-detected! Exact house number likh dein.");
+      // We store the full link in the element's dataset so it can be sent to WhatsApp
+      addressBox.dataset.fullLink = mapsUrl;
+      notify("Location selected successfully!");
     }
-  } catch (e) { notify("Location result parse nahi hua."); }
+  } catch (e) {
+    notify("Error setting address.");
+  }
 };
 
-function injectLocationButton() {
-  if (!isAndroidApp()) return;
-  if (document.getElementById("getLocationBtn")) return;
-  const addressField = document.getElementById("address");
-  if (!addressField) return;
+// Override form submission to include the Google Maps link
+const originalPrepareWhatsAppOrder = prepareWhatsAppOrder;
+prepareWhatsAppOrder = function(event) {
+  event.preventDefault();
+  if (!validateForm()) return;
 
-  const btn = document.createElement("button");
-  btn.id = "getLocationBtn";
-  btn.type = "button";
-  btn.className = "btn btn-light";
-  btn.style.marginTop = "10px";
-  btn.style.width = "100%";
-  btn.textContent = "📍 Use my current location";
+  // Inject the full map link into the message
+  const addressBox = $("address");
+  const fullLink = addressBox.dataset.fullLink;
+  if (fullLink) {
+    addressBox.value = `Location Link: ${fullLink}`;
+  }
 
-  btn.addEventListener("click", () => {
-    notify("Location auto-detect ho rahi hai...");
-    try { window.AndroidLocation.requestLocationFromWeb(); } catch (e) { notify("Location request fail ho gayi."); }
-  });
-  addressField.parentNode.insertBefore(btn, addressField.nextSibling);
-}
-
-// Automatically inject the button when page loads if running in App
-if (isAndroidApp()) { injectLocationButton(); }
+  // Call the original function to send WhatsApp
+  originalPrepareWhatsAppOrder(event);
+};
 </script>
 </body>
 </html>
