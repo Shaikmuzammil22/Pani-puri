@@ -1,5 +1,5 @@
 {
-  "shopOpen": true,
+  "shopOpen": false,
   "shopClosedMessage": "🚫 Aaj shop band hai! (Today is holiday)",
   "menu": [
     {
@@ -11,7 +11,7 @@
     },
     {
       "id": "samosa",
-      "name": "Family pack",
+      "name": "Family pack paani puri",
       "description": "Family Pack",
       "price": 150,
       "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/samosa.png"
