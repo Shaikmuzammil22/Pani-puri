@@ -7,28 +7,28 @@
       "name": "Pani Puri",
       "description": "Fresh and spicy",
       "price": 100,
-      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/panipuri.jpg"
+      "imageUrl": "https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=600&q=80"
     },
     {
       "id": "samosa",
-      "name": "Family pack paani puri",
+      "name": "Family Pack Pani Puri",
       "description": "Family Pack",
       "price": 150,
-      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/samosa.png"
+      "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80"
     },
     {
       "id": "onion",
-      "name": "Onion (Pyaz) soon",
+      "name": "Onion (Pyaz)",
       "description": "Fresh chopped onions",
-      "price": 0,
-      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/ginger.png"
+      "price": 20,
+      "imageUrl": "https://images.pexels.com/photos/144206/pexels-photo-144206.jpeg?auto=compress&cs=tinysrgb&w=600"
     },
     {
       "id": "adrak",
-      "name": "Adrak (Ginger) soon",
+      "name": "Adrak (Ginger)",
       "description": "Fresh ginger slices",
-      "price": 0,
-      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/onion.png"
+      "price": 10,
+      "imageUrl": "https://images.pexels.com/photos/1660030/pexels-photo-1660030.jpeg?auto=compress&cs=tinysrgb&w=600"
     }
   ]
 }
