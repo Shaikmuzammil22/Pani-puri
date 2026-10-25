@@ -4,14 +4,14 @@
   "menu": [
     {
       "id": "pani-puri",
-      "name": "Pani Puri 100₹ mai 50 pieces",
+      "name": "Pani Puri 100₹ rupya mai 50 pieces",
       "description": "Fresh and spicy",
       "price": 100,
       "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/panipuri.png"
     },
     {
       "id": "samosa",
-      "name": "Family Pack Pani Puri",
+      "name": "Family Pack Pani Puri offer 100 pieces",
       "description": "Family Pack",
       "price": 150,
       "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/panipuri.png"
