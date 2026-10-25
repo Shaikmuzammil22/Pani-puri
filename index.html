@@ -233,6 +233,210 @@ const REPO_NAME = "Pani-puri";
 const BRANCH = "main";
 const DATA_URL = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/${BRANCH}/data.json`;
 
+const WHATSAPP_NUMBER = "919036714440";
+const SHOP_NAME = "Ismail Pani Puri";
+
+const state = { menu: [], cart: {}, shopOpen: true };
+const $ = (id) => document.getElementById(id);
+
+function money(val) { return new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR" }).format(val); }
+function notify(msg) { const t = $("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 2500); }
+function cartEntries() { return state.menu.filter(item => (state.cart[item.id] || 0) > 0); }
+function cartCount() { return cartEntries().reduce((sum, item) => sum + state.cart[item.id], 0); }
+function cartTotal() { return cartEntries().reduce((sum, item) => sum + item.price * state.cart[item.id], 0); }
+
+function setQuantity(id, delta) {
+  if(!state.shopOpen) return notify("Shop is closed today!");
+  const item = state.menu.find(e => e.id === id);
+  if (!item || item.price <= 0) return;
+  const next = Math.max(0, Math.min(99, (state.cart[id] || 0) + delta));
+  if (next === 0) delete state.cart[id]; else state.cart[id] = next;
+  renderMenu(); renderCart();
+}
+
+function renderMenu() {
+  const grid = $("menuGrid");
+  if (!state.menu.length) return;
+  grid.innerHTML = state.menu.map((item, index) => {
+    const qty = state.cart[item.id] || 0;
+    const available = item.price > 0;
+    
+    let priceTag = available ? money(item.price) : `<span style="color:red; font-weight:bold;">Out of Stock</span>`;
+    let qtyBox = available ? `
+      <div class="quantity">
+        <button data-action="minus" data-id="${item.id}">−</button>
+        <span>${qty}</span>
+        <button data-action="plus" data-id="${item.id}">+</button>
+      </div>` : '';
+
+    return `
+      <article class="food-card" style="animation-delay: ${index * 0.15}s">
+        <div class="food-image"><img src="${item.imageUrl || 'https://via.placeholder.com/300'}" onerror="this.src='https://via.placeholder.com/300'"></div>
+        <div class="food-info">
+          <h3>${item.name}</h3>
+          <p>${item.description || ""}</p>
+          <div class="food-bottom">
+            <span class="price">${priceTag}</span>
+            ${qtyBox}
+          </div>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+function renderCart() {
+  const items = cartEntries();
+  $("cartItems").innerHTML = items.length ? items.map(item => `
+    <div class="cart-line">
+      <div><strong>${item.name}</strong><br><small style="color:var(--muted);">${money(item.price)} × ${state.cart[item.id]}</small><br>
+      <button class="remove" data-remove="${item.id}" style="color:#e74c3c;border:none;background:none;cursor:pointer;margin-top:5px;font-size:13px;font-weight:600;">Remove</button></div>
+      <strong>${money(item.price * state.cart[item.id])}</strong>
+    </div>
+  `).join("") : "<div style='color: var(--muted); text-align: center; padding: 30px; font-weight: 600;'>Your cart is empty.</div>";
+  $("cartTotal").textContent = money(cartTotal());
+  $("floatingCart").textContent = `🛒 Cart · ${cartCount()} · ${money(cartTotal())}`;
+}
+
+async function loadMenu() {
+  try {
+    const res = await fetch(DATA_URL + "?t=" + Date.noimation: slideRight 0.4s ease; }
+.total-row { display: flex; justify-content: space-between; font-weight: 900; font-size: 28px; margin-top: 30px; color: var(--brown); font-family: 'Playfair Display', serif; }
+
+.toast { position: fixed; bottom: 110px; left: 50%; transform: translateX(-50%) translateY(30px); background: rgba(58, 21, 6, 0.95); backdrop-filter: blur(10px); color: white; padding: 18px 35px; border-radius: 50px; opacity: 0; transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); pointer-events: none; z-index: 999; box-shadow: 0 15px 40px rgba(0,0,0,0.3); font-weight: 600; border: 1px solid var(--gold); letter-spacing: 1px; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.floating-cart { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, var(--green), var(--green-light)); color: white; padding: 20px 35px; border-radius: 50px; font-weight: 800; border: 2px solid rgba(255,255,255,0.2); cursor: pointer; box-shadow: 0 15px 30px rgba(33, 133, 72, 0.4); z-index: 99; transition: all 0.4s; animation: floatCart 3s ease-in-out infinite; font-size: 16px; letter-spacing: 1px; }
+.floating-cart:hover { transform: translateY(-5px) scale(1.05); animation-play-state: paused; }
+
+footer { background: linear-gradient(to top, #1a0902, var(--brown)); color: white; text-align: center; padding: 60px 20px; margin-top: 80px; position: relative; border-top: 3px solid var(--gold); }
+footer h2 { font-family: 'Playfair Display', serif; font-size: 36px; letter-spacing: 2px; }
+
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes fadeUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes slideRight { from { transform: translateX(-30px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes glowPulse { 0% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.4), 0 0 40px rgba(212, 175, 55, 0.2); } 100% { text-shadow: 0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.6); } }
+@keyframes spin { 100% { transform: translateX(-50%) rotate(360deg); } }
+@keyframes floatCart { 0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); } }
+
+@media (max-width: 800px) {
+  .hero-overlay h1 { font-size: 42px; }
+  .hero-overlay p { font-size: 14px; letter-spacing: 3px; }
+  .hero-photo { height: 350px; border-radius: 25px; }
+  .checkout-layout { grid-template-columns: 1fr; }
+  .navlinks { gap: 8px; }
+  .logo { font-size: 18px; }
+  .btn { padding: 8px 12px; font-size: 11px; }
+  .panel { padding: 20px; }
+  .section-heading h2 { font-size: 30px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-particles" id="particles"></div>
+
+<div class="topbar-marquee">
+  <div class="marquee-content">
+    <span>✨ Welcome to Ismail Pani Puri Wala ✨ Fresh & Premium Taste ✨ Home Delivery Available ✨ Order Now ✨</span>
+  </div>
+</div>
+
+<header>
+  <nav class="nav">
+    <a href="#" class="logo">Ismail <br><span>Pani Puri</span></a>
+    <div class="navlinks">
+      <button onclick="shareApp()" class="btn btn-dark">Share ↗</button>
+      <a href="#checkout" class="btn btn-primary">Order</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-photo">
+      <div class="hero-overlay">
+        <h1>ISMAIL PANI PURI</h1>
+        <p>Taste the Royal Tradition</p>
+        <a href="#menu" class="btn btn-primary" style="margin-top:20px;">Explore Menu ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu" class="section">
+    <div class="section-heading"><h2>Our Menu</h2></div>
+    
+    <div id="shopStatusNotice" class="notice" style="display: none; color: red; background: #ffe6e6; border-left-color: red; text-align: center; font-size: 18px;">
+      🚫 Aaj shop band hai! (Today is holiday)
+    </div>
+    
+    <div id="notice" class="notice">👑 Welcome! Fresh items available today.</div>
+    <div id="menuStatus" style="margin-bottom: 20px; color: var(--muted); text-align: center;">Loading menu...</div>
+    
+    <div id="menuGrid" class="menu-grid"></div>
+  </section>
+
+  <section id="checkout" class="section">
+    <div class="section-heading"><h2>Checkout</h2></div>
+    <div class="checkout-layout">
+      <div class="panel" id="orderPanel">
+        <h3>Your Details</h3>
+        <form id="orderForm">
+          <div class="field"><label>Name *</label><input id="customerName" required placeholder="Enter your full name"></div>
+          <div class="field"><label>Mobile *</label><input id="customerPhone" type="tel" required placeholder="Enter your phone number"></div>
+          <div class="field">
+            <label>Delivery Location *</label>
+            <textarea id="address" rows="2" required readonly style="cursor: pointer; background: #fff4e8; font-weight: bold; color: var(--brown); border-color: var(--gold);" placeholder="📍 Click here to auto-detect location"></textarea>
+          </div>
+          
+          <div class="field">
+            <label>Payment Method *</label>
+            <div class="choice-grid">
+              <div class="choice">
+                💵 Cash on Delivery
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-green" type="submit">Send WhatsApp Order →</button>
+        </form>
+      </div>
+      <div class="panel">
+        <h3>Your Cart</h3>
+        <div id="cartItems"><div style="color: var(--muted); text-align: center; padding: 30px; font-weight: 600;">Your cart is empty.</div></div>
+        <div class="total-row"><span>Total</span><span id="cartTotal">₹0.00</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <h2 style="color: white;">Ismail <span style="color: var(--gold);">Pani Puri</span></h2>
+  <p style="margin-top: 15px; font-weight: 300; color: #ccc; letter-spacing: 1px;">Premium Quality & Royal Taste</p>
+</footer>
+
+<button id="floatingCart" class="floating-cart">🛒 Cart · 0 · ₹0</button>
+<div id="toast" class="toast"></div>
+
+<script>
+const particlesContainer = document.getElementById('particles');
+for (let i = 0; i < 20; i++) {
+  let particle = document.createElement('div');
+  particle.classList.add('particle');
+  let size = Math.random() * 50 + 10;
+  particle.style.width = size + 'px';
+  particle.style.height = size + 'px';
+  particle.style.left = Math.random() * 100 + 'vw';
+  particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+  particle.style.animationDelay = Math.random() * 5 + 's';
+  particlesContainer.appendChild(particle);
+}
+
+const GITHUB_USERNAME = "Shaikmuzammil22";
+const REPO_NAME = "Pani-puri";
+const BRANCH = "main";
+const DATA_URL = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/${BRANCH}/data.json`;
+
 const WHATSAPP_NUMBER = "919353481235";
 const SHOP_NAME = "Ismail Pani Puri";
 
