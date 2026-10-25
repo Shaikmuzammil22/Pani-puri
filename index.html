@@ -168,7 +168,6 @@ footer h2 { font-family: 'Playfair Display', serif; font-size: 36px; letter-spac
     
     <div id="notice" class="notice">👑 Welcome! Fresh items available today.</div>
     
-    <!-- ERROR DIKHANE KE LIYE NAYA DIV -->
     <div id="menuStatus" style="margin-bottom: 20px; color: var(--muted); text-align: center; font-weight: bold; font-size: 18px;">Loading menu...</div>
     
     <div id="menuGrid" class="menu-grid"></div>
@@ -302,7 +301,6 @@ function renderCart() {
 
 async function loadMenu() {
   try {
-    // Cache bypass karne ke liye Date.now() use kiya gaya hai
     const res = await fetch(DATA_URL + "?t=" + Date.now());
     if (!res.ok) throw new Error("Network response was not ok");
     
@@ -310,6 +308,9 @@ async function loadMenu() {
     
     state.shopOpen = data.shopOpen;
     state.menu = data.menu;
+
+    // Menu ko hamesha render karo
+    renderMenu();
 
     if (!state.shopOpen) {
       $("shopStatusNotice").style.display = "block";
@@ -325,9 +326,7 @@ async function loadMenu() {
     }
 
     $("menuStatus").style.display = "none";
-    renderMenu();
   } catch(e) {
-    // Agar JSON me error hoga, to yahan error print hoga
     $("menuStatus").innerText = "Data load error! GitHub par data.json check karein. Error: " + e.message;
     $("menuStatus").style.color = "red";
     console.error(e);
