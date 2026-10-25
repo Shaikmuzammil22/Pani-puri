@@ -11,21 +11,21 @@
     },
     {
       "id": "samosa",
-      "name": "Samosa",
-      "description": "Crispy and fresh",
+      "name": "Family pack",
+      "description": "Family Pack",
       "price": 150,
       "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/samosa.png"
     },
     {
       "id": "onion",
-      "name": "Onion (Pyaz)",
+      "name": "Onion (Pyaz) soon",
       "description": "Fresh chopped onions",
       "price": 0,
       "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/ginger.png"
     },
     {
       "id": "adrak",
-      "name": "Adrak (Ginger)",
+      "name": "Adrak (Ginger) soon",
       "description": "Fresh ginger slices",
       "price": 0,
       "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/onion.png"
