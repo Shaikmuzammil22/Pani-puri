@@ -4,7 +4,7 @@
   "menu": [
     {
       "id": "pani-puri",
-      "name": "Pani Puri",
+      "name": "Pani Puri 100₹ mai 50 pieces",
       "description": "Fresh and spicy",
       "price": 100,
       "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/panipuri.png"
