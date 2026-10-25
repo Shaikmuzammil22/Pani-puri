@@ -7,14 +7,14 @@
       "name": "Pani Puri",
       "description": "Fresh and spicy",
       "price": 100,
-      "imageUrl": "https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=600&q=80"
+      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/panipuri.png"
     },
     {
       "id": "samosa",
       "name": "Family Pack Pani Puri",
       "description": "Family Pack",
       "price": 150,
-      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/panipuri.jpg"
+      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/panipuri.png"
     },
     {
       "id": "onion",
