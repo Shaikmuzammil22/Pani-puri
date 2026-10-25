@@ -14,21 +14,21 @@
       "name": "Family Pack Pani Puri",
       "description": "Family Pack",
       "price": 150,
-      "imageUrl": "https://imhttps://share.google/7DfUG61DVRc07USAbages.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80"
+      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/panipuri.jpg"
     },
     {
       "id": "onion",
-      "name": "Onion (Pyaz)",
+      "name": "Onion (Pyaz) per kg",
       "description": "Fresh chopped onions",
-      "price": 20,
-      "imageUrl": "https://images.pexels.com/photos/144206/pexels-photo-144206.jpeg?auto=compress&cs=tinysrgb&w=600"
+      "price": 0,
+      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/onion.png"
     },
     {
       "id": "adrak",
-      "name": "Adrak (Ginger)",
+      "name": "Adrak (Ginger) per kg",
       "description": "Fresh ginger slices",
       "price": 0,
-      "imageUrl": "https://share.google/uIpGY3iEGikXH6vPv"
+      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/ginger.png"
     }
   ]
 }
