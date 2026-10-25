@@ -39,26 +39,29 @@
 
   <div class="card">
     <h3>Item 1 (Pani Puri)</h3>
+    <div class="field"><label>Item Name</label><input type="text" id="name1" value="Pani Puri"></div>
     <div class="field"><label>Price (₹)</label><input type="number" id="price1"></div>
     <div class="field"><label>Photo URL</label><input type="text" id="img1"></div>
   </div>
 
   <div class="card">
-    <h3>Item 2 (Samosa)</h3>
+    <h3>Item 2 (Family Pack)</h3>
+    <!-- Naya Input: Name Change karne ke liye -->
+    <div class="field"><label>Item Name</label><input type="text" id="name2" placeholder="Family Pack Pani Puri"></div>
     <div class="field"><label>Price (₹)</label><input type="number" id="price2"></div>
     <div class="field"><label>Photo URL</label><input type="text" id="img2"></div>
   </div>
 
-  <!-- NAYA ITEM: ONION -->
   <div class="card">
     <h3>Item 3 (Onion / Pyaz)</h3>
+    <div class="field"><label>Item Name</label><input type="text" id="name3" value="Onion (Pyaz)"></div>
     <div class="field"><label>Price (₹) - (0 karein toh Out of Stock)</label><input type="number" id="price3"></div>
     <div class="field"><label>Photo URL</label><input type="text" id="img3"></div>
   </div>
 
-  <!-- NAYA ITEM: ADRAK -->
   <div class="card">
     <h3>Item 4 (Adrak / Ginger)</h3>
+    <div class="field"><label>Item Name</label><input type="text" id="name4" value="Adrak (Ginger)"></div>
     <div class="field"><label>Price (₹) - (0 karein toh Out of Stock)</label><input type="number" id="price4"></div>
     <div class="field"><label>Photo URL</label><input type="text" id="img4"></div>
   </div>
@@ -82,11 +85,26 @@
       document.getElementById("shopStatus").value = data.shopOpen ? "true" : "false";
       
       if(data.menu) {
-        if(data.menu[0]) { document.getElementById("price1").value = data.menu[0].price; document.getElementById("img1").value = data.menu[0].imageUrl; }
-        if(data.menu[1]) { document.getElementById("price2").value = data.menu[1].price; document.getElementById("img2").value = data.menu[1].imageUrl; }
-        // Naye items load karna
-        if(data.menu[2]) { document.getElementById("price3").value = data.menu[2].price; document.getElementById("img3").value = data.menu[2].imageUrl; }
-        if(data.menu[3]) { document.getElementById("price4").value = data.menu[3].price; document.getElementById("img4").value = data.menu[3].imageUrl; }
+        if(data.menu[0]) { 
+            document.getElementById("name1").value = data.menu[0].name;
+            document.getElementById("price1").value = data.menu[0].price; 
+            document.getElementById("img1").value = data.menu[0].imageUrl; 
+        }
+        if(data.menu[1]) { 
+            document.getElementById("name2").value = data.menu[1].name;
+            document.getElementById("price2").value = data.menu[1].price; 
+            document.getElementById("img2").value = data.menu[1].imageUrl; 
+        }
+        if(data.menu[2]) { 
+            document.getElementById("name3").value = data.menu[2].name;
+            document.getElementById("price3").value = data.menu[2].price; 
+            document.getElementById("img3").value = data.menu[2].imageUrl; 
+        }
+        if(data.menu[3]) { 
+            document.getElementById("name4").value = data.menu[3].name;
+            document.getElementById("price4").value = data.menu[3].price; 
+            document.getElementById("img4").value = data.menu[3].imageUrl; 
+        }
       }
     } catch(e) { console.log("Data load failed", e); }
   };
@@ -102,19 +120,19 @@
       "shopClosedMessage": "🚫 Aaj shop band hai! (Today is holiday)",
       "menu": [
         {
-          "id": "pani-puri", "name": "Pani Puri", "description": "Fresh and spicy",
+          "id": "pani-puri", "name": document.getElementById("name1").value, "description": "Fresh and spicy",
           "price": Number(document.getElementById("price1").value), "imageUrl": document.getElementById("img1").value
         },
         {
-          "id": "samosa", "name": "Samosa", "description": "Crispy and fresh",
+          "id": "samosa", "name": document.getElementById("name2").value, "description": "Family Pack",
           "price": Number(document.getElementById("price2").value), "imageUrl": document.getElementById("img2").value
         },
         {
-          "id": "onion", "name": "Onion (Pyaz)", "description": "Fresh chopped onions",
+          "id": "onion", "name": document.getElementById("name3").value, "description": "Fresh chopped onions",
           "price": Number(document.getElementById("price3").value), "imageUrl": document.getElementById("img3").value
         },
         {
-          "id": "adrak", "name": "Adrak (Ginger)", "description": "Fresh ginger slices",
+          "id": "adrak", "name": document.getElementById("name4").value, "description": "Fresh ginger slices",
           "price": Number(document.getElementById("price4").value), "imageUrl": document.getElementById("img4").value
         }
       ]
