@@ -3,6 +3,13 @@
   "shopClosedMessage": "🚫 Aaj shop band hai! (Today is holiday)",
   "menu": [
     {
+      "id": "item-1793216650970",
+      "name": "Paani puri",
+      "description": "Ye sirf only Ameer pet colony aur laltlab walo ke liye chota pack",
+      "price": 50,
+      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/main/images/item-1793216866256.jpg"
+    },
+    {
       "id": "pani-puri",
       "name": "Pani Puri 100₹ mai 50 pieces",
       "description": "Fresh and spicy",
@@ -29,13 +36,6 @@
       "description": "Fresh ginger slices",
       "price": 0,
       "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/ginger.png"
-    },
-    {
-      "id": "item-1793216650970",
-      "name": "Paani puri ",
-      "description": "Ye sirf only Ameer pet colony aur laltlab walo ke liye chota pack",
-      "price": 50,
-      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/main/images/item-1793216866256.jpg"
     }
   ]
 }
