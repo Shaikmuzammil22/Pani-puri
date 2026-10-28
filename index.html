@@ -1,5 +1,15 @@
 
-/* ===== ISMAIL PANI PURI — PREMIUM EMERALD THEME ===== */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10251b">
+<title>Ismail Pani Puri Wala</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
 :root {
   --brown: #10251b;
   --brown-light: #244a38;
@@ -11,221 +21,1352 @@
   --green-light: #25a66a;
   --text: #202d25;
   --muted: #74796f;
-
-  --shadow: 0 12px 35px rgba(16, 37, 27, 0.08);
-  --shadow-hover: 0 22px 45px rgba(16, 37, 27, 0.15);
+  --shadow: 0 12px 35px rgba(16,37,27,.08);
+  --shadow-hover: 0 22px 45px rgba(16,37,27,.15);
 }
 
-/* Page background */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
 body {
-  background: var(--cream);
   color: var(--text);
+  background: var(--cream);
+  overflow-x: hidden;
+  position: relative;
 }
 
-/* Premium announcement bar */
+button, input, textarea {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bg-particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+  border-radius: 50%;
+  opacity: .08;
+  animation: floatUp 15s infinite linear;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(100vh) scale(0); }
+  100% { transform: translateY(-10vh) scale(1.5); }
+}
+
+/* Announcement bar */
 .topbar-marquee {
   background: linear-gradient(110deg, #10251b, #1e4030, #10251b);
   color: #e5cb83;
+  padding: 12px 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  overflow: hidden;
+  white-space: nowrap;
   border-bottom: 2px solid var(--gold);
 }
 
-/* Glass header */
-header {
-  background: rgba(248, 246, 239, 0.94);
-  border-bottom: 1px solid rgba(200, 168, 91, 0.35);
+.marquee-content {
+  display: inline-block;
+  animation: marquee 25s linear infinite;
 }
 
-/* Brand */
+.marquee-content span {
+  padding: 0 30px;
+  display: inline-block;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Navigation */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(248,246,239,.94);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(200,168,91,.35);
+}
+
+.nav {
+  max-width: 1180px;
+  margin: auto;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
 .logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 900;
   color: #10251b;
+  line-height: 1.2;
+  transition: transform .3s;
+}
+
+.logo:hover {
+  transform: scale(1.03);
 }
 
 .logo span {
   color: #b89542;
-  text-shadow: none;
+}
+
+.navlinks {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 /* Buttons */
+.btn {
+  border: 0;
+  border-radius: 50px;
+  padding: 12px 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .25s, box-shadow .25s, background .25s;
+  position: relative;
+  letter-spacing: .7px;
+  text-transform: uppercase;
+  font-size: 12px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
 .btn-primary {
-  background: linear-gradient(135deg, #e7cd82, #c5a34c);
+  background: linear-gradient(135deg, #ead38f, #c5a34c);
   color: #10251b;
-  box-shadow: 0 5px 18px rgba(200, 168, 91, 0.22);
+  box-shadow: 0 6px 18px rgba(200,168,91,.22);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 10px 25px rgba(200,168,91,.3);
 }
 
 .btn-dark {
   background: linear-gradient(135deg, #244a38, #10251b);
   color: #f0d78f;
+  box-shadow: 0 6px 18px rgba(16,37,27,.15);
 }
 
-/* Hero: keep existing photo and layout */
+.btn-green {
+  background: linear-gradient(120deg, #126b45, #25a66a);
+  color: white;
+  width: 100%;
+  font-size: 15px;
+  padding: 17px;
+  border-radius: 15px;
+  box-shadow: 0 8px 22px rgba(18,107,69,.2);
+}
+
+/* Hero */
+.hero {
+  max-width: 1180px;
+  margin: 35px auto;
+  padding: 0 20px;
+}
+
 .hero-photo {
-  border: 1px solid rgba(200, 168, 91, 0.4);
-  box-shadow: 0 24px 55px rgba(16, 37, 27, 0.19);
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  min-height: 450px;
+  height: 520px;
+  box-shadow: 0 24px 55px rgba(16,37,27,.19);
+  animation: zoomIn 1s ease;
+  background-image:
+    linear-gradient(90deg, rgba(9,28,19,.86), rgba(9,28,19,.22)),
+    url('https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=1200&q=80');
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(200,168,91,.4);
 }
 
 .hero-overlay {
+  position: absolute;
+  inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(9, 28, 19, 0.88),
-    rgba(9, 28, 19, 0.35)
+    rgba(9,28,19,.72),
+    rgba(9,28,19,.05)
   );
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  text-align: center;
 }
 
 .hero-overlay h1 {
-  color: #f4e6b6;
-  text-shadow: 0 3px 22px rgba(200, 168, 91, 0.22);
+  font-family: 'Playfair Display', serif;
+  font-size: 62px;
+  font-weight: 900;
+  color: var(--gold-light);
+  text-shadow: 0 3px 22px rgba(200,168,91,.22);
+  margin-bottom: 18px;
+  letter-spacing: 2px;
+  line-height: 1.12;
+  animation: fadeUp .8s ease both;
 }
 
-/* Headings */
-.section-heading h2,
-.food-info h3,
-.panel h3 {
+.hero-overlay p {
+  color: white;
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  animation: fadeUp .8s ease .2s both;
+}
+
+/* Sections */
+.section {
+  max-width: 1180px;
+  margin: auto;
+  padding: 55px 20px;
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-heading h2 {
+  font-family: 'Playfair Display', serif;
   color: #173525;
+  font-size: 40px;
+  font-weight: 900;
+  position: relative;
+  display: inline-block;
 }
 
 .section-heading h2::after {
-  color: #c8a85b;
+  content: '◆';
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--gold);
+  font-size: 17px;
+}
+
+/* Notice */
+.notice {
+  background: linear-gradient(120deg, #fffdf6, #f1ead5);
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 30px;
+  border-left: 5px solid var(--gold);
+  font-weight: 600;
+  box-shadow: var(--shadow);
+  line-height: 1.7;
 }
 
 /* Menu cards */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 25px;
+}
+
 .food-card {
   background: #fffefa;
-  border: 1px solid rgba(200, 168, 91, 0.24);
-  box-shadow: 0 10px 30px rgba(16, 37, 27, 0.07);
+  border-radius: 23px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  transition: transform .3s, box-shadow .3s;
+  animation: fadeUp .6s ease both;
+  position: relative;
+  border: 1px solid rgba(200,168,91,.24);
 }
 
 .food-card:hover {
-  box-shadow: 0 20px 42px rgba(16, 37, 27, 0.14);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
 }
 
-.food-card:hover::before {
-  box-shadow: inset 0 0 0 2px #c8a85b;
+.food-image {
+  height: 240px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  background: #e8e5d9;
+}
+
+.food-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(16,37,27,.12), transparent 50%);
+  pointer-events: none;
+}
+
+.food-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+
+.food-card:hover .food-image img {
+  transform: scale(1.05);
 }
 
 .food-info {
+  padding: 24px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background: #fffefa;
 }
 
+.food-info h3 {
+  font-family: 'Playfair Display', serif;
+  color: #173525;
+  font-size: 25px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  overflow-wrap: anywhere;
+}
+
+.food-info p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 22px;
+  line-height: 1.7;
+}
+
+.food-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
 .price {
+  font-size: 24px;
+  font-weight: 800;
   color: #16744b;
-  text-shadow: none;
 }
 
-/* Notices */
-.notice {
-  background: linear-gradient(120deg, #fffdf6, #f1ead5);
-  border-left-color: #c8a85b;
-  box-shadow: var(--shadow);
+/* Checkout layout */
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: start;
 }
 
-/* Checkout panels */
 .panel {
-  background: rgba(255, 254, 250, 0.96);
-  border: 1px solid rgba(200, 168, 91, 0.2);
+  background: rgba(255,254,250,.96);
+  padding: 30px;
+  border-radius: 25px;
   box-shadow: var(--shadow);
+  border: 1px solid rgba(200,168,91,.2);
+  min-width: 0;
 }
 
 .panel h3 {
-  border-bottom-color: #c8a85b;
+  font-family: 'Playfair Display', serif;
+  color: #173525;
+  margin-bottom: 28px;
+  font-size: 28px;
+  font-weight: 800;
+  border-bottom: 2px solid var(--gold);
+  padding-bottom: 12px;
+  display: inline-block;
 }
 
-/* Inputs */
+.field {
+  margin-bottom: 23px;
+}
+
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #173525;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+}
+
 .field input,
 .field textarea {
+  width: 100%;
+  padding: 15px;
+  border: 1.5px solid #e7e4d9;
+  border-radius: 13px;
   background: #fbfaf6;
-  border-color: #e7e4d9;
-  color: #202d25;
+  transition: border-color .25s, box-shadow .25s;
+  font-size: 15px;
+  color: var(--text);
 }
 
 .field input:focus,
 .field textarea:focus {
-  border-color: #c8a85b;
-  box-shadow: 0 0 15px rgba(200, 168, 91, 0.15);
+  border-color: var(--gold);
+  background: white;
+  outline: none;
+  box-shadow: 0 0 15px rgba(200,168,91,.15);
 }
 
-/* Location field */
 .field textarea#address {
-  background: #f7f2e5 !important;
-  border-color: #c8a85b !important;
-  color: #173525 !important;
-}
-
-/* Payment choice */
-.choice {
-  background: linear-gradient(135deg, #fffdf6, #f3edda);
-  border-color: #c8a85b;
+  background: #f7f2e5;
+  border-color: var(--gold);
   color: #173525;
-  box-shadow: 0 6px 18px rgba(16, 37, 27, 0.05);
 }
 
-/* WhatsApp order button */
-.btn-green {
-  background: linear-gradient(120deg, #126b45, #25a66a);
-  color: #fff;
-  box-shadow: 0 8px 22px rgba(18, 107, 69, 0.2);
+.choice-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+
+.choice {
+  border: 1.5px solid var(--gold);
+  border-radius: 14px;
+  padding: 18px;
+  text-align: center;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fffdf6, #f3edda);
+  color: #173525;
 }
 
 /* Cart */
-.floating-cart {
-  background: linear-gradient(120deg, #126b45, #218b5b);
-  color: #fff;
-  border: 2px solid rgba(230, 208, 143, 0.8);
-  box-shadow: 0 12px 30px rgba(18, 107, 69, 0.24);
+.cart-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 0;
+  border-bottom: 1px solid #ece9df;
+  overflow-wrap: anywhere;
 }
 
-/* Cart total */
-.total-row {
+.cart-line strong {
   color: #173525;
 }
 
-/* Toast message */
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-weight: 900;
+  font-size: 25px;
+  margin-top: 30px;
+  color: #173525;
+  font-family: 'Playfair Display', serif;
+}
+
+/* Floating cart */
+.floating-cart {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  background: linear-gradient(120deg, #126b45, #218b5b);
+  color: white;
+  padding: 16px 25px;
+  border-radius: 50px;
+  font-weight: 800;
+  border: 2px solid rgba(230,208,143,.8);
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(18,107,69,.24);
+  z-index: 99;
+  transition: transform .25s, box-shadow .25s;
+  font-size: 14px;
+  max-width: calc(100vw - 28px);
+}
+
+.floating-cart:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 35px rgba(18,107,69,.3);
+}
+
+/* Toast */
 .toast {
-  background: rgba(16, 37, 27, 0.97);
-  border-color: #c8a85b;
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: rgba(16,37,27,.97);
+  color: white;
+  padding: 15px 24px;
+  border-radius: 30px;
+  opacity: 0;
+  transition: opacity .25s, transform .25s;
+  pointer-events: none;
+  z-index: 999;
+  box-shadow: var(--shadow-hover);
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid var(--gold);
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  text-align: center;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 /* Footer */
 footer {
   background: linear-gradient(145deg, #10251b, #091810);
-  border-top: 3px solid #c8a85b;
+  color: white;
+  text-align: center;
+  padding: 55px 20px;
+  margin-top: 65px;
+  border-top: 3px solid var(--gold);
 }
 
-footer h2 span {
-  color: #e2c46e !important;
+footer h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  letter-spacing: 1px;
 }
 
-/* Gold particles: softer and more elegant */
-.particle {
-  opacity: 0.08;
+/* Animation */
+@keyframes zoomIn {
+  from { transform: scale(.97); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
-/* Mobile cart positioning */
-@media (max-width: 600px) {
-  .floating-cart {
-    right: 14px;
-    bottom: 18px;
-    padding: 14px 20px;
-    font-size: 13px;
-    max-width: calc(100vw - 28px);
+@keyframes fadeUp {
+  from { transform: translateY(18px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  .hero {
+    margin: 22px auto;
+    padding: 0 14px;
   }
 
   .hero-photo {
-    border-radius: 24px;
+    height: 370px;
+    min-height: 0;
+    border-radius: 23px;
   }
 
-  .food-info {
+  .hero-overlay {
+    padding: 20px;
+  }
+
+  .hero-overlay h1 {
+    font-size: clamp(32px, 8vw, 45px);
+    letter-spacing: 1px;
+  }
+
+  .hero-overlay p {
+    font-size: 12px;
+    letter-spacing: 2px;
+    line-height: 1.8;
+  }
+
+  .section {
+    padding: 40px 14px;
+  }
+
+  .section-heading {
+    margin-bottom: 40px;
+  }
+
+  .section-heading h2 {
+    font-size: 32px;
+  }
+
+  .menu-grid {
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 17px;
+  }
+
+  .checkout-layout {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .nav {
+    padding: 13px 14px;
+  }
+
+  .logo {
+    font-size: 19px;
+  }
+
+  .navlinks {
+    gap: 7px;
+  }
+
+  .btn {
+    padding: 10px 13px;
+    font-size: 11px;
+  }
+
+  .panel {
     padding: 22px;
   }
 }
 
-/* Accessibility: respect reduced-motion settings */
+@media (max-width: 480px) {
+  .topbar-marquee {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    padding: 10px 0;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  .navlinks {
+    gap: 6px;
+  }
+
+  .navlinks .btn {
+    padding: 10px 12px;
+    font-size: 10px;
+  }
+
+  .hero-photo {
+    height: 340px;
+  }
+
+  .hero-overlay h1 {
+    font-size: 34px;
+  }
+
+  .hero-overlay p {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+  }
+
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .food-image {
+    height: 230px;
+  }
+
+  .food-info {
+    padding: 20px;
+  }
+
+  .food-info h3 {
+    font-size: 23px;
+  }
+
+  .panel h3 {
+    font-size: 25px;
+  }
+
+  .total-row {
+    font-size: 22px;
+  }
+
+  footer h2 {
+    font-size: 29px;
+  }
+
+  .floating-cart {
+    right: 12px;
+    bottom: 16px;
+    padding: 13px 18px;
+    font-size: 12px;
+  }
+
+  .toast {
+    bottom: 82px;
+    font-size: 12px;
+    padding: 13px 18px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
+    animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    transition-duration: .01ms !important;
     scroll-behavior: auto !important;
   }
 }
+</style>
+</head>
+
+<body>
+
+<div class="bg-particles" id="particles"></div>
+
+<div class="topbar-marquee">
+  <div class="marquee-content">
+    <span>✨ Welcome to Ismail Pani Puri Wala ✨ Fresh & Premium Taste ✨ Home Delivery Available ✨ Order Now ✨</span>
+    <span>✨ Welcome to Ismail Pani Puri Wala ✨ Fresh & Premium Taste ✨ Home Delivery Available ✨ Order Now ✨</span>
+  </div>
+</div>
+
+<header>
+  <nav class="nav">
+    <a href="#" class="logo">Ismail <br><span>Pani Puri</span></a>
+    <div class="navlinks">
+      <button onclick="shareApp()" class="btn btn-dark">Share ↗</button>
+      <a href="#checkout" class="btn btn-primary">Order</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="hero-photo">
+      <div class="hero-overlay">
+        <h1>ISMAIL PANI PURI</h1>
+        <p>Taste the Royal Tradition</p>
+        <a href="#menu" class="btn btn-primary">Explore Menu ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu" class="section">
+    <div class="section-heading">
+      <h2>Our Menu</h2>
+    </div>
+
+    <div id="shopStatusNotice" class="notice"
+         style="display:none;color:#b42318;background:#fff0ed;border-left-color:#b42318;text-align:center;font-size:17px;">
+      🚫 Aaj shop band hai! (Today is holiday)
+    </div>
+
+    <div id="notice" class="notice">
+      👑 Welcome! Fresh items available today.
+    </div>
+
+    <div id="menuStatus"
+         style="margin-bottom:20px;color:var(--muted);text-align:center;font-weight:bold;font-size:16px;">
+      Loading menu...
+    </div>
+
+    <div id="menuGrid" class="menu-grid"></div>
+  </section>
+
+  <section id="checkout" class="section">
+    <div class="section-heading">
+      <h2>Checkout</h2>
+    </div>
+
+    <div class="checkout-layout">
+
+      <div class="panel" id="orderPanel">
+        <h3>Your Details</h3>
+
+        <form id="orderForm">
+          <div class="field">
+            <label for="customerName">Name *</label>
+            <input id="customerName" required
+                   autocomplete="name"
+                   placeholder="Enter your full name">
+          </div>
+
+          <div class="field">
+            <label for="customerPhone">Mobile *</label>
+            <input id="customerPhone" type="tel" required
+                   autocomplete="tel"
+                   inputmode="tel"
+                   placeholder="Enter your phone number">
+          </div>
+
+          <div class="field">
+            <label for="address">Delivery Location *</label>
+            <textarea id="address" rows="3" required readonly
+              style="cursor:pointer;background:#f7f2e5;font-weight:600;color:var(--brown);border-color:var(--gold);"
+              placeholder="📍 Click here to auto-detect location"></textarea>
+          </div>
+
+          <div class="field">
+            <label>Payment Method *</label>
+            <div class="choice-grid">
+              <div class="choice">💵 Cash on Delivery</div>
+            </div>
+          </div>
+
+          <button class="btn btn-green" type="submit">
+            Send WhatsApp Order →
+          </button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h3>Your Cart</h3>
+
+        <div id="cartItems">
+          <div style="color:var(--muted);text-align:center;padding:30px;font-weight:600;">
+            Your cart is empty.
+          </div>
+        </div>
+
+        <div class="total-row">
+          <span>Total</span>
+          <span id="cartTotal">₹0.00</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <h2 style="color:white;">
+    Ismail <span style="color:#e2c46e;">Pani Puri</span>
+  </h2>
+  <p style="margin-top:15px;font-weight:300;color:#d6d9d2;letter-spacing:1px;">
+    Premium Quality & Royal Taste
+  </p>
+</footer>
+
+<button id="floatingCart" class="floating-cart" type="button">
+  🛒 Cart · 0 · ₹0
+</button>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+
+const particlesContainer = document.getElementById("particles");
+
+for (let i = 0; i < 20; i++) {
+  const particle = document.createElement("div");
+  particle.classList.add("particle");
+
+  const size = Math.random() * 45 + 10;
+  particle.style.width = size + "px";
+  particle.style.height = size + "px";
+  particle.style.left = Math.random() * 100 + "vw";
+  particle.style.animationDuration = (Math.random() * 10 + 10) + "s";
+  particle.style.animationDelay = Math.random() * 5 + "s";
+
+  particlesContainer.appendChild(particle);
+}
+
+const GITHUB_USERNAME = "Shaikmuzammil22";
+const REPO_NAME = "Pani-puri";
+const BRANCH = "main";
+
+const DATA_URL =
+  `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/${BRANCH}/data.json`;
+
+const WHATSAPP_NUMBER = "919036714440";
+const SHOP_NAME = "Ismail Pani Puri";
+
+const state = {
+  menu: [],
+  cart: {},
+  shopOpen: true
+};
+
+const $ = id => document.getElementById(id);
+
+function money(val) {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR"
+  }).format(val);
+}
+
+let toastTimer;
+
+function notify(msg) {
+  const toast = $("toast");
+  toast.textContent = msg;
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2800);
+}
+
+function cartEntries() {
+  return state.menu.filter(item => (state.cart[item.id] || 0) > 0);
+}
+
+function cartCount() {
+  return cartEntries().reduce(
+    (sum, item) => sum + state.cart[item.id], 0
+  );
+}
+
+function cartTotal() {
+  return cartEntries().reduce(
+    (sum, item) => sum + item.price * state.cart[item.id], 0
+  );
+}
+
+/* Safe text insertion for menu content */
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function safeImageUrl(value) {
+  try {
+    const url = new URL(String(value || ""), window.location.href);
+
+    if (url.protocol === "https:" || url.protocol === "http:") {
+      return url.href;
+    }
+  } catch (e) {}
+
+  return "https://placehold.co/600x400/f1ead5/173525?text=Ismail+Pani+Puri";
+}
+
+function renderMenu() {
+  const grid = $("menuGrid");
+
+  if (!state.menu.length) {
+    grid.innerHTML = "";
+    return;
+  }
+
+  grid.innerHTML = state.menu.map((item, index) => {
+    const available =
+      Number.isFinite(Number(item.price)) && Number(item.price) > 0;
+
+    const priceTag = available
+      ? escapeHTML(money(Number(item.price)))
+      : '<span style="color:#b42318;font-weight:800;">Out of Stock</span>';
+
+    const itemId = String(item.id);
+
+    const actionButton = available
+      ? `<button class="btn btn-primary buy-button"
+           style="width:100%;padding:14px 18px;font-size:13px;"
+           data-buy="${escapeHTML(itemId)}"
+           type="button">⚡ BUY NOW</button>`
+      : "";
+
+    return `
+      <article class="food-card" style="animation-delay:${index * 0.07}s">
+        <div class="food-image">
+          <img
+            src="${escapeHTML(safeImageUrl(item.imageUrl))}"
+            alt="${escapeHTML(item.name)}"
+            loading="lazy"
+            onerror="this.onerror=null;this.src='https://placehold.co/600x400/f1ead5/173525?text=Ismail+Pani+Puri'">
+        </div>
+
+        <div class="food-info">
+          <div>
+            <h3>${escapeHTML(item.name)}</h3>
+            <p>${escapeHTML(item.description || "")}</p>
+          </div>
+
+          <div class="food-bottom"
+               style="flex-direction:column;align-items:stretch;gap:15px;">
+            <span class="price" style="text-align:center;">${priceTag}</span>
+            ${actionButton}
+          </div>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+function renderCart() {
+  const items = cartEntries();
+
+  $("cartItems").innerHTML = items.length
+    ? items.map(item => `
+      <div class="cart-line">
+        <div>
+          <strong>${escapeHTML(item.name)}</strong>
+          <br>
+          <small style="color:var(--muted);">
+            ${escapeHTML(money(item.price))} × ${state.cart[item.id]}
+          </small>
+          <br>
+          <button class="remove"
+                  data-remove="${escapeHTML(item.id)}"
+                  type="button"
+                  style="color:#b42318;border:none;background:none;cursor:pointer;margin-top:6px;font-size:13px;font-weight:700;">
+            Remove
+          </button>
+        </div>
+        <strong>${escapeHTML(money(item.price * state.cart[item.id]))}</strong>
+      </div>
+    `).join("")
+    : `<div style="color:var(--muted);text-align:center;padding:30px;font-weight:600;">
+         Your cart is empty.
+       </div>`;
+
+  $("cartTotal").textContent = money(cartTotal());
+
+  $("floatingCart").textContent =
+    `🛒 Cart · ${cartCount()} · ${money(cartTotal())}`;
+}
+
+/* Buy Now: preserve single-item direct ordering */
+function buyNow(itemId) {
+  if (!state.shopOpen) {
+    return notify("Shop is closed today!");
+  }
+
+  const item = state.menu.find(e => String(e.id) === String(itemId));
+
+  if (!item || !Number.isFinite(Number(item.price)) || Number(item.price) <= 0) {
+    return notify("Item not available");
+  }
+
+  state.cart = {};
+  state.cart[item.id] = 1;
+
+  renderCart();
+
+  notify("📍 Location detect ho rahi hai...");
+
+  $("address").value = "Fetching location...";
+  $("address").dataset.link = "";
+  $("address").removeAttribute("readonly");
+
+  $("checkout").scrollIntoView({ behavior: "smooth" });
+
+  window._pendingBuyItem = item;
+
+  if (
+    typeof window.AndroidLocation !== "undefined" &&
+    typeof window.AndroidLocation.requestLocationFromWeb === "function"
+  ) {
+    window.AndroidLocation.requestLocationFromWeb();
+    return;
+  }
+
+  if (!navigator.geolocation) {
+    $("address").value = "";
+    return notify("Location support nahi hai. Address enter karein.");
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      const mapsUrl =
+        `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
+
+      $("address").value = "📍 Location Auto-Detected";
+      $("address").dataset.link = mapsUrl;
+      $("address").setAttribute("readonly", true);
+
+      notify("Location detected! Details bharein aur order bhejein.");
+    },
+    err => {
+      $("address").value = "";
+      $("address").dataset.link = "";
+      $("address").removeAttribute("readonly");
+      notify("Location permission denied. Address enter karein.");
+    },
+    { enableHighAccuracy: true, timeout: 15000, maximumAge: 60000 }
+  );
+}
+
+/* Load live menu from GitHub */
+async function loadMenu() {
+  const status = $("menuStatus");
+
+  try {
+    const response = await fetch(DATA_URL + "?t=" + Date.now(), {
+      cache: "no-store"
+    });
+
+    if (!response.ok) {
+      throw new Error("HTTP " + response.status);
+    }
+
+    const data = await response.json();
+
+    if (!Array.isArray(data.menu)) {
+      throw new Error("data.json mein menu array nahi mila");
+    }
+
+    state.shopOpen = data.shopOpen !== false;
+
+    state.menu = data.menu
+      .filter(item =>
+        item &&
+        item.id !== undefined &&
+        item.id !== null &&
+        item.name !== undefined
+      )
+      .map(item => ({
+        ...item,
+        price: Number(item.price)
+      }));
+
+    /* Remove cart entries that no longer exist or are unavailable */
+    const validIds = new Set(
+      state.menu
+        .filter(item => Number.isFinite(item.price) && item.price > 0)
+        .map(item => String(item.id))
+    );
+
+    Object.keys(state.cart).forEach(id => {
+      if (!validIds.has(String(id))) {
+        delete state.cart[id];
+      }
+    });
+
+    renderMenu();
+    renderCart();
+
+    if (!state.shopOpen) {
+      $("shopStatusNotice").style.display = "block";
+      $("shopStatusNotice").textContent =
+        data.shopClosedMessage || "Aaj shop band hai!";
+
+      $("notice").style.display = "none";
+      $("orderPanel").style.opacity = ".65";
+      $("orderPanel").style.pointerEvents = "none";
+    } else {
+      $("shopStatusNotice").style.display = "none";
+      $("notice").style.display = "block";
+      $("orderPanel").style.opacity = "1";
+      $("orderPanel").style.pointerEvents = "auto";
+    }
+
+    status.style.display = "none";
+
+  } catch (error) {
+    status.style.display = "block";
+    status.style.color = "#b42318";
+    status.textContent =
+      "Menu load nahi hua. Internet aur GitHub data.json check karein. " +
+      error.message;
+
+    console.error("Menu loading error:", error);
+  }
+}
+
+/* Event delegation for menu buttons and cart */
+$("menuGrid").addEventListener("click", event => {
+  const button = event.target.closest("button[data-buy]");
+
+  if (button) {
+    buyNow(button.dataset.buy);
+  }
+});
+
+$("cartItems").addEventListener("click", event => {
+  const button = event.target.closest("button[data-remove]");
+
+  if (button) {
+    delete state.cart[button.dataset.remove];
+    renderCart();
+    notify("Item removed from cart");
+  }
+});
+
+$("floatingCart").addEventListener("click", () => {
+  $("checkout").scrollIntoView({ behavior: "smooth" });
+});
+
+/* Manual location detection */
+$("address").addEventListener("click", () => {
+  if ($("address").hasAttribute("readonly")) return;
+
+  if (
+    typeof window.AndroidLocation !== "undefined" &&
+    typeof window.AndroidLocation.requestLocationFromWeb === "function"
+  ) {
+    $("address").value = "Fetching location...";
+    window.AndroidLocation.requestLocationFromWeb();
+    return;
+  }
+
+  if (!navigator.geolocation) {
+    return notify("Is browser mein location supported nahi hai.");
+  }
+
+  $("address").value = "Fetching location...";
+
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      const mapsUrl =
+        `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
+
+      $("address").value = "📍 Location Auto-Detected";
+      $("address").dataset.link = mapsUrl;
+      $("address").setAttribute("readonly", true);
+
+      notify("Location detected!");
+    },
+    () => {
+      $("address").value = "";
+      $("address").dataset.link = "";
+      $("address").removeAttribute("readonly");
+      notify("Location permission denied. Address enter karein.");
+    },
+    { enableHighAccuracy: true, timeout: 15000, maximumAge: 60000 }
+  );
+});
+
+/* Android WebView location callback */
+window.onNativeLocation = function(res) {
+  let data;
+
+  try {
+    data = typeof res === "string" ? JSON.parse(res) : res;
+  } catch (error) {
+    notify("Location response invalid hai.");
+    return;
+  }
+
+  if (data.error) {
+    $("address").value = "";
+    $("address").dataset.link = "";
+    $("address").removeAttribute("readonly");
+    notify(data.error);
+    return;
+  }
+
+  if (data.mapsUrl) {
+    $("address").value = "📍 Location Auto-Detected";
+    $("address").dataset.link = data.mapsUrl;
+    $("address").setAttribute("readonly", true);
+    notify("Location detected! Ab order bhejein.");
+  }
+};
+
+/* WhatsApp checkout */
+$("orderForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  if (!state.shopOpen) {
+    return notify("Shop is closed today.");
+  }
+
+  if (!cartEntries().length) {
+    return notify("Cart is empty");
+  }
+
+  const name = $("customerName").value.trim();
+  const phone = $("customerPhone").value.trim();
+  const address = $("address").value.trim();
+
+  if (!name || !phone || !address || address === "Fetching location...") {
+    return notify("Saari required details bharein.");
+  }
+
+  if (!/^[0-9+\s()-]{7,20}$/.test(phone)) {
+    return notify("Valid mobile number enter karein.");
+  }
+
+  const addressLink = $("address").dataset.link || address;
+
+  let message =
+    `🛒 *New Order - ${SHOP_NAME}*\n` +
+    `Payment: Cash on Delivery\n` +
+    `Name: ${name}\n` +
+    `Phone: ${phone}\n` +
+    `Address: ${addressLink}\n\n` +
+    `*Items:*\n`;
+
+  cartEntries().forEach(item => {
+    message +=
+      `• ${item.name} x${state.cart[item.id]} = ` +
+      `${money(item.price * state.cart[item.id])}\n`;
+  });
+
+  message += `\n*Total: ${money(cartTotal())}*`;
+
+  const whatsappUrl =
+    "https://wa.me/" + WHATSAPP_NUMBER +
+    "?text=" + encodeURIComponent(message);
+
+  window.open(whatsappUrl, "_blank");
+});
+
+/* Share */
+function shareApp() {
+  if (
+    typeof window.AndroidLocation !== "undefined" &&
+    typeof window.AndroidLocation.shareApk === "function"
+  ) {
+    window.AndroidLocation.shareApk();
+  } else {
+    const shareData = {
+      title: SHOP_NAME,
+      text: "Order fresh food from " + SHOP_NAME,
+      url: window.location.href
+    };
+
+    if (navigator.share) {
+      navigator.share(shareData).catch(error => {
+        if (error.name !== "AbortError") {
+          notify("Sharing failed.");
+        }
+      });
+    } else if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(window.location.href)
+        .then(() => notify("Website link copied!"))
+        .catch(() => notify("Website link: " + window.location.href));
+    } else {
+      notify("Website link: " + window.location.href);
+    }
+  }
+}
+
+loadMenu();
+</script>
+
+</body>
+</html>
