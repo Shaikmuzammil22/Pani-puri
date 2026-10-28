@@ -1,440 +1,231 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#572511">
-<title>Ismail Pani Puri Wala</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-<style>
-:root { 
-  --brown: #3a1506; 
-  --brown-light: #6b2d13;
-  --gold: #d4af37;
-  --gold-light: #f3e5ab;
-  --orange: #ed812d; 
-  --cream: #fffcf5; 
-  --green: #218548; 
-  --green-light: #2cb865;
-  --text: #2e2119; 
-  --muted: #75695f;
-  --shadow: 0 15px 35px rgba(58, 21, 6, 0.08);
-  --shadow-hover: 0 20px 50px rgba(58, 21, 6, 0.15);
-}
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-body { color: var(--text); background: var(--cream); overflow-x: hidden; position: relative; }
-button, input, textarea { font: inherit; }
-a { color: inherit; text-decoration: none; }
 
-.bg-particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; overflow: hidden; }
-.particle { position: absolute; background: radial-gradient(circle, var(--gold) 0%, transparent 70%); border-radius: 50%; opacity: 0.15; animation: floatUp 15s infinite linear; }
-@keyframes floatUp { 0% { transform: translateY(100vh) scale(0); } 100% { transform: translateY(-10vh) scale(1.5); } }
+/* ===== ISMAIL PANI PURI — PREMIUM EMERALD THEME ===== */
+:root {
+  --brown: #10251b;
+  --brown-light: #244a38;
+  --gold: #c8a85b;
+  --gold-light: #f4e6b6;
+  --orange: #c8a85b;
+  --cream: #f8f6ef;
+  --green: #126b45;
+  --green-light: #25a66a;
+  --text: #202d25;
+  --muted: #74796f;
 
-.topbar-marquee { background: linear-gradient(90deg, var(--brown), #1a0902, var(--brown)); color: var(--gold); padding: 12px 0; font-size: 15px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; overflow: hidden; white-space: nowrap; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border-bottom: 2px solid var(--gold); }
-.marquee-content { display: inline-block; animation: marquee 25s linear infinite; }
-.marquee-content span { padding: 0 30px; display: inline-block; text-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
-@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-header { position: sticky; top: 0; z-index: 100; background: rgba(255, 252, 245, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(212, 175, 55, 0.3); transition: all 0.3s ease; }
-.nav { max-width: 1180px; margin: auto; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; }
-.logo { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 900; color: var(--brown); letter-spacing: 1px; transition: transform 0.3s; line-height: 1.2; }
-.logo:hover { transform: scale(1.05); }
-.logo span { color: var(--gold); text-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
-.navlinks { display: flex; gap: 10px; font-size: 14px; font-weight: 600; color: var(--brown-light); align-items: center; }
-
-.btn { border: 0; border-radius: 50px; padding: 10px 18px; font-weight: 700; cursor: pointer; transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); position: relative; overflow: hidden; z-index: 1; letter-spacing: 1px; text-transform: uppercase; font-size: 12px; white-space: nowrap; }
-.btn::before { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; background: rgba(255,255,255,0.3); border-radius: 50%; transform: translate(-50%, -50%); transition: width 0.5s, height 0.5s; z-index: -1; }
-.btn:hover::before { width: 300px; height: 300px; }
-.btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
-.btn-primary { background: linear-gradient(135deg, var(--gold), #b38b22); color: var(--brown); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
-.btn-dark { background: linear-gradient(135deg, var(--brown), #1a0902); color: var(--gold); }
-.btn-green { background: linear-gradient(135deg, var(--green), var(--green-light)); color: white; width: 100%; font-size: 16px; padding: 18px; border-radius: 15px; box-shadow: 0 8px 20px rgba(33, 133, 72, 0.3); }
-
-.hero { max-width: 1180px; margin: 40px auto; padding: 0 20px; perspective: 1000px; }
-.hero-photo { position: relative; border-radius: 40px; overflow: hidden; height: 520px; box-shadow: 0 30px 60px rgba(58, 21, 6, 0.25); animation: zoomIn 1.2s cubic-bezier(0.16, 1, 0.3, 1); transform-style: preserve-3d; background-image: url('https://images.unsplash.com/photo-1626500155537-8f7d81d7d5cb?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center; transition: background-size 15s ease; }
-.hero-photo:hover { background-size: 110%; }
-.hero-overlay { position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.85) 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; text-align: center; }
-.hero-overlay h1 { font-family: 'Playfair Display', serif; font-size: 65px; font-weight: 900; color: var(--gold-light); text-shadow: 0 0 20px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.4); margin-bottom: 15px; letter-spacing: 3px; animation: glowPulse 3s infinite alternate, fadeUp 1s ease 0.5s both; line-height: 1.1; }
-.hero-overlay p { color: white; font-size: 18px; font-weight: 300; letter-spacing: 6px; text-transform: uppercase; margin-bottom: 35px; animation: fadeUp 1s ease 0.7s both; }
-
-.section { max-width: 1180px; margin: auto; padding: 60px 20px; }
-.section-heading { text-align: center; margin-bottom: 50px; }
-.section-heading h2 { font-family: 'Playfair Display', serif; color: var(--brown); font-size: 40px; font-weight: 900; position: relative; display: inline-block; animation: fadeUp 0.8s ease; }
-.section-heading h2::after { content: '❖'; position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); color: var(--gold); font-size: 20px; animation: spin 4s linear infinite; }
-
-.notice { background: linear-gradient(135deg, #fff8ed, #ffeed5); padding: 20px; border-radius: 15px; margin-bottom: 30px; border-left: 6px solid var(--gold); font-weight: 600; box-shadow: var(--shadow); animation: slideRight 0.5s ease; }
-
-.menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; perspective: 1500px; }
-.food-card { background: white; border-radius: 25px; overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); opacity: 0; animation: fadeUp 0.8s ease forwards; transform-style: preserve-3d; position: relative; border: 1px solid rgba(212, 175, 55, 0.2); }
-.food-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 25px; box-shadow: inset 0 0 0 2px transparent; transition: box-shadow 0.5s; pointer-events: none; z-index: 10; }
-.food-card:hover { transform: translateY(-10px) rotateX(5deg) rotateY(-5deg); box-shadow: 30px 30px 50px rgba(58, 21, 6, 0.15); }
-.food-card:hover::before { box-shadow: inset 0 0 0 2px var(--gold); }
-.food-image { height: 240px; width: 100%; overflow: hidden; position: relative; }
-.food-image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.5), transparent); opacity: 0.6; }
-.food-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; transform: translateZ(20px); }
-.food-card:hover .food-image img { transform: scale(1.1) translateZ(30px); }
-.food-info { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; background: white; transform: translateZ(10px); }
-.food-info h3 { font-family: 'Playfair Display', serif; color: var(--brown); font-size: 26px; font-weight: 800; margin-bottom: 10px; }
-.food-info p { color: var(--muted); font-size: 15px; margin-bottom: 25px; line-height: 1.6; }
-.food-bottom { display: flex; justify-content: space-between; align-items: center; }
-.price { font-size: 26px; font-weight: 800; color: var(--green); text-shadow: 0 2px 5px rgba(33, 133, 72, 0.2); }
-
-.checkout-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; perspective: 1000px; }
-.panel { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); padding: 30px; border-radius: 30px; box-shadow: var(--shadow); transition: transform 0.4s, box-shadow 0.4s; border: 1px solid #fff; }
-.panel:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
-.panel h3 { font-family: 'Playfair Display', serif; color: var(--brown); margin-bottom: 30px; font-size: 28px; font-weight: 800; border-bottom: 2px solid var(--gold); padding-bottom: 10px; display: inline-block; }
-.field { margin-bottom: 25px; position: relative; }
-.field label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 10px; color: var(--brown); text-transform: uppercase; letter-spacing: 1px; }
-.field input, .field textarea { width: 100%; padding: 18px; border: 2px solid #eee; border-radius: 15px; background: #fafafa; transition: all 0.4s; font-size: 16px; }
-.field input:focus, .field textarea:focus { border-color: var(--gold); background: white; outline: none; box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); transform: scale(1.01); }
-
-.choice-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-.choice { border: 2px solid var(--gold); border-radius: 15px; padding: 20px; text-align: center; font-weight: 700; background: linear-gradient(135deg, #fffdf5, #fff8ed); color: var(--brown); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.15); }
-
-.cart-line { display: flex; justify-content: space-between; padding: 18px 0; border-bottom: 1px solid #eee; animation: slideRight 0.4s ease; }
-.total-row { display: flex; justify-content: space-between; font-weight: 900; font-size: 28px; margin-top: 30px; color: var(--brown); font-family: 'Playfair Display', serif; }
-
-.toast { position: fixed; bottom: 110px; left: 50%; transform: translateX(-50%) translateY(30px); background: rgba(58, 21, 6, 0.95); backdrop-filter: blur(10px); color: white; padding: 18px 35px; border-radius: 50px; opacity: 0; transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); pointer-events: none; z-index: 999; box-shadow: 0 15px 40px rgba(0,0,0,0.3); font-weight: 600; border: 1px solid var(--gold); letter-spacing: 1px; }
-.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-.floating-cart { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, var(--green), var(--green-light)); color: white; padding: 20px 35px; border-radius: 50px; font-weight: 800; border: 2px solid rgba(255,255,255,0.2); cursor: pointer; box-shadow: 0 15px 30px rgba(33, 133, 72, 0.4); z-index: 99; transition: all 0.4s; animation: floatCart 3s ease-in-out infinite; font-size: 16px; letter-spacing: 1px; }
-.floating-cart:hover { transform: translateY(-5px) scale(1.05); animation-play-state: paused; }
-
-footer { background: linear-gradient(to top, #1a0902, var(--brown)); color: white; text-align: center; padding: 60px 20px; margin-top: 80px; position: relative; border-top: 3px solid var(--gold); }
-footer h2 { font-family: 'Playfair Display', serif; font-size: 36px; letter-spacing: 2px; }
-
-@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-@keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-@keyframes fadeUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-@keyframes slideRight { from { transform: translateX(-30px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-@keyframes glowPulse { 0% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.4), 0 0 40px rgba(212, 175, 55, 0.2); } 100% { text-shadow: 0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.6); } }
-@keyframes spin { 100% { transform: translateX(-50%) rotate(360deg); } }
-@keyframes floatCart { 0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); } }
-
-@media (max-width: 800px) {
-  .hero-overlay h1 { font-size: 42px; }
-  .hero-overlay p { font-size: 14px; letter-spacing: 3px; }
-  .hero-photo { height: 350px; border-radius: 25px; }
-  .checkout-layout { grid-template-columns: 1fr; }
-  .navlinks { gap: 8px; }
-  .logo { font-size: 18px; }
-  .btn { padding: 8px 12px; font-size: 11px; }
-  .panel { padding: 20px; }
-  .section-heading h2 { font-size: 30px; }
-}
-</style>
-</head>
-<body>
-
-<div class="bg-particles" id="particles"></div>
-
-<div class="topbar-marquee">
-  <div class="marquee-content">
-    <span>✨ Welcome to Ismail Pani Puri Wala ✨ Fresh & Premium Taste ✨ Home Delivery Available ✨ Order Now ✨</span>
-    <span>✨ Welcome to Ismail Pani Puri Wala ✨ Fresh & Premium Taste ✨ Home Delivery Available ✨ Order Now ✨</span>
-  </div>
-</div>
-
-<header>
-  <nav class="nav">
-    <a href="#" class="logo">Ismail <br><span>Pani Puri</span></a>
-    <div class="navlinks">
-      <button onclick="shareApp()" class="btn btn-dark">Share ↗</button>
-      <a href="#checkout" class="btn btn-primary">Order</a>
-    </div>
-  </nav>
-</header>
-
-<main>
-  <section class="hero">
-    <div class="hero-photo">
-      <div class="hero-overlay">
-        <h1>ISMAIL PANI PURI</h1>
-        <p>Taste the Royal Tradition</p>
-        <a href="#menu" class="btn btn-primary" style="margin-top:20px;">Explore Menu ↓</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="menu" class="section">
-    <div class="section-heading"><h2>Our Menu</h2></div>
-    
-    <div id="shopStatusNotice" class="notice" style="display: none; color: red; background: #ffe6e6; border-left-color: red; text-align: center; font-size: 18px;">
-      🚫 Aaj shop band hai! (Today is holiday)
-    </div>
-    
-    <div id="notice" class="notice">👑 Welcome! Fresh items available today.</div>
-    
-    <div id="menuStatus" style="margin-bottom: 20px; color: var(--muted); text-align: center; font-weight: bold; font-size: 18px;">Loading menu...</div>
-    
-    <div id="menuGrid" class="menu-grid"></div>
-  </section>
-
-  <section id="checkout" class="section">
-    <div class="section-heading"><h2>Checkout</h2></div>
-    <div class="checkout-layout">
-      <div class="panel" id="orderPanel">
-        <h3>Your Details</h3>
-        <form id="orderForm">
-          <div class="field"><label>Name *</label><input id="customerName" required placeholder="Enter your full name"></div>
-          <div class="field"><label>Mobile *</label><input id="customerPhone" type="tel" required placeholder="Enter your phone number"></div>
-          <div class="field">
-            <label>Delivery Location *</label>
-            <textarea id="address" rows="2" required readonly style="cursor: pointer; background: #fff4e8; font-weight: bold; color: var(--brown); border-color: var(--gold);" placeholder="📍 Click here to auto-detect location"></textarea>
-          </div>
-          
-          <div class="field">
-            <label>Payment Method *</label>
-            <div class="choice-grid">
-              <div class="choice">
-                💵 Cash on Delivery
-              </div>
-            </div>
-          </div>
-
-          <button class="btn btn-green" type="submit">Send WhatsApp Order →</button>
-        </form>
-      </div>
-      <div class="panel">
-        <h3>Your Cart</h3>
-        <div id="cartItems"><div style="color: var(--muted); text-align: center; padding: 30px; font-weight: 600;">Your cart is empty.</div></div>
-        <div class="total-row"><span>Total</span><span id="cartTotal">₹0.00</span></div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <h2 style="color: white;">Ismail <span style="color: var(--gold);">Pani Puri</span></h2>
-  <p style="margin-top: 15px; font-weight: 300; color: #ccc; letter-spacing: 1px;">Premium Quality & Royal Taste</p>
-</footer>
-
-<button id="floatingCart" class="floating-cart">🛒 Cart · 0 · ₹0</button>
-<div id="toast" class="toast"></div>
-
-<script>
-const particlesContainer = document.getElementById('particles');
-for (let i = 0; i < 20; i++) {
-  let particle = document.createElement('div');
-  particle.classList.add('particle');
-  let size = Math.random() * 50 + 10;
-  particle.style.width = size + 'px';
-  particle.style.height = size + 'px';
-  particle.style.left = Math.random() * 100 + 'vw';
-  particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-  particle.style.animationDelay = Math.random() * 5 + 's';
-  particlesContainer.appendChild(particle);
+  --shadow: 0 12px 35px rgba(16, 37, 27, 0.08);
+  --shadow-hover: 0 22px 45px rgba(16, 37, 27, 0.15);
 }
 
-const GITHUB_USERNAME = "Shaikmuzammil22";
-const REPO_NAME = "Pani-puri";
-const BRANCH = "main";
-const DATA_URL = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/${BRANCH}/data.json`;
-
-const WHATSAPP_NUMBER = "919036714440";
-const SHOP_NAME = "Ismail Pani Puri";
-
-const state = { menu: [], cart: {}, shopOpen: true };
-const $ = (id) => document.getElementById(id);
-
-function money(val) { return new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR" }).format(val); }
-function notify(msg) { const t = $("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 2500); }
-function cartEntries() { return state.menu.filter(item => (state.cart[item.id] || 0) > 0); }
-function cartCount() { return cartEntries().reduce((sum, item) => sum + state.cart[item.id], 0); }
-function cartTotal() { return cartEntries().reduce((sum, item) => sum + item.price * state.cart[item.id], 0); }
-
-// Updated Render Menu: No Plus/Minus, Only Buy Now
-function renderMenu() {
-  const grid = $("menuGrid");
-  if (!state.menu.length) { grid.innerHTML = ""; return; }
-  
-  grid.innerHTML = state.menu.map((item, index) => {
-    const available = item.price > 0;
-    
-    let priceTag = available ? money(item.price) : `<span style="color:red; font-weight:bold;">Out of Stock</span>`;
-    
-    let actionButton = '';
-    if (available) {
-      actionButton = `
-        <button class="btn btn-primary" style="padding:14px 24px; font-size:14px; width:100%; border-radius:50px; box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);" onclick="buyNow('${item.id}')">
-          ⚡ BUY NOW
-        </button>`;
-    }
-
-    return `
-      <article class="food-card" style="animation-delay: ${index * 0.1}s">
-        <div class="food-image"><img src="${item.imageUrl || 'https://via.placeholder.com/300'}" onerror="this.src='https://via.placeholder.com/300'"></div>
-        <div class="food-info">
-          <h3>${item.name}</h3>
-          <p>${item.description || ""}</p>
-          <div class="food-bottom" style="flex-direction:column; align-items:stretch; gap:15px;">
-            <span class="price" style="text-align:center;">${priceTag}</span>
-            ${actionButton}
-          </div>
-        </div>
-      </article>
-    `;
-  }).join("");
+/* Page background */
+body {
+  background: var(--cream);
+  color: var(--text);
 }
 
-function renderCart() {
-  const items = cartEntries();
-  $("cartItems").innerHTML = items.length ? items.map(item => `
-    <div class="cart-line">
-      <div><strong>${item.name}</strong><br><small style="color:var(--muted);">${money(item.price)} × ${state.cart[item.id]}</small><br>
-      <button class="remove" data-remove="${item.id}" style="color:#e74c3c;border:none;background:none;cursor:pointer;margin-top:5px;font-size:13px;font-weight:600;">Remove</button></div>
-      <strong>${money(item.price * state.cart[item.id])}</strong>
-    </div>
-  `).join("") : "<div style='color: var(--muted); text-align: center; padding: 30px; font-weight: 600;'>Your cart is empty.</div>";
-  $("cartTotal").textContent = money(cartTotal());
-  $("floatingCart").textContent = `🛒 Cart · ${cartCount()} · ${money(cartTotal())}`;
+/* Premium announcement bar */
+.topbar-marquee {
+  background: linear-gradient(110deg, #10251b, #1e4030, #10251b);
+  color: #e5cb83;
+  border-bottom: 2px solid var(--gold);
 }
 
-/* ============ DIRECT BUY NOW — Auto Location + WhatsApp ============ */
-function buyNow(itemId) {
-  if (!state.shopOpen) return notify("Shop is closed today!");
-  
-  const item = state.menu.find(e => e.id === itemId);
-  if (!item || item.price <= 0) return notify("Item not available");
+/* Glass header */
+header {
+  background: rgba(248, 246, 239, 0.94);
+  border-bottom: 1px solid rgba(200, 168, 91, 0.35);
+}
 
-  // Clear cart & set this specific item qty = 1
-  state.cart = {};
-  state.cart[itemId] = 1;
-  
-  // Update UI
-  renderCart();
+/* Brand */
+.logo {
+  color: #10251b;
+}
 
-  notify("📍 Location detect ho rahi hai...");
-  $("address").value = "Fetching location...";
-  $("address").removeAttribute("readonly");
+.logo span {
+  color: #b89542;
+  text-shadow: none;
+}
 
-  // Scroll to checkout form smoothly
-  $("checkout").scrollIntoView({ behavior: 'smooth' });
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, #e7cd82, #c5a34c);
+  color: #10251b;
+  box-shadow: 0 5px 18px rgba(200, 168, 91, 0.22);
+}
 
-  window._pendingBuyItem = item;
+.btn-dark {
+  background: linear-gradient(135deg, #244a38, #10251b);
+  color: #f0d78f;
+}
 
-  if (typeof window.AndroidLocation !== "undefined" && typeof window.AndroidLocation.requestLocationFromWeb === "function") {
-    window.AndroidLocation.requestLocationFromWeb();
-  } else if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const mapsUrl = `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
-        $("address").value = "📍 Location Auto-Detected";
-        $("address").dataset.link = mapsUrl;
-        $("address").setAttribute("readonly", true);
-        notify("Location detected! Details bharein aur order bhejein.");
-      },
-      (err) => {
-        notify("Location permission denied. Manually address daalein.");
-        $("address").value = "";
-      },
-      { enableHighAccuracy: true, timeout: 10000 }
-    );
-  } else {
-    notify("Location support nahi hai. Manually address daalein.");
-    $("address").value = "";
+/* Hero: keep existing photo and layout */
+.hero-photo {
+  border: 1px solid rgba(200, 168, 91, 0.4);
+  box-shadow: 0 24px 55px rgba(16, 37, 27, 0.19);
+}
+
+.hero-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(9, 28, 19, 0.88),
+    rgba(9, 28, 19, 0.35)
+  );
+}
+
+.hero-overlay h1 {
+  color: #f4e6b6;
+  text-shadow: 0 3px 22px rgba(200, 168, 91, 0.22);
+}
+
+/* Headings */
+.section-heading h2,
+.food-info h3,
+.panel h3 {
+  color: #173525;
+}
+
+.section-heading h2::after {
+  color: #c8a85b;
+}
+
+/* Menu cards */
+.food-card {
+  background: #fffefa;
+  border: 1px solid rgba(200, 168, 91, 0.24);
+  box-shadow: 0 10px 30px rgba(16, 37, 27, 0.07);
+}
+
+.food-card:hover {
+  box-shadow: 0 20px 42px rgba(16, 37, 27, 0.14);
+}
+
+.food-card:hover::before {
+  box-shadow: inset 0 0 0 2px #c8a85b;
+}
+
+.food-info {
+  background: #fffefa;
+}
+
+.price {
+  color: #16744b;
+  text-shadow: none;
+}
+
+/* Notices */
+.notice {
+  background: linear-gradient(120deg, #fffdf6, #f1ead5);
+  border-left-color: #c8a85b;
+  box-shadow: var(--shadow);
+}
+
+/* Checkout panels */
+.panel {
+  background: rgba(255, 254, 250, 0.96);
+  border: 1px solid rgba(200, 168, 91, 0.2);
+  box-shadow: var(--shadow);
+}
+
+.panel h3 {
+  border-bottom-color: #c8a85b;
+}
+
+/* Inputs */
+.field input,
+.field textarea {
+  background: #fbfaf6;
+  border-color: #e7e4d9;
+  color: #202d25;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: #c8a85b;
+  box-shadow: 0 0 15px rgba(200, 168, 91, 0.15);
+}
+
+/* Location field */
+.field textarea#address {
+  background: #f7f2e5 !important;
+  border-color: #c8a85b !important;
+  color: #173525 !important;
+}
+
+/* Payment choice */
+.choice {
+  background: linear-gradient(135deg, #fffdf6, #f3edda);
+  border-color: #c8a85b;
+  color: #173525;
+  box-shadow: 0 6px 18px rgba(16, 37, 27, 0.05);
+}
+
+/* WhatsApp order button */
+.btn-green {
+  background: linear-gradient(120deg, #126b45, #25a66a);
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(18, 107, 69, 0.2);
+}
+
+/* Cart */
+.floating-cart {
+  background: linear-gradient(120deg, #126b45, #218b5b);
+  color: #fff;
+  border: 2px solid rgba(230, 208, 143, 0.8);
+  box-shadow: 0 12px 30px rgba(18, 107, 69, 0.24);
+}
+
+/* Cart total */
+.total-row {
+  color: #173525;
+}
+
+/* Toast message */
+.toast {
+  background: rgba(16, 37, 27, 0.97);
+  border-color: #c8a85b;
+}
+
+/* Footer */
+footer {
+  background: linear-gradient(145deg, #10251b, #091810);
+  border-top: 3px solid #c8a85b;
+}
+
+footer h2 span {
+  color: #e2c46e !important;
+}
+
+/* Gold particles: softer and more elegant */
+.particle {
+  opacity: 0.08;
+}
+
+/* Mobile cart positioning */
+@media (max-width: 600px) {
+  .floating-cart {
+    right: 14px;
+    bottom: 18px;
+    padding: 14px 20px;
+    font-size: 13px;
+    max-width: calc(100vw - 28px);
+  }
+
+  .hero-photo {
+    border-radius: 24px;
+  }
+
+  .food-info {
+    padding: 22px;
   }
 }
 
-async function loadMenu() {
-  try {
-    const res = await fetch(DATA_URL + "?t=" + Date.now());
-    if (!res.ok) throw new Error("Network response was not ok");
-    
-    const data = await res.json();
-    state.shopOpen = data.shopOpen;
-    state.menu = data.menu || [];
-    renderMenu();
-
-    if (!state.shopOpen) {
-      $("shopStatusNotice").style.display = "block";
-      $("shopStatusNotice").innerText = data.shopClosedMessage || "Aaj shop band hai!";
-      $("notice").style.display = "none";
-      $("orderPanel").style.opacity = "0.6";
-      $("orderPanel").style.pointerEvents = "none";
-    } else {
-      $("shopStatusNotice").style.display = "none";
-      $("notice").style.display = "block";
-      $("orderPanel").style.opacity = "1";
-      $("orderPanel").style.pointerEvents = "auto";
-    }
-
-    $("menuStatus").style.display = "none";
-  } catch(e) {
-    $("menuStatus").innerText = "Data load error! GitHub par data.json check karein. Error: " + e.message;
-    $("menuStatus").style.color = "red";
-    console.error(e);
+/* Accessibility: respect reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
-
-$("cartItems").addEventListener("click", e => {
-  const btn = e.target.closest("button[data-remove]");
-  if (btn) { 
-    delete state.cart[btn.dataset.remove]; 
-    renderCart(); 
-  }
-});
-$("floatingCart").addEventListener("click", () => $("checkout").scrollIntoView({ behavior: 'smooth' }));
-
-$("address").addEventListener("click", () => {
-  if ($("address").hasAttribute("readonly")) return;
-  if (typeof window.AndroidLocation !== "undefined") {
-    $("address").value = "Fetching location...";
-    window.AndroidLocation.requestLocationFromWeb();
-  } else if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const mapsUrl = `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
-        $("address").value = "📍 Location Auto-Detected";
-        $("address").dataset.link = mapsUrl;
-        $("address").setAttribute("readonly", true);
-        notify("Location detected!");
-      },
-      () => notify("Location permission denied.")
-    );
-  } else {
-    alert("Please open this in the App to auto-detect location.");
-  }
-});
-
-window.onNativeLocation = function(res) {
-  const data = typeof res === "string" ? JSON.parse(res) : res;
-  if (data.error) { 
-    notify(data.error); 
-    $("address").value = ""; 
-    return; 
-  }
-  if (data.mapsUrl) {
-    $("address").value = `📍 Location Auto-Detected`;
-    $("address").dataset.link = data.mapsUrl;
-    $("address").setAttribute("readonly", true);
-    notify("Location detected! Ab details bharein.");
-  }
-};
-
-$("orderForm").addEventListener("submit", (e) => {
-  e.preventDefault();
-  if (!state.shopOpen) return notify("Shop is closed today.");
-  if (!cartEntries().length) return notify("Cart is empty");
-  const addr = $("address").value;
-  if (!addr || addr === "Fetching location...") return notify("Please detect location first");
-  
-  const addressLink = $("address").dataset.link || addr;
-  let msg = `🛒 *New Order (Cash on Delivery)*\nName: ${$("customerName").value}\nPhone: ${$("customerPhone").value}\nAddress: ${addressLink}\n\n*Items:*\n`;
-  cartEntries().forEach(i => msg += `• ${i.name} x${state.cart[i.id]} = ${money(i.price * state.cart[i.id])}\n`);
-  msg += `\n*Total: ${money(cartTotal())}*`;
-  
-  window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg), "_blank");
-});
-
-function shareApp() {
-  if (typeof window.AndroidLocation !== "undefined" && typeof window.AndroidLocation.shareApk === "function") {
-    window.AndroidLocation.shareApk(); 
-  } else {
-    alert("APK share karne ke liye is app ko mobile mein install karein.");
-  }
-}
-
-loadMenu();
-</script>
-</body>
-</html>
