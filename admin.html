@@ -11,7 +11,8 @@
   .field { margin-bottom: 15px; }
   label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
   input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
-  button { width: 100%; padding: 15px; background: #218548; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+  button { width: 100%; padding: 15px; background: #218548; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 15px; transition: 0.3s; }
+  button:active { transform: scale(0.98); }
   .status { margin-top: 15px; padding: 10px; text-align: center; border-radius: 8px; font-weight: bold; display: none; }
   .success { background: #d4edda; color: #155724; display: block; }
   .error { background: #f8d7da; color: #721c24; display: block; }
@@ -22,7 +23,7 @@
   .move-btn { background: #6b2d13; color: white; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 14px; width: auto; margin: 0; line-height: 1; }
   .move-btn:disabled { background: #ccc; cursor: not-allowed; opacity: 0.5; }
   .remove-btn { background: #e74c3c; color: white; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px; width: auto; margin: 0; }
-  .add-btn { background: #ed812d; color: white; border: none; padding: 14px; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: bold; width: 100%; margin-bottom: 15px; }
+  .add-btn { background: #ed812d; color: white; border: none; padding: 14px; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: bold; width: 100%; margin-bottom: 15px; margin-top: 0; }
   .img-preview { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; border: 1px solid #ccc; margin-top: 8px; display: none; }
   .file-input { padding: 8px; background: #fff; }
   .note { font-size: 12px; color: #666; margin-top: 6px; margin-bottom: 4px; }
@@ -48,10 +49,10 @@
     </select>
   </div>
 
+  <!-- Yahan Items render honge -->
   <div id="itemsContainer"></div>
 
   <button class="add-btn" onclick="addNewItem()">＋ Add New Item</button>
-
   <button onclick="saveData()">Update Live App</button>
   <div id="statusMsg" class="status"></div>
 </div>
@@ -65,11 +66,14 @@
 
   let menuItems = [];
 
+  // Page load hote hi data fetch karega
   window.onload = async () => {
     try {
       const res = await fetch("https://raw.githubusercontent.com/" + GITHUB_USERNAME + "/" + REPO_NAME + "/" + BRANCH + "/data.json?t=" + Date.now());
       const data = await res.json();
       document.getElementById("shopStatus").value = data.shopOpen ? "true" : "false";
+      
+      // Purane data ko format karna
       menuItems = (data.menu || []).map(m => ({
         id: m.id || "item-" + Date.now() + "-" + Math.random(),
         name: m.name || "",
@@ -85,6 +89,7 @@
     }
   };
 
+  // UI Render Function
   function renderItems() {
     const container = document.getElementById("itemsContainer");
     container.innerHTML = menuItems.map((item, i) => {
@@ -95,8 +100,8 @@
         <h3>
           <span class="title">Item ${i + 1}${item.name ? ' - ' + escapeHtml(item.name) : ''}</span>
           <span class="actions">
-            <button class="move-btn" onclick="moveItem(${i}, -1)" ${isFirst ? 'disabled title="Already top"' : 'title="Move Up"'}>⬆</button>
-            <button class="move-btn" onclick="moveItem(${i}, 1)" ${isLast ? 'disabled title="Already bottom"' : 'title="Move Down"'}>⬇</button>
+            <button class="move-btn" onclick="moveItem(${i}, -1)" ${isFirst ? 'disabled' : ''}>⬆</button>
+            <button class="move-btn" onclick="moveItem(${i}, 1)" ${isLast ? 'disabled' : ''}>⬇</button>
             <button class="remove-btn" onclick="removeItem(${i})">✕</button>
           </span>
         </h3>
@@ -125,7 +130,7 @@
     return (str || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); 
   }
 
-  /* ====== ITEM REORDER (Up / Down) ====== */
+  // Reorder se pehle current values save karna
   function captureCurrentValues() {
     const cards = document.querySelectorAll(".card");
     cards.forEach((card, i) => {
@@ -137,17 +142,21 @@
     });
   }
 
+  // Item ko upar/neeche move karna
   function moveItem(index, direction) {
     captureCurrentValues();
     const newIndex = index + direction;
     if (newIndex < 0 || newIndex >= menuItems.length) return;
+    
+    // Swap items
     const temp = menuItems[index];
     menuItems[index] = menuItems[newIndex];
     menuItems[newIndex] = temp;
-    renderItems();
-    window.scrollTo({ top: document.querySelector(`.card[data-index="${newIndex}"]`).offsetTop - 20, behavior: 'smooth' });
+    
+    renderItems(); // UI turant update hoga
   }
 
+  // Naya item add karna
   function addNewItem() {
     captureCurrentValues();
     menuItems.push({
@@ -161,6 +170,7 @@
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   }
 
+  // Item delete karna
   function removeItem(index) {
     if(confirm("Is item ko delete karein?")) {
       captureCurrentValues();
@@ -169,6 +179,7 @@
     }
   }
 
+  // Gallery se photo upload karke GitHub pe bhejna
   async function handleImageUpload(event, index) {
     const file = event.target.files[0];
     if(!file) return;
@@ -217,7 +228,7 @@
         const errData = await res.json();
         statusEl.style.color = "#e74c3c";
         statusEl.textContent = "❌ Upload fail: " + (errData.message || "Token check karein");
-        alert("❌ Photo upload fail. Token permissions check karein (repo scope chahiye).");
+        alert("❌ Photo upload fail. Token permissions check karein.");
       }
     } catch(e) {
       statusEl.style.color = "#e74c3c";
@@ -235,11 +246,11 @@
     });
   }
 
+  // Live App par data save karna (GitHub API)
   async function saveData() {
     const token = document.getElementById("githubToken").value.trim();
     if(!token) return showMsg("GitHub Token daalna zaroori hai!", "error");
 
-    // Capture latest values before saving
     const cards = document.querySelectorAll(".card");
     if(cards.length !== menuItems.length) return showMsg("Kuch galat hai, page reload karein.", "error");
 
@@ -264,30 +275,13 @@
       const getRes = await fetch(API_URL, { headers: { "Authorization": `token ${token}` } });
       const fileInfo = await getRes.json();
       if(fileInfo.message === "Not Found") return showMsg("Token galat hai ya file nahi mili.", "error");
-      if(!fileInfo.sha) return showMsg("Token permissions check karein (repo scope chahiye).", "error");
+      if(!fileInfo.sha) return showMsg("Token permissions check karein.", "error");
       
       const contentEncoded = btoa(unescape(encodeURIComponent(JSON.stringify(updatedData, null, 2))));
 
       const putRes = await fetch(API_URL, {
         method: "PUT",
         headers: { "Authorization": `token ${token}`, "Content-Type": "application/json" },
-        body: JSON.stringify({ message: "Admin: Menu updated", content: contentEncoded, sha: fileInfo.sha, branch: BRANCH })
-      });
-
-      if(putRes.ok) { showMsg("✅ Success! App live update ho gaya hai.", "success"); }
-      else { showMsg("❌ Error: Update fail ho gaya. Token check karein.", "error"); }
-    } catch(e) { showMsg("❌ Network Error: " + e.message, "error"); }
-  }
-
-  function showMsg(msg, type) {
-    const el = document.getElementById("statusMsg");
-    el.textContent = msg;
-    el.className = "status " + type;
-    setTimeout(() => el.className = "status", 5000);
-  }
-</script>
-</body>
-</html>/json" },
         body: JSON.stringify({ message: "Admin: Menu updated", content: contentEncoded, sha: fileInfo.sha, branch: BRANCH })
       });
 
