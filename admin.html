@@ -15,7 +15,13 @@
   .status { margin-top: 15px; padding: 10px; text-align: center; border-radius: 8px; font-weight: bold; display: none; }
   .success { background: #d4edda; color: #155724; display: block; }
   .error { background: #f8d7da; color: #721c24; display: block; }
-  .card { border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px; background: #fafafa; }
+  .card { border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px; background: #fafafa; position: relative; }
+  .card h3 { margin-top: 0; display: flex; justify-content: space-between; align-items: center; }
+  .remove-btn { background: #e74c3c; color: white; border: none; padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; width: auto; margin: 0; }
+  .add-btn { background: #ed812d; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: bold; width: 100%; margin-bottom: 15px; }
+  .img-preview { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; border: 1px solid #ccc; margin-top: 5px; display: none; }
+  .file-input { padding: 8px; }
+  .note { font-size: 12px; color: #666; margin-top: 4px; }
 </style>
 </head>
 <body>
@@ -37,34 +43,9 @@
     </select>
   </div>
 
-  <div class="card">
-    <h3>Item 1 (Pani Puri)</h3>
-    <div class="field"><label>Item Name</label><input type="text" id="name1" value="Pani Puri"></div>
-    <div class="field"><label>Price (₹)</label><input type="number" id="price1"></div>
-    <div class="field"><label>Photo URL</label><input type="text" id="img1"></div>
-  </div>
+  <div id="itemsContainer"></div>
 
-  <div class="card">
-    <h3>Item 2 (Family Pack)</h3>
-    <!-- Naya Input: Name Change karne ke liye -->
-    <div class="field"><label>Item Name</label><input type="text" id="name2" placeholder="Family Pack Pani Puri"></div>
-    <div class="field"><label>Price (₹)</label><input type="number" id="price2"></div>
-    <div class="field"><label>Photo URL</label><input type="text" id="img2"></div>
-  </div>
-
-  <div class="card">
-    <h3>Item 3 (Onion / Pyaz)</h3>
-    <div class="field"><label>Item Name</label><input type="text" id="name3" value="Onion (Pyaz)"></div>
-    <div class="field"><label>Price (₹) - (0 karein toh Out of Stock)</label><input type="number" id="price3"></div>
-    <div class="field"><label>Photo URL</label><input type="text" id="img3"></div>
-  </div>
-
-  <div class="card">
-    <h3>Item 4 (Adrak / Ginger)</h3>
-    <div class="field"><label>Item Name</label><input type="text" id="name4" value="Adrak (Ginger)"></div>
-    <div class="field"><label>Price (₹) - (0 karein toh Out of Stock)</label><input type="number" id="price4"></div>
-    <div class="field"><label>Photo URL</label><input type="text" id="img4"></div>
-  </div>
+  <button class="add-btn" onclick="addNewItem()">＋ Add New Item</button>
 
   <button onclick="saveData()">Update Live App</button>
   <div id="statusMsg" class="status"></div>
@@ -77,65 +58,145 @@
   const BRANCH = "main";
   const API_URL = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${FILE_PATH}`;
 
+  let menuItems = [];
+
   window.onload = async () => {
     try {
       const res = await fetch("https://raw.githubusercontent.com/" + GITHUB_USERNAME + "/" + REPO_NAME + "/" + BRANCH + "/data.json?t=" + Date.now());
       const data = await res.json();
-      
       document.getElementById("shopStatus").value = data.shopOpen ? "true" : "false";
-      
-      if(data.menu) {
-        if(data.menu[0]) { 
-            document.getElementById("name1").value = data.menu[0].name;
-            document.getElementById("price1").value = data.menu[0].price; 
-            document.getElementById("img1").value = data.menu[0].imageUrl; 
-        }
-        if(data.menu[1]) { 
-            document.getElementById("name2").value = data.menu[1].name;
-            document.getElementById("price2").value = data.menu[1].price; 
-            document.getElementById("img2").value = data.menu[1].imageUrl; 
-        }
-        if(data.menu[2]) { 
-            document.getElementById("name3").value = data.menu[2].name;
-            document.getElementById("price3").value = data.menu[2].price; 
-            document.getElementById("img3").value = data.menu[2].imageUrl; 
-        }
-        if(data.menu[3]) { 
-            document.getElementById("name4").value = data.menu[3].name;
-            document.getElementById("price4").value = data.menu[3].price; 
-            document.getElementById("img4").value = data.menu[3].imageUrl; 
-        }
-      }
-    } catch(e) { console.log("Data load failed", e); }
+      menuItems = data.menu || [];
+      renderItems();
+    } catch(e) { 
+      console.log("Data load failed", e); 
+      menuItems = [];
+      renderItems();
+    }
   };
+
+  function renderItems() {
+    const container = document.getElementById("itemsContainer");
+    container.innerHTML = menuItems.map((item, i) => `
+      <div class="card" data-index="${i}">
+        <h3>Item ${i + 1} ${item.name ? '- ' + item.name : ''}
+          <button class="remove-btn" onclick="removeItem(${i})">✕ Remove</button>
+        </h3>
+        <div class="field"><label>Item Name</label>
+          <input type="text" class="item-name" value="${escapeHtml(item.name || '')}" placeholder="e.g. Pani Puri">
+        </div>
+        <div class="field"><label>Description</label>
+          <input type="text" class="item-desc" value="${escapeHtml(item.description || '')}" placeholder="e.g. Fresh and spicy">
+        </div>
+        <div class="field"><label>Price (₹) - (0 karein toh Out of Stock)</label>
+          <input type="number" class="item-price" value="${item.price || 0}">
+        </div>
+        <div class="field"><label>Photo (Gallery se choose karein)</label>
+          <input type="file" accept="image/*" class="file-input" onchange="handleImageUpload(event, ${i})">
+          <div class="note">Ya Photo URL daalein:</div>
+          <input type="text" class="item-img-url" value="${escapeHtml(item.imageUrl || '')}" placeholder="https://...">
+          <img class="img-preview" id="preview-${i}" src="${item.imageUrl || ''}" style="${item.imageUrl ? 'display:block' : ''}">
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function escapeHtml(str) { return (str || '').replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
+
+  function addNewItem() {
+    menuItems.push({
+      id: "item-" + Date.now(),
+      name: "",
+      description: "",
+      price: 0,
+      imageUrl: ""
+    });
+    renderItems();
+  }
+
+  function removeItem(index) {
+    if(confirm("Is item ko delete karein?")) {
+      menuItems.splice(index, 1);
+      renderItems();
+    }
+  }
+
+  async function handleImageUpload(event, index) {
+    const file = event.target.files[0];
+    if(!file) return;
+    
+    const token = document.getElementById("githubToken").value.trim();
+    if(!token) { alert("Pehle GitHub Token daalein (photo upload ke liye zaroori hai)"); return; }
+
+    const preview = document.getElementById("preview-" + index);
+    preview.style.display = "block";
+    preview.src = URL.createObjectURL(file);
+
+    try {
+      const base64 = await fileToBase64(file);
+      const ext = file.name.split('.').pop().toLowerCase();
+      const fileName = `images/item-${Date.now()}.${ext}`;
+      
+      // Upload image to GitHub repo
+      const uploadUrl = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${fileName}`;
+      
+      // Check if file exists (rare case)
+      let sha = null;
+      try {
+        const check = await fetch(uploadUrl, { headers: { "Authorization": `token ${token}` } });
+        if(check.ok) { const info = await check.json(); sha = info.sha; }
+      } catch(e) {}
+
+      const body = { message: "Admin: Upload item image", content: base64, branch: BRANCH };
+      if(sha) body.sha = sha;
+
+      const res = await fetch(uploadUrl, {
+        method: "PUT",
+        headers: { "Authorization": `token ${token}`, "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      });
+
+      if(res.ok) {
+        const imageUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/${BRANCH}/${fileName}`;
+        document.querySelectorAll(".item-img-url")[index].value = imageUrl;
+        menuItems[index].imageUrl = imageUrl;
+        alert("✅ Photo upload ho gayi!");
+      } else {
+        alert("❌ Photo upload fail. Token check karein.");
+      }
+    } catch(e) {
+      alert("❌ Upload error: " + e.message);
+    }
+  }
+
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(',')[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
 
   async function saveData() {
     const token = document.getElementById("githubToken").value.trim();
     if(!token) return showMsg("GitHub Token daalna zaroori hai!", "error");
+
+    // Read all fields from DOM
+    const cards = document.querySelectorAll(".card");
+    cards.forEach((card, i) => {
+      menuItems[i].name = card.querySelector(".item-name").value;
+      menuItems[i].description = card.querySelector(".item-desc").value;
+      menuItems[i].price = Number(card.querySelector(".item-price").value);
+      menuItems[i].imageUrl = card.querySelector(".item-img-url").value;
+      if(!menuItems[i].id) menuItems[i].id = "item-" + Date.now() + "-" + i;
+    });
 
     const isShopOpen = document.getElementById("shopStatus").value === "true";
     
     const updatedData = {
       "shopOpen": isShopOpen,
       "shopClosedMessage": "🚫 Aaj shop band hai! (Today is holiday)",
-      "menu": [
-        {
-          "id": "pani-puri", "name": document.getElementById("name1").value, "description": "Fresh and spicy",
-          "price": Number(document.getElementById("price1").value), "imageUrl": document.getElementById("img1").value
-        },
-        {
-          "id": "samosa", "name": document.getElementById("name2").value, "description": "Family Pack",
-          "price": Number(document.getElementById("price2").value), "imageUrl": document.getElementById("img2").value
-        },
-        {
-          "id": "onion", "name": document.getElementById("name3").value, "description": "Fresh chopped onions",
-          "price": Number(document.getElementById("price3").value), "imageUrl": document.getElementById("img3").value
-        },
-        {
-          "id": "adrak", "name": document.getElementById("name4").value, "description": "Fresh ginger slices",
-          "price": Number(document.getElementById("price4").value), "imageUrl": document.getElementById("img4").value
-        }
-      ]
+      "menu": menuItems
     };
 
     try {
