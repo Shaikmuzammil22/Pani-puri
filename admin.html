@@ -16,8 +16,12 @@
   .success { background: #d4edda; color: #155724; display: block; }
   .error { background: #f8d7da; color: #721c24; display: block; }
   .card { border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px; background: #fafafa; position: relative; }
-  .card h3 { margin-top: 0; display: flex; justify-content: space-between; align-items: center; font-size: 16px; }
-  .remove-btn { background: #e74c3c; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; width: auto; margin: 0; }
+  .card h3 { margin-top: 0; display: flex; justify-content: space-between; align-items: center; font-size: 15px; gap: 8px; }
+  .card h3 .title { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .card h3 .actions { display: flex; gap: 5px; flex-shrink: 0; }
+  .move-btn { background: #6b2d13; color: white; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 14px; width: auto; margin: 0; line-height: 1; }
+  .move-btn:disabled { background: #ccc; cursor: not-allowed; opacity: 0.5; }
+  .remove-btn { background: #e74c3c; color: white; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px; width: auto; margin: 0; }
   .add-btn { background: #ed812d; color: white; border: none; padding: 14px; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: bold; width: 100%; margin-bottom: 15px; }
   .img-preview { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; border: 1px solid #ccc; margin-top: 8px; display: none; }
   .file-input { padding: 8px; background: #fff; }
@@ -67,7 +71,7 @@
       const data = await res.json();
       document.getElementById("shopStatus").value = data.shopOpen ? "true" : "false";
       menuItems = (data.menu || []).map(m => ({
-        id: m.id || "item-" + Date.now() + Math.random(),
+        id: m.id || "item-" + Date.now() + "-" + Math.random(),
         name: m.name || "",
         description: m.description || "",
         price: m.price || 0,
@@ -83,10 +87,18 @@
 
   function renderItems() {
     const container = document.getElementById("itemsContainer");
-    container.innerHTML = menuItems.map((item, i) => `
+    container.innerHTML = menuItems.map((item, i) => {
+      const isFirst = i === 0;
+      const isLast = i === menuItems.length - 1;
+      return `
       <div class="card" data-index="${i}">
-        <h3>Item ${i + 1} ${item.name ? '- ' + escapeHtml(item.name) : ''}
-          <button class="remove-btn" onclick="removeItem(${i})">✕ Remove</button>
+        <h3>
+          <span class="title">Item ${i + 1}${item.name ? ' - ' + escapeHtml(item.name) : ''}</span>
+          <span class="actions">
+            <button class="move-btn" onclick="moveItem(${i}, -1)" ${isFirst ? 'disabled title="Already top"' : 'title="Move Up"'}>⬆</button>
+            <button class="move-btn" onclick="moveItem(${i}, 1)" ${isLast ? 'disabled title="Already bottom"' : 'title="Move Down"'}>⬇</button>
+            <button class="remove-btn" onclick="removeItem(${i})">✕</button>
+          </span>
         </h3>
         <div class="field"><label>Item Name</label>
           <input type="text" class="item-name" value="${escapeHtml(item.name)}" placeholder="e.g. Pani Puri">
@@ -105,14 +117,39 @@
           <img class="img-preview" id="preview-${i}" src="${item.imageUrl || ''}" style="${item.imageUrl ? 'display:block' : 'display:none'}">
         </div>
       </div>
-    `).join("");
+    `;
+    }).join("");
   }
 
   function escapeHtml(str) { 
     return (str || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); 
   }
 
+  /* ====== ITEM REORDER (Up / Down) ====== */
+  function captureCurrentValues() {
+    const cards = document.querySelectorAll(".card");
+    cards.forEach((card, i) => {
+      if (!menuItems[i]) return;
+      menuItems[i].name = card.querySelector(".item-name").value.trim();
+      menuItems[i].description = card.querySelector(".item-desc").value.trim();
+      menuItems[i].price = Number(card.querySelector(".item-price").value) || 0;
+      menuItems[i].imageUrl = card.querySelector(".item-img-url").value.trim();
+    });
+  }
+
+  function moveItem(index, direction) {
+    captureCurrentValues();
+    const newIndex = index + direction;
+    if (newIndex < 0 || newIndex >= menuItems.length) return;
+    const temp = menuItems[index];
+    menuItems[index] = menuItems[newIndex];
+    menuItems[newIndex] = temp;
+    renderItems();
+    window.scrollTo({ top: document.querySelector(`.card[data-index="${newIndex}"]`).offsetTop - 20, behavior: 'smooth' });
+  }
+
   function addNewItem() {
+    captureCurrentValues();
     menuItems.push({
       id: "item-" + Date.now() + "-" + Math.floor(Math.random()*1000),
       name: "",
@@ -121,10 +158,12 @@
       imageUrl: ""
     });
     renderItems();
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   }
 
   function removeItem(index) {
     if(confirm("Is item ko delete karein?")) {
+      captureCurrentValues();
       menuItems.splice(index, 1);
       renderItems();
     }
@@ -200,6 +239,7 @@
     const token = document.getElementById("githubToken").value.trim();
     if(!token) return showMsg("GitHub Token daalna zaroori hai!", "error");
 
+    // Capture latest values before saving
     const cards = document.querySelectorAll(".card");
     if(cards.length !== menuItems.length) return showMsg("Kuch galat hai, page reload karein.", "error");
 
@@ -231,6 +271,23 @@
       const putRes = await fetch(API_URL, {
         method: "PUT",
         headers: { "Authorization": `token ${token}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ message: "Admin: Menu updated", content: contentEncoded, sha: fileInfo.sha, branch: BRANCH })
+      });
+
+      if(putRes.ok) { showMsg("✅ Success! App live update ho gaya hai.", "success"); }
+      else { showMsg("❌ Error: Update fail ho gaya. Token check karein.", "error"); }
+    } catch(e) { showMsg("❌ Network Error: " + e.message, "error"); }
+  }
+
+  function showMsg(msg, type) {
+    const el = document.getElementById("statusMsg");
+    el.textContent = msg;
+    el.className = "status " + type;
+    setTimeout(() => el.className = "status", 5000);
+  }
+</script>
+</body>
+</html>/json" },
         body: JSON.stringify({ message: "Admin: Menu updated", content: contentEncoded, sha: fileInfo.sha, branch: BRANCH })
       });
 
