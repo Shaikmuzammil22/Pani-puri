@@ -3,43 +3,281 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Panel - Pani Puri Wala</title>
+<title>Premium Admin - Pani Puri Wala</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  body { font-family: system-ui, sans-serif; background: #f4f4f4; padding: 15px; margin: 0; }
-  .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-  h1 { text-align: center; color: #572511; font-size: 24px; margin-bottom: 20px; }
-  .field { margin-bottom: 15px; }
-  label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
-  input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
-  button { width: 100%; padding: 15px; background: #218548; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 15px; transition: 0.3s; }
-  button:active { transform: scale(0.98); }
-  .status { margin-top: 15px; padding: 10px; text-align: center; border-radius: 8px; font-weight: bold; display: none; }
-  .success { background: #d4edda; color: #155724; display: block; }
-  .error { background: #f8d7da; color: #721c24; display: block; }
-  .card { border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px; background: #fafafa; position: relative; }
-  .card h3 { margin-top: 0; display: flex; justify-content: space-between; align-items: center; font-size: 15px; gap: 8px; }
-  .card h3 .title { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .card h3 .actions { display: flex; gap: 5px; flex-shrink: 0; }
-  .move-btn { background: #6b2d13; color: white; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 14px; width: auto; margin: 0; line-height: 1; }
-  .move-btn:disabled { background: #ccc; cursor: not-allowed; opacity: 0.5; }
-  .remove-btn { background: #e74c3c; color: white; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px; width: auto; margin: 0; }
-  .add-btn { background: #ed812d; color: white; border: none; padding: 14px; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: bold; width: 100%; margin-bottom: 15px; margin-top: 0; }
-  .img-preview { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; border: 1px solid #ccc; margin-top: 8px; display: none; }
-  .file-input { padding: 8px; background: #fff; }
-  .note { font-size: 12px; color: #666; margin-top: 6px; margin-bottom: 4px; }
-  .upload-status { font-size: 12px; color: #218548; font-weight: bold; margin-top: 4px; display: none; }
+  :root {
+    --primary: #3a1506;
+    --gold: #d4af37;
+    --gold-hover: #b38b22;
+    --green: #218548;
+    --green-hover: #196b38;
+    --danger: #e74c3c;
+    --bg: #f4f6f9;
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --text: #2e2119;
+    --text-light: #75695f;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body { 
+    font-family: 'Poppins', sans-serif; 
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    background-attachment: fixed;
+    color: var(--text); 
+    padding: 20px 15px; 
+    min-height: 100vh;
+  }
+
+  .container { 
+    max-width: 650px; 
+    margin: auto; 
+    background: var(--card-bg); 
+    backdrop-filter: blur(10px);
+    padding: 30px; 
+    border-radius: 20px; 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08), 0 5px 15px rgba(0,0,0,0.03); 
+    border: 1px solid rgba(255,255,255,0.5);
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  h1 { 
+    text-align: center; 
+    color: var(--primary); 
+    font-size: 26px; 
+    font-weight: 700;
+    margin-bottom: 25px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 25px 0 15px 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+  }
+
+  .field { margin-bottom: 18px; position: relative; }
+  
+  label { 
+    display: block; 
+    font-weight: 500; 
+    margin-bottom: 8px; 
+    font-size: 13px; 
+    color: var(--primary);
+  }
+
+  input, select { 
+    width: 100%; 
+    padding: 14px 15px; 
+    border: 1.5px solid #e0e0e0; 
+    border-radius: 12px; 
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: #fafafa;
+    transition: all 0.3s ease;
+  }
+
+  input:focus, select:focus {
+    border-color: var(--gold);
+    background: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
+    transform: translateY(-2px);
+  }
+
+  /* Buttons */
+  button { 
+    width: 100%; 
+    padding: 16px; 
+    background: var(--green); 
+    color: white; 
+    border: none; 
+    border-radius: 12px; 
+    font-size: 15px; 
+    font-weight: 600; 
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer; 
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(33, 133, 72, 0.2);
+  }
+
+  button:hover { background: var(--green-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(33, 133, 72, 0.3); }
+  button:active { transform: translateY(0); }
+
+  .add-btn {
+    background: linear-gradient(135deg, #ed812d, #d96a1a);
+    box-shadow: 0 4px 15px rgba(237, 129, 45, 0.2);
+    margin-bottom: 15px;
+  }
+  .add-btn:hover { background: linear-gradient(135deg, #d96a1a, #c45c12); box-shadow: 0 6px 20px rgba(237, 129, 45, 0.3); }
+
+  /* Status Message */
+  .status { 
+    margin-top: 15px; 
+    padding: 12px; 
+    text-align: center; 
+    border-radius: 12px; 
+    font-weight: 600; 
+    font-size: 14px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.4s ease;
+    display: none;
+  }
+  .status.show { opacity: 1; transform: translateY(0); display: block; }
+  .success { background: #e3f9e5; color: #1b7a2d; border: 1px solid #bdf0c4; }
+  .error { background: #fce8e6; color: #c5221f; border: 1px solid #f7c5c2; }
+
+  /* Item Cards */
+  .card { 
+    border: 1px solid #eee; 
+    padding: 20px; 
+    border-radius: 16px; 
+    margin-bottom: 20px; 
+    background: #fff; 
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    animation: slideIn 0.4s ease-out forwards;
+  }
+  .card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.06); border-color: #e8e8e8; transform: translateY(-2px); }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-15px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed #eee;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .badge {
+    background: var(--gold);
+    color: var(--primary);
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-weight: 700;
+  }
+
+  .actions { display: flex; gap: 6px; }
+
+  .icon-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 0;
+  }
+
+  .move-btn { background: #f0f0f0; color: var(--primary); }
+  .move-btn:hover { background: var(--primary); color: #fff; }
+  .move-btn:disabled { background: #f9f9f9; color: #ccc; cursor: not-allowed; box-shadow: none; }
+
+  .remove-btn { background: #fdeaea; color: var(--danger); }
+  .remove-btn:hover { background: var(--danger); color: #fff; }
+
+  /* Image Upload Area */
+  .upload-area {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .file-input-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .file-input-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .file-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #f8f9fa;
+    border: 1.5px dashed #ccc;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-light);
+    transition: 0.3s;
+  }
+  .file-input-wrapper:hover .file-label { background: #f1f3f5; border-color: var(--gold); color: var(--gold); }
+
+  .img-preview { 
+    width: 90px; 
+    height: 90px; 
+    object-fit: cover; 
+    border-radius: 12px; 
+    border: 2px solid #eee; 
+    margin-top: 8px; 
+    display: none; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: 0.3s;
+  }
+  .img-preview:hover { transform: scale(1.05); border-color: var(--gold); }
+
+  .upload-status { font-size: 12px; font-weight: 600; margin-top: 5px; display: none; }
 </style>
 </head>
 <body>
 <div class="container">
-  <h1>Admin Panel</h1>
+  <h1>👑 Premium Admin</h1>
   
   <div class="field">
     <label>GitHub Token (Private)</label>
     <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxxxxx">
   </div>
-
-  <hr style="margin: 20px 0; border: 1px solid #eee;">
 
   <div class="field">
     <label>Shop Status</label>
@@ -49,11 +287,12 @@
     </select>
   </div>
 
-  <!-- Yahan Items render honge -->
+  <div class="section-title">Menu Items</div>
+
   <div id="itemsContainer"></div>
 
   <button class="add-btn" onclick="addNewItem()">＋ Add New Item</button>
-  <button onclick="saveData()">Update Live App</button>
+  <button onclick="saveData()">🚀 Update Live App</button>
   <div id="statusMsg" class="status"></div>
 </div>
 
@@ -66,14 +305,13 @@
 
   let menuItems = [];
 
-  // Page load hote hi data fetch karega
+  // Load Data On Start
   window.onload = async () => {
     try {
       const res = await fetch("https://raw.githubusercontent.com/" + GITHUB_USERNAME + "/" + REPO_NAME + "/" + BRANCH + "/data.json?t=" + Date.now());
       const data = await res.json();
       document.getElementById("shopStatus").value = data.shopOpen ? "true" : "false";
       
-      // Purane data ko format karna
       menuItems = (data.menu || []).map(m => ({
         id: m.id || "item-" + Date.now() + "-" + Math.random(),
         name: m.name || "",
@@ -89,37 +327,57 @@
     }
   };
 
-  // UI Render Function
+  // Render UI
   function renderItems() {
     const container = document.getElementById("itemsContainer");
+    if(menuItems.length === 0) {
+      container.innerHTML = `<div style="text-align:center; padding:20px; color:var(--text-light); font-size:14px;">Koi item nahi hai. Add New Item par click karein.</div>`;
+      return;
+    }
+
     container.innerHTML = menuItems.map((item, i) => {
       const isFirst = i === 0;
       const isLast = i === menuItems.length - 1;
+      
       return `
       <div class="card" data-index="${i}">
-        <h3>
-          <span class="title">Item ${i + 1}${item.name ? ' - ' + escapeHtml(item.name) : ''}</span>
-          <span class="actions">
-            <button class="move-btn" onclick="moveItem(${i}, -1)" ${isFirst ? 'disabled' : ''}>⬆</button>
-            <button class="move-btn" onclick="moveItem(${i}, 1)" ${isLast ? 'disabled' : ''}>⬇</button>
-            <button class="remove-btn" onclick="removeItem(${i})">✕</button>
-          </span>
-        </h3>
+        <div class="card-header">
+          <div class="card-title">
+            <span class="badge">#${i + 1}</span> 
+            ${item.name ? escapeHtml(item.name) : 'New Item'}
+          </div>
+          <div class="actions">
+            <button class="icon-btn move-btn" onclick="moveItem(${i}, -1)" ${isFirst ? 'disabled' : ''} title="Move Up">⬆</button>
+            <button class="icon-btn move-btn" onclick="moveItem(${i}, 1)" ${isLast ? 'disabled' : ''} title="Move Down">⬇</button>
+            <button class="icon-btn remove-btn" onclick="removeItem(${i})" title="Remove">✕</button>
+          </div>
+        </div>
+
         <div class="field"><label>Item Name</label>
           <input type="text" class="item-name" value="${escapeHtml(item.name)}" placeholder="e.g. Pani Puri">
         </div>
+
         <div class="field"><label>Description</label>
           <input type="text" class="item-desc" value="${escapeHtml(item.description)}" placeholder="e.g. Fresh and spicy">
         </div>
-        <div class="field"><label>Price (₹) - (0 karein toh Out of Stock)</label>
+
+        <div class="field"><label>Price (₹) - (0 = Out of Stock)</label>
           <input type="number" class="item-price" value="${item.price}">
         </div>
-        <div class="field"><label>Photo (Gallery se choose karein)</label>
-          <input type="file" accept="image/*" class="file-input" onchange="handleImageUpload(event, ${i})">
-          <div class="upload-status" id="upload-status-${i}"></div>
-          <div class="note">Ya Photo URL daalein:</div>
-          <input type="text" class="item-img-url" value="${escapeHtml(item.imageUrl)}" placeholder="https://...">
-          <img class="img-preview" id="preview-${i}" src="${item.imageUrl || ''}" style="${item.imageUrl ? 'display:block' : 'display:none'}">
+
+        <div class="field">
+          <label>Photo (Gallery se choose karein)</label>
+          <div class="upload-area">
+            <div class="file-input-wrapper">
+              <input type="file" accept="image/*" onchange="handleImageUpload(event, ${i})">
+              <div class="file-label">📁 Choose Photo from Gallery</div>
+            </div>
+            <div class="upload-status" id="upload-status-${i}"></div>
+            
+            <div style="font-size:12px; color:var(--text-light); margin-top:5px;">Ya Photo URL daalein:</div>
+            <input type="text" class="item-img-url" value="${escapeHtml(item.imageUrl)}" placeholder="https://...">
+            <img class="img-preview" id="preview-${i}" src="${item.imageUrl || ''}" style="${item.imageUrl ? 'display:block' : 'display:none'}">
+          </div>
         </div>
       </div>
     `;
@@ -130,7 +388,7 @@
     return (str || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); 
   }
 
-  // Reorder se pehle current values save karna
+  // Capture values before moving or updating
   function captureCurrentValues() {
     const cards = document.querySelectorAll(".card");
     cards.forEach((card, i) => {
@@ -142,21 +400,26 @@
     });
   }
 
-  // Item ko upar/neeche move karna
+  // Move Up / Down
   function moveItem(index, direction) {
     captureCurrentValues();
     const newIndex = index + direction;
     if (newIndex < 0 || newIndex >= menuItems.length) return;
     
-    // Swap items
     const temp = menuItems[index];
     menuItems[index] = menuItems[newIndex];
     menuItems[newIndex] = temp;
     
-    renderItems(); // UI turant update hoga
+    renderItems();
+    
+    // Auto scroll to moved item
+    setTimeout(() => {
+      const el = document.querySelector(`.card[data-index="${newIndex}"]`);
+      if(el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 50);
   }
 
-  // Naya item add karna
+  // Add Item
   function addNewItem() {
     captureCurrentValues();
     menuItems.push({
@@ -170,16 +433,16 @@
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   }
 
-  // Item delete karna
+  // Remove Item
   function removeItem(index) {
-    if(confirm("Is item ko delete karein?")) {
+    if(confirm("Kya aap sach mein is item ko delete karna chahte hain?")) {
       captureCurrentValues();
       menuItems.splice(index, 1);
       renderItems();
     }
   }
 
-  // Gallery se photo upload karke GitHub pe bhejna
+  // Handle Photo Upload to GitHub
   async function handleImageUpload(event, index) {
     const file = event.target.files[0];
     if(!file) return;
@@ -194,11 +457,13 @@
 
     const preview = document.getElementById("preview-" + index);
     const statusEl = document.getElementById("upload-status-" + index);
+    
     preview.style.display = "block";
     preview.src = URL.createObjectURL(file);
+    
     statusEl.style.display = "block";
     statusEl.style.color = "#ed812d";
-    statusEl.textContent = "⏳ Uploading...";
+    statusEl.textContent = "⏳ Uploading to GitHub...";
 
     try {
       const base64 = await fileToBase64(file);
@@ -211,7 +476,7 @@
         method: "PUT",
         headers: { "Authorization": `token ${token}`, "Content-Type": "application/json" },
         body: JSON.stringify({ 
-          message: "Admin: Upload item image", 
+          message: "Admin: Uploaded new item image", 
           content: base64, 
           branch: BRANCH 
         })
@@ -246,13 +511,13 @@
     });
   }
 
-  // Live App par data save karna (GitHub API)
+  // Save to GitHub
   async function saveData() {
     const token = document.getElementById("githubToken").value.trim();
     if(!token) return showMsg("GitHub Token daalna zaroori hai!", "error");
 
     const cards = document.querySelectorAll(".card");
-    if(cards.length !== menuItems.length) return showMsg("Kuch galat hai, page reload karein.", "error");
+    if(cards.length !== menuItems.length) return showMsg("Page reload karein, kuch error aaya hai.", "error");
 
     cards.forEach((card, i) => {
       menuItems[i].name = card.querySelector(".item-name").value.trim();
@@ -269,13 +534,14 @@
       "menu": menuItems
     };
 
-    showMsg("⏳ Updating...", "success");
+    showMsg("⏳ Updating Live App...", "success");
 
     try {
       const getRes = await fetch(API_URL, { headers: { "Authorization": `token ${token}` } });
       const fileInfo = await getRes.json();
-      if(fileInfo.message === "Not Found") return showMsg("Token galat hai ya file nahi mili.", "error");
-      if(!fileInfo.sha) return showMsg("Token permissions check karein.", "error");
+      
+      if(fileInfo.message === "Not Found") return showMsg("Token galat hai ya data.json nahi mili.", "error");
+      if(!fileInfo.sha) return showMsg("Token permissions check karein (repo scope chahiye).", "error");
       
       const contentEncoded = btoa(unescape(encodeURIComponent(JSON.stringify(updatedData, null, 2))));
 
@@ -285,16 +551,21 @@
         body: JSON.stringify({ message: "Admin: Menu updated", content: contentEncoded, sha: fileInfo.sha, branch: BRANCH })
       });
 
-      if(putRes.ok) { showMsg("✅ Success! App live update ho gaya hai.", "success"); }
-      else { showMsg("❌ Error: Update fail ho gaya. Token check karein.", "error"); }
-    } catch(e) { showMsg("❌ Network Error: " + e.message, "error"); }
+      if(putRes.ok) { 
+        showMsg("✅ Success! App live update ho gaya hai.", "success"); 
+      } else { 
+        showMsg("❌ Error: Update fail ho gaya. Token check karein.", "error"); 
+      }
+    } catch(e) { 
+      showMsg("❌ Network Error: " + e.message, "error"); 
+    }
   }
 
   function showMsg(msg, type) {
     const el = document.getElementById("statusMsg");
     el.textContent = msg;
-    el.className = "status " + type;
-    setTimeout(() => el.className = "status", 5000);
+    el.className = "status show " + type;
+    setTimeout(() => el.className = "status " + type, 5000);
   }
 </script>
 </body>
