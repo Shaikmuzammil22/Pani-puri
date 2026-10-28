@@ -135,6 +135,7 @@ footer h2 { font-family: 'Playfair Display', serif; font-size: 36px; letter-spac
 <div class="topbar-marquee">
   <div class="marquee-content">
     <span>✨ Welcome to Ismail Pani Puri Wala ✨ Fresh & Premium Taste ✨ Home Delivery Available ✨ Order Now ✨</span>
+    <span>✨ Welcome to Ismail Pani Puri Wala ✨ Fresh & Premium Taste ✨ Home Delivery Available ✨ Order Now ✨</span>
   </div>
 </div>
 
@@ -257,28 +258,35 @@ function setQuantity(id, delta) {
 
 function renderMenu() {
   const grid = $("menuGrid");
-  if (!state.menu.length) return;
+  if (!state.menu.length) { grid.innerHTML = ""; return; }
   grid.innerHTML = state.menu.map((item, index) => {
     const qty = state.cart[item.id] || 0;
     const available = item.price > 0;
     
     let priceTag = available ? money(item.price) : `<span style="color:red; font-weight:bold;">Out of Stock</span>`;
-    let qtyBox = available ? `
-      <div class="quantity">
-        <button data-action="minus" data-id="${item.id}">−</button>
-        <span>${qty}</span>
-        <button data-action="plus" data-id="${item.id}">+</button>
-      </div>` : '';
+    
+    let actionButtons = '';
+    if (available) {
+      actionButtons = `
+        <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; width:100%;">
+          <button class="btn btn-primary" style="padding:12px 18px; font-size:12px; flex:1;" onclick="buyNow('${item.id}')">⚡ Buy Now</button>
+          <div class="quantity">
+            <button data-action="minus" data-id="${item.id}">−</button>
+            <span>${qty}</span>
+            <button data-action="plus" data-id="${item.id}">+</button>
+          </div>
+        </div>`;
+    }
 
     return `
-      <article class="food-card" style="animation-delay: ${index * 0.15}s">
+      <article class="food-card" style="animation-delay: ${index * 0.1}s">
         <div class="food-image"><img src="${item.imageUrl || 'https://via.placeholder.com/300'}" onerror="this.src='https://via.placeholder.com/300'"></div>
         <div class="food-info">
           <h3>${item.name}</h3>
           <p>${item.description || ""}</p>
-          <div class="food-bottom">
-            <span class="price">${priceTag}</span>
-            ${qtyBox}
+          <div class="food-bottom" style="flex-direction:column; align-items:stretch; gap:15px;">
+            <span class="price" style="text-align:center;">${priceTag}</span>
+            ${actionButtons}
           </div>
         </div>
       </article>
@@ -299,17 +307,57 @@ function renderCart() {
   $("floatingCart").textContent = `🛒 Cart · ${cartCount()} · ${money(cartTotal())}`;
 }
 
+/* ============ DIRECT BUY NOW — Auto Location + WhatsApp ============ */
+function buyNow(itemId) {
+  if (!state.shopOpen) return notify("Shop is closed today!");
+  
+  const item = state.menu.find(e => e.id === itemId);
+  if (!item || item.price <= 0) return notify("Item not available");
+
+  state.cart = {};
+  state.cart[itemId] = 1;
+  renderMenu();
+  renderCart();
+
+  notify("📍 Location detect ho rahi hai...");
+  $("address").value = "Fetching location...";
+  $("address").removeAttribute("readonly");
+
+  $("checkout").scrollIntoView({ behavior: 'smooth' });
+
+  window._pendingBuyItem = item;
+
+  if (typeof window.AndroidLocation !== "undefined" && typeof window.AndroidLocation.requestLocationFromWeb === "function") {
+    window.AndroidLocation.requestLocationFromWeb();
+  } else if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const mapsUrl = `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
+        $("address").value = "📍 Location Auto-Detected";
+        $("address").dataset.link = mapsUrl;
+        $("address").setAttribute("readonly", true);
+        notify("Location detected! Details bharein aur order bhejein.");
+      },
+      (err) => {
+        notify("Location permission denied. Manually address daalein.");
+        $("address").value = "";
+      },
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
+  } else {
+    notify("Location support nahi hai. Manually address daalein.");
+    $("address").value = "";
+  }
+}
+
 async function loadMenu() {
   try {
     const res = await fetch(DATA_URL + "?t=" + Date.now());
     if (!res.ok) throw new Error("Network response was not ok");
     
     const data = await res.json();
-    
     state.shopOpen = data.shopOpen;
-    state.menu = data.menu;
-
-    // Menu ko hamesha render karo
+    state.menu = data.menu || [];
     renderMenu();
 
     if (!state.shopOpen) {
@@ -344,19 +392,38 @@ $("cartItems").addEventListener("click", e => {
 $("floatingCart").addEventListener("click", () => $("checkout").scrollIntoView({ behavior: 'smooth' }));
 
 $("address").addEventListener("click", () => {
+  if ($("address").hasAttribute("readonly")) return;
   if (typeof window.AndroidLocation !== "undefined") {
     $("address").value = "Fetching location...";
     window.AndroidLocation.requestLocationFromWeb();
-  } else { alert("Please open this in the App to auto-detect location."); }
+  } else if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const mapsUrl = `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
+        $("address").value = "📍 Location Auto-Detected";
+        $("address").dataset.link = mapsUrl;
+        $("address").setAttribute("readonly", true);
+        notify("Location detected!");
+      },
+      () => notify("Location permission denied.")
+    );
+  } else {
+    alert("Please open this in the App to auto-detect location.");
+  }
 });
 
 window.onNativeLocation = function(res) {
   const data = typeof res === "string" ? JSON.parse(res) : res;
-  if (data.error) { notify(data.error); $("address").value = ""; return; }
+  if (data.error) { 
+    notify(data.error); 
+    $("address").value = ""; 
+    return; 
+  }
   if (data.mapsUrl) {
     $("address").value = `📍 Location Auto-Detected`;
     $("address").dataset.link = data.mapsUrl;
-    notify("Location detected!");
+    $("address").setAttribute("readonly", true);
+    notify("Location detected! Ab details bharein.");
   }
 };
 
@@ -364,9 +431,11 @@ $("orderForm").addEventListener("submit", (e) => {
   e.preventDefault();
   if (!state.shopOpen) return notify("Shop is closed today.");
   if (!cartEntries().length) return notify("Cart is empty");
-  if (!$("address").value) return notify("Please detect location first");
+  const addr = $("address").value;
+  if (!addr || addr === "Fetching location...") return notify("Please detect location first");
   
-  let msg = `🛒 *New Order (Cash on Delivery)*\nName: ${$("customerName").value}\nPhone: ${$("customerPhone").value}\nAddress: ${$("address").dataset.link || $("address").value}\n\n*Items:*\n`;
+  const addressLink = $("address").dataset.link || addr;
+  let msg = `🛒 *New Order (Cash on Delivery)*\nName: ${$("customerName").value}\nPhone: ${$("customerPhone").value}\nAddress: ${addressLink}\n\n*Items:*\n`;
   cartEntries().forEach(i => msg += `• ${i.name} x${state.cart[i.id]} = ${money(i.price * state.cart[i.id])}\n`);
   msg += `\n*Total: ${money(cartTotal())}*`;
   
