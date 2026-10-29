@@ -1,48 +1,5 @@
 {
   "shopOpen": true,
   "shopClosedMessage": "🚫 Aaj shop band hai! (Today is holiday)",
-  "menu": [
-    {
-      "id": "item-1793216650970",
-      "name": "Paani puri",
-      "description": "Ye sirf only Ameer pet colony aur laltlab walo ke liye chota pack",
-      "price": 50,
-      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/main/images/item-1793216866256.jpg"
-    },
-    {
-      "id": "pani-puri",
-      "name": "Pani puri",
-      "description": "Yah sirf 2 se 3 kilometer walon ke liye hai bada pack",
-      "price": 100,
-      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/panipuri1.png"
-    },
-    {
-      "id": "samosa",
-      "name": "Family Pack Pani Puri offer 100 pieces",
-      "description": "Yah basavakalyan mai kahin bhi mangaane walon ke liye hai family pack",
-      "price": 150,
-      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/main/images/item-1793217111594.jpg"
-    },
-    {
-      "id": "onion",
-      "name": "Onion (Pyaz) per kg",
-      "description": "Fresh chopped onions",
-      "price": 0,
-      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/onion.png"
-    },
-    {
-      "id": "adrak",
-      "name": "Adrak (Ginger) per kg",
-      "description": "Fresh ginger slices",
-      "price": 0,
-      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/ginger.png"
-    },
-    {
-      "id": "item-1793232828899-779",
-      "name": "",
-      "description": "",
-      "price": 0,
-      "imageUrl": ""
-    }
-  ]
+  "menu": []
 }
