@@ -11,15 +11,15 @@
     },
     {
       "id": "pani-puri",
-      "name": "Pani Puri 100₹ mai 50 pieces",
-      "description": "Fresh and spicy",
+      "name": "Pani puri",
+      "description": "Yah sirf 2 se 3 kilometer walon ke liye hai",
       "price": 100,
       "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/panipuri1.png"
     },
     {
       "id": "samosa",
       "name": "Family Pack Pani Puri offer 100 pieces",
-      "description": "Family Pack",
+      "description": "Yah basavakalyan mai kahin bhi mangaane walon ke liye hai",
       "price": 150,
       "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/main/images/item-1793217111594.jpg"
     },
@@ -36,6 +36,13 @@
       "description": "Fresh ginger slices",
       "price": 0,
       "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/ginger.png"
+    },
+    {
+      "id": "item-1793232828899-779",
+      "name": "",
+      "description": "",
+      "price": 0,
+      "imageUrl": ""
     }
   ]
 }
