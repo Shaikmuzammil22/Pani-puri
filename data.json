@@ -12,14 +12,14 @@
     {
       "id": "pani-puri",
       "name": "Pani puri",
-      "description": "Yah sirf 2 se 3 kilometer walon ke liye hai thoda bada pack pack",
+      "description": "Yah sirf 2 se 3 kilometer walon ke liye hai bada pack",
       "price": 100,
       "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/refs/heads/main/panipuri1.png"
     },
     {
       "id": "samosa",
       "name": "Family Pack Pani Puri offer 100 pieces",
-      "description": "Yah basavakalyan mai kahin bhi mangaane walon ke liye hai",
+      "description": "Yah basavakalyan mai kahin bhi mangaane walon ke liye hai family pack",
       "price": 150,
       "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/main/images/item-1793217111594.jpg"
     },
