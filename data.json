@@ -22,6 +22,20 @@
       "description": "Rs 150 mai 100 pieces offer basavakalyan kahin bhi mangaaiye",
       "price": 150,
       "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/main/images/item-1793374202746.jpg"
+    },
+    {
+      "id": "item-1793384066810-719",
+      "name": "Onion",
+      "description": "₹50 kg 5 kg lena padega",
+      "price": 50,
+      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/main/images/item-1793384238556.jpg"
+    },
+    {
+      "id": "item-1793384254084-232",
+      "name": "Adrak lahsun",
+      "description": "1 kilo 2 kilo kitna bhi manga sakte hain",
+      "price": 0,
+      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/main/images/item-1793384430483.jpg"
     }
   ]
 }
