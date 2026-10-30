@@ -1,5 +1,27 @@
 {
   "shopOpen": true,
   "shopClosedMessage": "🚫 Aaj shop band hai! (Today is holiday)",
-  "menu": []
+  "menu": [
+    {
+      "id": "item-1793370529596-140",
+      "name": "Pani puri",
+      "description": "Yah sirf amir pet colony walon ke liye and laltala walon ke liye hai chhota pack",
+      "price": 50,
+      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/main/images/item-1793370579590.jpg"
+    },
+    {
+      "id": "item-1793370587646-243",
+      "name": "Pani puri",
+      "description": "Do SE teen kilometer walon ke liye hai",
+      "price": 100,
+      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/main/images/item-1793370631753.jpg"
+    },
+    {
+      "id": "item-1793370637676-318",
+      "name": "Pani puri",
+      "description": "Teen se char kilometer walon ke liye hai",
+      "price": 150,
+      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/main/images/item-1793370684529.jpg"
+    }
+  ]
 }
