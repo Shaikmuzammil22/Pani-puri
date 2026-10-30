@@ -5,9 +5,23 @@
     {
       "id": "item-1793370791035-645",
       "name": "Pani puri",
-      "description": "Yah sirf ameerpet colony aur lachar walon ke liye hai chhota pack",
+      "description": "Yah sirf ameerpet colony aur laltab walon ke liye hai chhota pack",
       "price": 50,
-      "imageUrl": ""
+      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/main/images/item-1793373829135.jpg"
+    },
+    {
+      "id": "item-1793373840647-212",
+      "name": "Pani puri",
+      "description": "Rs 100 mein 50 pieces ye 2 SE 3 kilometer walon ke liye hain",
+      "price": 100,
+      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/main/images/item-1793374026067.jpg"
+    },
+    {
+      "id": "item-1793374036978-593",
+      "name": "Pani puri offer",
+      "description": "Rs 150 mai 100 pieces offer basavakalyan kahin bhi mangaaiye",
+      "price": 150,
+      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/main/images/item-1793374202746.jpg"
     }
   ]
 }
