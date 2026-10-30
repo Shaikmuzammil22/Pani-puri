@@ -36,6 +36,13 @@
       "description": "1 kilo 2 kilo kitna bhi manga sakte hain",
       "price": 0,
       "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/main/images/item-1793384430483.jpg"
+    },
+    {
+      "id": "item-1793385338105-413",
+      "name": "Mirch powder",
+      "description": "Koti hui lal mirch 1 kg 250",
+      "price": 250,
+      "imageUrl": "https://raw.githubusercontent.com/Shaikmuzammil22/Pani-puri/main/images/item-1793385586615.jpg"
     }
   ]
 }
