@@ -1,5 +1,5 @@
 {
-  "shopOpen": true,
+  "shopOpen": false,
   "shopClosedMessage": "🚫 Aaj shop band hai! (Today is holiday)",
   "menu": [
     {
